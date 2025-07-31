@@ -1,7 +1,7 @@
 class_name PointOfInterest
 extends Node3D
 @export var identifier: int
-@export var neighbours: Array[int] #possible neighbours
+@export var neighbours: Array[PointOfInterest] #possible neighbours
 var reference_point: Vector3 #reference point that hexagon map will read
 var is_visited: bool
 
@@ -21,11 +21,18 @@ func on_clicked(current_visit: PointOfInterest) -> PointOfInterest:
 	return self
 
 
-
+#check if the previous pointofinterest is in neighbours and this pointofinterest wasn't visited
 func can_visit(pointId: int) -> bool:
 	if is_visited:
 		return false
 	for neighbour in neighbours:
-		if pointId == neighbour:
+		if pointId == neighbour.identifier:
 			return true 
+	return false
+
+
+func is_any_neighbour_available() -> bool:
+	for neighbour in neighbours:
+		if !neighbour.is_visited:
+			return true
 	return false

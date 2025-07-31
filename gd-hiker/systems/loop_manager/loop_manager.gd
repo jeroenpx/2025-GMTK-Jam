@@ -2,7 +2,7 @@ extends Node3D
 @export var camera: Camera3D 
 @export var ray_distance: float = 1000.0
 @export var current_visit: PointOfInterest = null
-@export var number_of_undos: int = 3
+@export var number_of_undos: int = 500
 var points_of_interest: Array[PointOfInterest] = []
 
 var visited_paths = []
@@ -29,12 +29,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		if hit:
 			var point = hit.collider
 			var previous_visit = current_visit
+			
 			if point.can_visit(previous_visit.identifier):
 				var current_path: Array[int] = [previous_visit.identifier, point.identifier]
 				if !is_path_taken(current_path):
 					current_visit = point.on_clicked(previous_visit)
 					visited_paths.append(current_path)
 					print("From " + str(previous_visit.identifier) + " to " + str(current_visit.identifier))
+					if current_visit == start_point:
+						print("Return to start- hurray - End Level")
+					elif !current_visit.is_any_neighbour_available():
+						print("Undo or Reset")
 			else:
 				print("Don't move. Stay at " + str(current_visit.identifier))
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
