@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqsdtbt1igram"]
+
+[ext_resource type="PackedScene" uid="uid://ciw02q5m2than" path="res://systems/loop_manager/LoopManager.tscn" id="1_qdju4"]
+[ext_resource type="PackedScene" uid="uid://7rdp17ixhb6o" path="res://systems/point_of_interest/PointOfInterest.tscn" id="2_b8o63"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_qdju4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_b8o63"]
+
+[node name="test" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.781749, 0.623593, 0, -0.623593, 0.781749, 0, 2.35838, 6.94852)
+
+[node name="LoopManager" parent="." node_paths=PackedStringArray("camera", "current_visit") instance=ExtResource("1_qdju4")]
+camera = NodePath("../Camera3D")
+current_visit = NodePath("PointOfInterest")
+
+[node name="PointOfInterest" parent="LoopManager" instance=ExtResource("2_b8o63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.28758, 0, 0)
+neighbours = Array[int]([1, 2])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LoopManager/PointOfInterest"]
+mesh = SubResource("SphereMesh_qdju4")
+
+[node name="PointOfInterest2" parent="LoopManager" instance=ExtResource("2_b8o63")]
+identifier = 1
+neighbours = Array[int]([0, 2, 3])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LoopManager/PointOfInterest2"]
+mesh = SubResource("SphereMesh_b8o63")
+
+[node name="PointOfInterest3" parent="LoopManager" instance=ExtResource("2_b8o63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62447, 0, 3.083)
+identifier = 2
+neighbours = Array[int]([1, 0, 3])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LoopManager/PointOfInterest3"]
+mesh = SubResource("SphereMesh_b8o63")
+
+[node name="PointOfInterest4" parent="LoopManager" instance=ExtResource("2_b8o63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.33691, 0, 0.436443)
+identifier = 3
+neighbours = Array[int]([1, 2])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LoopManager/PointOfInterest4"]
+mesh = SubResource("SphereMesh_b8o63")
