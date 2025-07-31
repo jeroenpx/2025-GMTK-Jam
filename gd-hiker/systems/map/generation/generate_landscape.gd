@@ -3,6 +3,8 @@
 extends MapGen
 
 @export var output: MeshInstance3D;
+@export var use_smooth_normals: bool = true;
+@export var smooth_steps: int = 1;
 
 @export_tool_button("Generate")
 var _do_generate = _generate;
@@ -85,6 +87,55 @@ func _randomize():
 func _generate():
 	generate(self.get_parent() as Map)
 
+
+func _vertex_idx_to_point(at: Vector2i) -> Vector3:
+	at = at - Vector2i(2, 6);
+	return Vector3(at.x * Hexagons.triangle_width * 2.0 + (at.y % 2) * Hexagons.triangle_width, 0, at.y * Hexagons.triangle_height/2.0);
+
+func _vertex_point_to_idx(at: Vector3) -> Vector2i:
+	var x = floori((at.x + Hexagons.triangle_width/4.0) / (Hexagons.triangle_width * 2.0));
+	var y = floori((at.z + Hexagons.triangle_width/4.0) / (Hexagons.triangle_height/2.0));
+	return Vector2i(x, y) + Vector2i(2, 6);
+
+func smoothen(from: DataGrid, to: DataGrid):
+	for x in range(from.grid_w):
+		for y in range(from.grid_h):
+			var at = Vector2i(x, y);
+			
+			var my_vertex = from.get_thing(at);
+			var my_count = 1;
+			
+			for i in range(6):
+				var at_n = Hexagons.hex_neighbour(at, i);
+				var neighbour_vertex = from.get_thing(at_n);
+				if neighbour_vertex != null:
+					my_count += 1;
+					my_vertex += neighbour_vertex;
+			
+			to.put_thing(at, my_vertex/my_count);
+
+func calculate_smooth_vertex_normals(from: DataGrid, to: DataGrid):
+	for x in range(from.grid_w):
+		for y in range(from.grid_h):
+			var at = Vector2i(x, y);
+			
+			var my_vertex = from.get_thing(at);
+			var my_normal = Vector3(0,0,0);
+			var my_count = 0;
+			
+			for i in range(6):
+				var at_n = Hexagons.hex_neighbour(at, i);
+				var neighbour_vertex = from.get_thing(at_n);
+				var at_n2 = Hexagons.hex_neighbour(at, (i+1)%6);
+				var neighbour_vertex2 = from.get_thing(at_n2);
+				if neighbour_vertex != null and neighbour_vertex2 != null:
+					my_count += 1;
+					
+					my_normal += calculate_normal(my_vertex, neighbour_vertex, neighbour_vertex2);
+			
+			to.put_thing(at, my_normal/my_count);
+	
+
 # Implement this function in a subclass
 func generate(map: Map):
 	# Load the images from the GPU
@@ -94,7 +145,42 @@ func generate(map: Map):
 	# Clean up the previous run (TODO)
 	
 	
+	# Collect the vertex data
+	var vgrid = DataGrid.new();
+	vgrid.init(ceil(map.bounds.size.x / Hexagons.triangle_width)+20, ceil(map.bounds.size.y / Hexagons.triangle_height * 2.0)+20);
 	
+	# Init the grid
+	for x in range(vgrid.grid_w):
+		for y in range(vgrid.grid_h):
+			var at = Vector2i(x, y);
+			var vertex = _vertex_idx_to_point(at);
+			var vertex_2D = Vector2(vertex.x, vertex.z);
+					
+			# Displace this vertex
+			var displace_color = sample_color_wrap(vertex_displace_noise_img, vertex_2D * vertex_displace_noise_scale + vertex_displace_noise_shifted);
+			var displace_amount = Vector3(displace_color.r, displace_color.g, displace_color.b) - Vector3(0.5, 0, 0.5);
+			vertex += displace_amount * vertex_displace_noise_amount;
+			
+			# Store
+			vgrid.put_thing(at, vertex);
+	
+	# Smoothen
+	var vgrid2 = DataGrid.new();
+	vgrid2.init(vgrid.grid_w, vgrid.grid_h);
+	
+	for i in range(smooth_steps):
+		smoothen(vgrid, vgrid2);
+		var tmp = vgrid2;
+		vgrid2 = vgrid;
+		vgrid = tmp;
+	
+	# Smoothen the path some more?
+	# (cut in the landscape?)
+	
+	
+	var smooth_normals_grid = DataGrid.new();
+	smooth_normals_grid.init(vgrid.grid_w, vgrid.grid_h);
+	calculate_smooth_vertex_normals(vgrid, smooth_normals_grid);
 	
 	# Build the mesh
 	var st = SurfaceTool.new()
@@ -110,7 +196,8 @@ func generate(map: Map):
 				var triangle = Hexagons.hex_to_center_triangle(hex) + tri;
 				
 				# Get the vertex coords of this triangle
-				var tri_vertices = Hexagons.calculate_triangle_vertices(triangle);
+				var vertices = Hexagons.calculate_triangle_vertices(triangle);
+				var tri_vertices = vertices.duplicate();
 				var tri_vertices_2D: Array[Vector2];
 				for i in range(3):
 					var v = tri_vertices[i];
@@ -118,16 +205,10 @@ func generate(map: Map):
 				
 				# Displace the vertices
 				for i in range(3):
-					var v = tri_vertices[i];
-					var vertex_2D = tri_vertices_2D[i];
-					
-					# Displace this vertex
-					var displace_color = sample_color_wrap(vertex_displace_noise_img, vertex_2D * vertex_displace_noise_scale + vertex_displace_noise_shifted);
-					var displace_amount = Vector3(displace_color.r, displace_color.g, displace_color.b) - Vector3(0.5, 0, 0.5);
-					v += displace_amount * vertex_displace_noise_amount;
+					var at = _vertex_point_to_idx(tri_vertices[i]);
 					
 					# Push the displacement back in the array
-					tri_vertices[i] = v;
+					tri_vertices[i] = vgrid.get_thing(at);
 				
 				# Calculate the normal
 				var normal = calculate_normal(tri_vertices[0], tri_vertices[1], tri_vertices[2]);
@@ -143,10 +224,14 @@ func generate(map: Map):
 					
 					var color = lerp(Color.BLACK, Color.RED, amount_path);
 					
+					# Get the smooth normal
+					var at = _vertex_point_to_idx(vertices[i]);
+					var smooth_normal = smooth_normals_grid.get_thing(at);
+					
 					# Push vertex
 					st.set_color(color);
 					st.set_uv(vertex_2D);# not used
-					st.set_normal(normal);
+					st.set_normal(smooth_normal if use_smooth_normals else normal);
 					st.add_vertex(v);
 	
 	# Make the mesh
