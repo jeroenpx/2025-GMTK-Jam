@@ -15,11 +15,11 @@ void vertex() {
 
 void fragment() {
 	vec4 sampled_path_noise = texture(path_noise, world_position.xz * path_noise_scale);
-	
+
 	float amount_path = COLOR.r + sampled_path_noise.r;
-	
+
 	ALBEDO = mix(terrain_color, path_color, step(path_step, amount_path));
-	// 
+	//
 	//ALBEDO = mix(terrain_color, path_color, COLOR.r);
 }
 

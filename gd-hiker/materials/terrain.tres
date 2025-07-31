@@ -3,7 +3,8 @@
 [ext_resource type="Shader" uid="uid://dhq5wn4242k0c" path="res://materials/_shaders/terrain_shader.gdshader" id="1_uupk1"]
 
 [sub_resource type="Gradient" id="Gradient_uupk1"]
-colors = PackedColorArray(0, 0, 0, 1, 0.678944, 0.678944, 0.678944, 1)
+offsets = PackedFloat32Array(0, 0.485887)
+colors = PackedColorArray(0, 0, 0, 1, 0.577008, 0.577008, 0.577008, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_m0shn"]
 
@@ -17,5 +18,5 @@ shader = ExtResource("1_uupk1")
 shader_parameter/terrain_color = Color(0.730726, 0.750602, 0.463888, 1)
 shader_parameter/path_color = Color(0.961691, 0.802772, 0.759701, 1)
 shader_parameter/path_noise = SubResource("NoiseTexture2D_o5vb0")
-shader_parameter/path_noise_scale = 0.235
-shader_parameter/path_step = 0.55
+shader_parameter/path_noise_scale = 0.19
+shader_parameter/path_step = 0.6
