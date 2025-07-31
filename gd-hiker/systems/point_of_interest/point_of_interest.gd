@@ -1,7 +1,9 @@
 class_name PointOfInterest
 extends Node3D
+enum Type{DEFAULT, NATURE, ZIPLINE, PIER, CIVILISATION, }
 @export var identifier: int
 @export var neighbours: Array[PointOfInterest] #possible neighbours
+@export var type_point_of_interest: Type
 var reference_point: Vector3 #reference point that hexagon map will read
 var is_visited: bool
 
@@ -36,3 +38,17 @@ func is_any_neighbour_available() -> bool:
 		if !neighbour.is_visited:
 			return true
 	return false
+
+func update_points() -> int:
+	match type_point_of_interest:
+		Type.NATURE:
+			return 100
+		Type.ZIPLINE:
+			return 200
+		Type.PIER:
+			return 200
+		Type.CIVILISATION:
+			return 50
+		Type.DEFAULT:
+			return 0
+	return 0

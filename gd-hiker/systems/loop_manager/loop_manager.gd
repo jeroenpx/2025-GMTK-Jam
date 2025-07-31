@@ -39,7 +39,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					if current_visit == start_point:
 						print("Return to start- hurray - End Level")
 					elif !current_visit.is_any_neighbour_available():
-						print("Undo or Reset")
+						BtnIndicators.show_undo(true)
+						BtnIndicators.show_reset(true)
 			else:
 				print("Don't move. Stay at " + str(current_visit.identifier))
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
@@ -60,6 +61,8 @@ func is_path_taken(current_path: Array[int]) -> bool:
 
 func undo_path() -> void:
 	if(number_of_undos>current_num_of_undos):
+		BtnIndicators.show_undo(false)
+		BtnIndicators.show_reset(false)
 		current_num_of_undos += 1
 		var last_path = visited_paths.pop_back()
 		if last_path:
@@ -72,6 +75,8 @@ func undo_path() -> void:
 
 
 func reset_path() -> void:
+	BtnIndicators.show_reset(false)
+	BtnIndicators.show_undo(false)
 	visited_paths.clear()
 	current_visit = start_point
 	current_num_of_undos = 0

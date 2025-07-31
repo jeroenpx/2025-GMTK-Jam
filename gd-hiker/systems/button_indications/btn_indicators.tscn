@@ -1,18 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxmqn0gild0ln"]
+[gd_scene load_steps=6 format=3 uid="uid://dxmqn0gild0ln"]
 
 [ext_resource type="Script" uid="uid://c21yr4vrst2lj" path="res://systems/button_indications/btn_indicators.gd" id="1_7k7lt"]
 [ext_resource type="Texture2D" uid="uid://bjhp3arvepmbv" path="res://assets-2D/mouse0_new.png" id="2_acruv"]
 [ext_resource type="Texture2D" uid="uid://dvw55ni652bj8" path="res://assets-2D/mouse1_new.png" id="3_p80sf"]
+[ext_resource type="Theme" uid="uid://bndlqmsq8d6tl" path="res://fonts/MyTheme.tres" id="5_1fvyj"]
+[ext_resource type="Texture2D" uid="uid://cpuljlaq0gr7u" path="res://assets-2D/R - button.png" id="5_prryn"]
 
-[node name="BtnIndicators" type="Control" node_paths=PackedStringArray("navigate_indication")]
+[node name="BtnIndicators" type="Control" node_paths=PackedStringArray("navigate_indication", "undo_indication", "reset_indication")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("5_1fvyj")
 script = ExtResource("1_7k7lt")
-navigate_indication = NodePath("BtnLocation/NavigateIndication")
+navigate_indication = NodePath("BtnLocation/HBoxContainer/NavigateIndication")
+undo_indication = NodePath("BtnLocation/HBoxContainer/UndoIndication")
+reset_indication = NodePath("BtnLocation/HBoxContainer/ResetIndication")
 
 [node name="BtnLocation" type="Control" parent="."]
 layout_mode = 1
@@ -26,26 +32,25 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="NavigateIndication" type="HBoxContainer" parent="BtnLocation"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BtnLocation"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.5
-offset_top = -20.0
-offset_right = 46.5
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 51
 alignment = 1
 
-[node name="IconHolder2" type="Control" parent="BtnLocation/NavigateIndication"]
+[node name="NavigateIndication" type="HBoxContainer" parent="BtnLocation/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="IconHolder2" type="Control" parent="BtnLocation/HBoxContainer/NavigateIndication"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="BtnLocation/NavigateIndication/IconHolder2"]
+[node name="Icon" type="TextureRect" parent="BtnLocation/HBoxContainer/NavigateIndication/IconHolder2"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -65,31 +70,20 @@ texture = ExtResource("2_acruv")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="BtnLocation/NavigateIndication"]
+[node name="Label" type="Label" parent="BtnLocation/HBoxContainer/NavigateIndication"]
 layout_mode = 2
 theme_override_constants/outline_size = 17
 text = " Walk"
 
-[node name="UndoIndication" type="HBoxContainer" parent="BtnLocation"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.5
-offset_top = -20.0
-offset_right = 46.5
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="UndoIndication" type="HBoxContainer" parent="BtnLocation/HBoxContainer"]
+layout_mode = 2
 alignment = 1
 
-[node name="IconHolder" type="Control" parent="BtnLocation/UndoIndication"]
+[node name="IconHolder" type="Control" parent="BtnLocation/HBoxContainer/UndoIndication"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="BtnLocation/UndoIndication/IconHolder"]
+[node name="Icon" type="TextureRect" parent="BtnLocation/HBoxContainer/UndoIndication/IconHolder"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -109,7 +103,41 @@ texture = ExtResource("3_p80sf")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="BtnLocation/UndoIndication"]
+[node name="Label" type="Label" parent="BtnLocation/HBoxContainer/UndoIndication"]
 layout_mode = 2
 theme_override_constants/outline_size = 17
 text = " Undo"
+
+[node name="ResetIndication" type="HBoxContainer" parent="BtnLocation/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="IconHolder" type="Control" parent="BtnLocation/HBoxContainer/ResetIndication"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="BtnLocation/HBoxContainer/ResetIndication/IconHolder"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -20.0
+offset_right = 25.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(30, 20)
+texture = ExtResource("5_prryn")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="BtnLocation/HBoxContainer/ResetIndication"]
+layout_mode = 2
+theme = ExtResource("5_1fvyj")
+theme_override_constants/outline_size = 17
+text = "Reset"
