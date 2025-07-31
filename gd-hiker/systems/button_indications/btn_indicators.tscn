@@ -1,0 +1,115 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxmqn0gild0ln"]
+
+[ext_resource type="Script" uid="uid://c21yr4vrst2lj" path="res://systems/button_indications/btn_indicators.gd" id="1_7k7lt"]
+[ext_resource type="Texture2D" uid="uid://bjhp3arvepmbv" path="res://assets-2D/mouse0_new.png" id="2_acruv"]
+[ext_resource type="Texture2D" uid="uid://dvw55ni652bj8" path="res://assets-2D/mouse1_new.png" id="3_p80sf"]
+
+[node name="BtnIndicators" type="Control" node_paths=PackedStringArray("navigate_indication")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7k7lt")
+navigate_indication = NodePath("BtnLocation/NavigateIndication")
+
+[node name="BtnLocation" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.94
+anchor_right = 0.5
+anchor_bottom = 0.94
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="NavigateIndication" type="HBoxContainer" parent="BtnLocation"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = -20.0
+offset_right = 46.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IconHolder2" type="Control" parent="BtnLocation/NavigateIndication"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="BtnLocation/NavigateIndication/IconHolder2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -27.12
+offset_right = 25.0
+offset_bottom = 12.88
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.495, 1.495)
+pivot_offset = Vector2(30, 20)
+texture = ExtResource("2_acruv")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="BtnLocation/NavigateIndication"]
+layout_mode = 2
+theme_override_constants/outline_size = 17
+text = " Walk"
+
+[node name="UndoIndication" type="HBoxContainer" parent="BtnLocation"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = -20.0
+offset_right = 46.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IconHolder" type="Control" parent="BtnLocation/UndoIndication"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="BtnLocation/UndoIndication/IconHolder"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -27.12
+offset_right = 25.0
+offset_bottom = 12.88
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.495, 1.495)
+pivot_offset = Vector2(30, 20)
+texture = ExtResource("3_p80sf")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="BtnLocation/UndoIndication"]
+layout_mode = 2
+theme_override_constants/outline_size = 17
+text = " Undo"
