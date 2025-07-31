@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ciw02q5m2than"]
 
-[ext_resource type="Script" uid="uid://b38ff3ypvc8nd" path="res://loop_manager.gd" id="1_8x2cs"]
+[ext_resource type="Script" uid="uid://b38ff3ypvc8nd" path="res://systems/loop_manager/loop_manager.gd" id="1_8x2cs"]
 
 [node name="LoopManager" type="Node3D"]
 script = ExtResource("1_8x2cs")
