@@ -8,6 +8,9 @@ extends Node3D
 @export_tool_button("Update Map")
 var _do_update_map = _update_map;
 
+@export_tool_button("Update Map Only")
+var _do_update_map_only = _update_map_only;
+
 @export_group("Parsed Data")
 @export var _grid_data: Array;
 @export var _annotations: Dictionary[String, Vector3];
@@ -23,12 +26,26 @@ func get_at(at: Vector2i, def: String) -> String:
 		return _grid_data[at.y][at.x];
 	return def;
 
+func find_point_name(near_at: Vector2i, range: float = 1):
+	var near_at_map_2D = Hexagons.hex_to_map_space(near_at);
+	var near_at_map = Vector3(near_at_map_2D.x, 0, near_at_map_2D.y)/Hexagons.LONG_SIDE_DIAGONAL;
+	var range_quad = range * range;
+	
+	for ann in _annotations.keys():
+		var loc = _annotations[ann] / Hexagons.LONG_SIDE_DIAGONAL;
+		var dist_sq = loc.distance_squared_to(near_at_map);
+		if loc.distance_squared_to(near_at_map) < range_quad:
+			return ann;
+	return "";
+
 func _update_map() -> void:
+	_update_map_only();
+	_regenerate_scene();
+	
+func _update_map_only() -> void:
 	_parse();
 	_calculate_dimensions();
 	_calculate_bounds();
-	_regenerate_scene();
-	
 # PARSING STUFF
 func _parse() -> void:
 	_annotations.clear();
