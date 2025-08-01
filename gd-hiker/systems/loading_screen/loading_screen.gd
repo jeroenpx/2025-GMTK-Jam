@@ -9,7 +9,7 @@ var chunk_resource: Resource
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	scene_path = LevelManager.scene_path
-	GameState.enter_cinematic("cinematic")
+	GameState.enter_cinematic("loading")
 	ResourceLoader.load_threaded_request(scene_path)
 
 
@@ -28,6 +28,6 @@ func _process(delta: float) -> void:
 	loading_label.text = str("Loading... ", int(loaded)*100.0, "%")
 	if status == ResourceLoader.THREAD_LOAD_LOADED:
 		loading = false
-		await get_tree().create_timer(4.0).timeout
-		GameState.enter_cinematic("play")
+		await get_tree().create_timer(1.0).timeout
+		GameState.enter_cinematic("")
 		get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(scene_path))

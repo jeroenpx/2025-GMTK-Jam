@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr7iyddfemech"]
+
+[ext_resource type="Texture2D" uid="uid://cpuljlaq0gr7u" path="res://assets-2D/R - button.png" id="1_c7mkw"]
+
+[node name="LimitationsIndication" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 33
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_c7mkw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "max 5"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/HBoxContainer2"]
+clip_contents = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_c7mkw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "max 5"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/HBoxContainer3"]
+clip_contents = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_c7mkw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "max 5"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/HBoxContainer4"]
+clip_contents = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_c7mkw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "max 5"
