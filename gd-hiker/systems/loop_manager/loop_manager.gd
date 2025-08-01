@@ -1,5 +1,6 @@
 extends Node3D
 @export var camera: Camera3D 
+@export var next_level: String 
 @export var ray_distance: float = 1000.0
 @export var current_visit: PointOfInterest = null
 @export var number_of_undos: int = 500
@@ -11,6 +12,7 @@ var current_num_of_undos: int = 0
 var start_point: PointOfInterest = null
 var is_level_finished: bool = false
 var all_limitations_completed: Array[bool] = []
+var limitations_start_values: Array[int] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	start_point = current_visit
@@ -20,6 +22,7 @@ func _ready() -> void:
 			points_of_interest.append(point)
 	for i in range(0, limitations.size()):
 		all_limitations_completed.append(false)
+		limitations_start_values.append(limitations[i].value)
 		LimitationsIndication.show_indicator(limitations[i])
 		LimitationsIndication.set_indicator(limitations[i], false)
 
@@ -53,7 +56,9 @@ func _unhandled_input(event: InputEvent) -> void:
 						if current_visit == start_point:
 							if are_all_limitations_completed():
 								is_level_finished = true
-								print("Return to start- hurray - End Level")
+								LimitationsIndication.hide_indicators()
+								if next_level!="" :
+									LevelManager.change_level(next_level)
 							else:
 								BtnIndicators.show_undo(true)
 								BtnIndicators.show_reset(true)
@@ -146,9 +151,15 @@ func reset_path() -> void:
 	visited_paths.clear()
 	current_visit = start_point
 	print("Reset - current visit = " + str(current_visit.identifier))
+	
 	for point in points_of_interest:
-		update_status(point, 1)
 		point.undo_point_of_interest()
+		
+	var i : int = 0
+	for limitation in limitations:
+		limitation.value = limitations_start_values[i]
+		LimitationsIndication.set_indicator(limitations[i], false)
+		i=+1
 
 #hover over functionality
 func hover_over() -> void:

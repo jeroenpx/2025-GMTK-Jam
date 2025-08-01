@@ -30,6 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 0.781749, 0.623593, 0, -0.623593, 0.781749, 
 
 [node name="LoopManager" parent="." node_paths=PackedStringArray("camera", "current_visit") instance=ExtResource("1_qdju4")]
 camera = NodePath("../Camera3D")
+next_level = "res://levels/level_0.tscn"
 current_visit = NodePath("PointOfInterest")
 limitations = Array[ExtResource("2_esv6d")]([SubResource("Resource_3mdte"), SubResource("Resource_jy1m5")])
 

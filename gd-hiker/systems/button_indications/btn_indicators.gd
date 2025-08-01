@@ -19,6 +19,7 @@ func _on_state_change() -> void:
 	else:
 		navigate_indication.visible = false;
 		undo_indication.visible = false;
+		reset_indication.visible = false;
 
 func show_navigate(show: bool) -> void:
 	showing_navigate = show;

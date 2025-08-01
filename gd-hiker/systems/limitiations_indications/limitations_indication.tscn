@@ -5,7 +5,8 @@
 [ext_resource type="Script" uid="uid://0cc2xd3liphh" path="res://systems/limitiations_indications/visit_indicator.gd" id="2_avwou"]
 [ext_resource type="Texture2D" uid="uid://enuhqtddxgll" path="res://assets-2D/checkmark2.png" id="4_vqbcy"]
 
-[node name="LimitationsIndication" type="Control" node_paths=PackedStringArray("nature_ind", "civil_ind", "rest_ind", "zipline_ind", "boat_ind")]
+[node name="LimitationsIndication" type="Control" node_paths=PackedStringArray("nature_ind", "civil_ind", "rest_ind", "zipline_ind", "boat_ind", "array_indicators")]
+z_index = -1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,10 +16,11 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ssxor")
 nature_ind = NodePath("HBoxContainer/NatureIndicator")
-civil_ind = NodePath("")
-rest_ind = NodePath("")
-zipline_ind = NodePath("")
-boat_ind = NodePath("")
+civil_ind = NodePath("HBoxContainer/CivilisationIndicator")
+rest_ind = NodePath("HBoxContainer/RestIndicator")
+zipline_ind = NodePath("HBoxContainer/ZiplineIndicator")
+boat_ind = NodePath("HBoxContainer/PierIndicator")
+array_indicators = [NodePath("HBoxContainer/NatureIndicator"), NodePath("HBoxContainer/ZiplineIndicator"), NodePath("HBoxContainer/PierIndicator"), NodePath("HBoxContainer/RestIndicator"), NodePath("HBoxContainer/CivilisationIndicator")]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(100, 20)
@@ -29,13 +31,15 @@ offset_top = 8.485
 offset_bottom = 48.485
 grow_horizontal = 2
 pivot_offset = Vector2(0, 30)
-theme_override_constants/separation = 33
+theme_override_constants/separation = 19
 
 [node name="NatureIndicator" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(60, 20)
 layout_mode = 2
-theme_override_constants/separation = 11
+theme_override_constants/separation = 5
 script = ExtResource("2_avwou")
+type = 1
 
 [node name="TextureLogo" type="TextureRect" parent="HBoxContainer/NatureIndicator"]
 custom_minimum_size = Vector2(40, 40)
@@ -49,8 +53,8 @@ visible = false
 layout_mode = 0
 offset_left = 30.0
 offset_top = -1.485
-offset_right = 45.0
-offset_bottom = 13.515
+offset_right = 50.0
+offset_bottom = 18.515
 pivot_offset = Vector2(0, 20)
 texture = ExtResource("4_vqbcy")
 expand_mode = 1
@@ -58,4 +62,133 @@ stretch_mode = 4
 
 [node name="Label" type="Label" parent="HBoxContainer/NatureIndicator"]
 layout_mode = 2
+theme_override_constants/outline_size = 10
+text = "max 5"
+
+[node name="ZiplineIndicator" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_constants/separation = 5
+script = ExtResource("2_avwou")
+type = 2
+
+[node name="TextureLogo" type="TextureRect" parent="HBoxContainer/ZiplineIndicator"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_c7mkw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CheckMark" type="TextureRect" parent="HBoxContainer/ZiplineIndicator/TextureLogo"]
+visible = false
+layout_mode = 0
+offset_left = 30.0
+offset_top = -1.485
+offset_right = 50.0
+offset_bottom = 18.515
+pivot_offset = Vector2(0, 20)
+texture = ExtResource("4_vqbcy")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/ZiplineIndicator"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+text = "max 5"
+
+[node name="PierIndicator" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_constants/separation = 5
+script = ExtResource("2_avwou")
+type = 3
+
+[node name="TextureLogo" type="TextureRect" parent="HBoxContainer/PierIndicator"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_c7mkw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CheckMark" type="TextureRect" parent="HBoxContainer/PierIndicator/TextureLogo"]
+visible = false
+layout_mode = 0
+offset_left = 30.0
+offset_top = -1.485
+offset_right = 50.0
+offset_bottom = 18.515
+pivot_offset = Vector2(0, 20)
+texture = ExtResource("4_vqbcy")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/PierIndicator"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+text = "max 5"
+
+[node name="RestIndicator" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_constants/separation = 5
+script = ExtResource("2_avwou")
+type = 5
+
+[node name="TextureLogo" type="TextureRect" parent="HBoxContainer/RestIndicator"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_c7mkw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CheckMark" type="TextureRect" parent="HBoxContainer/RestIndicator/TextureLogo"]
+visible = false
+layout_mode = 0
+offset_left = 30.0
+offset_top = -1.485
+offset_right = 50.0
+offset_bottom = 18.515
+pivot_offset = Vector2(0, 20)
+texture = ExtResource("4_vqbcy")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/RestIndicator"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+text = "max 5"
+
+[node name="CivilisationIndicator" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_constants/separation = 5
+script = ExtResource("2_avwou")
+type = 4
+
+[node name="TextureLogo" type="TextureRect" parent="HBoxContainer/CivilisationIndicator"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_c7mkw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CheckMark" type="TextureRect" parent="HBoxContainer/CivilisationIndicator/TextureLogo"]
+visible = false
+layout_mode = 0
+offset_left = 30.0
+offset_top = -1.485
+offset_right = 50.0
+offset_bottom = 18.515
+pivot_offset = Vector2(0, 20)
+texture = ExtResource("4_vqbcy")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/CivilisationIndicator"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
 text = "max 5"

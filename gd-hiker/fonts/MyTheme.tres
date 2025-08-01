@@ -1,8 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bndlqmsq8d6tl"]
-
-[ext_resource type="FontFile" uid="uid://bc0yrxqd2gssk" path="res://fonts/Schoolbell-Regular.ttf" id="1_hbcvg"]
-
-[resource]
-default_font = ExtResource("1_hbcvg")
-Label/font_sizes/font_size = 25
-Label/fonts/font = ExtResource("1_hbcvg")
