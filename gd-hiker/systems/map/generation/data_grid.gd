@@ -1,5 +1,5 @@
 @tool
-@icon("res://systems/planthandling/icons/triangle-grid.svg")
+@icon("res://systems/math/icons/triangle-grid.svg")
 class_name DataGrid
 extends Node
 

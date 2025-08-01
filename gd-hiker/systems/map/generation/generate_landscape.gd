@@ -16,6 +16,11 @@ var _do_generate = _generate;
 @export_tool_button("Randomize")
 var _do_randomize = _randomize;
 
+@export_category("Grid Output")
+@export var displacement_grid: DataGrid;
+@export var amount_path_grid: DataGrid;
+@export var amount_lake_grid: DataGrid;
+
 @export_category("Path Vertex Color Generation")
 @export var path_sample_straight: Texture2D;
 var path_sample_straight_img: Image;
@@ -104,17 +109,6 @@ func _randomize():
 func _generate():
 	generate(self.get_parent() as Map)
 
-const vertex_grid_shift = Vector2i(2, 6);
-
-func _vertex_idx_to_point(at: Vector2i) -> Vector3:
-	at = at - vertex_grid_shift;
-	return Vector3(at.x * Hexagons.triangle_width * 2.0 + (at.y % 2) * Hexagons.triangle_width, 0, at.y * Hexagons.triangle_height/2.0);
-
-func _vertex_point_to_idx(at: Vector3) -> Vector2i:
-	var x = floori((at.x + Hexagons.triangle_width/4.0) / (Hexagons.triangle_width * 2.0));
-	var y = floori((at.z + Hexagons.triangle_width/4.0) / (Hexagons.triangle_height/2.0));
-	return Vector2i(x, y) + vertex_grid_shift;
-
 func smoothen(from: DataGrid, to: DataGrid):
 	for x in range(from.grid_w):
 		for y in range(from.grid_h):
@@ -131,6 +125,12 @@ func smoothen(from: DataGrid, to: DataGrid):
 					my_vertex += neighbour_vertex;
 			
 			to.put_thing(at, my_vertex/my_count);
+
+func copy_grid(from: DataGrid, to: DataGrid):
+	for x in range(from.grid_w):
+		for y in range(from.grid_h):
+			var at = Vector2i(x, y);
+			to.put_thing(at, from.get_thing(at));
 
 func smoothen_paths(from: DataGrid, to: DataGrid, limit: DataGrid):
 	for x in range(from.grid_w):
@@ -191,11 +191,11 @@ func calculate_amount_path_grid(map: Map, to: DataGrid, type: TileAreaType):
 	for x in range(to.grid_w):
 		for y in range(to.grid_h):
 			var at = Vector2i(x, y);
-			var loc = _vertex_idx_to_point(at);
+			var loc = HexagonTriangleVertexSpace.idx_to_point(at);
 			var vertex_2D = Vector2(loc.x, loc.z);
 			
 			# which triangle are we in?
-			var at_shifted = at - vertex_grid_shift;
+			var at_shifted = at - HexagonTriangleVertexSpace.vertex_grid_shift;
 			var at_triangle = Vector2i(at_shifted.x*2, at_shifted.y);
 			
 			# which hexagon are we in?
@@ -222,23 +222,21 @@ func generate(map: Map):
 	
 	
 	# Collect the vertex data
-	var vgrid = DataGrid.new();
+	var vgrid = displacement_grid;
 	vgrid.init(ceil(map.bounds.size.x / Hexagons.triangle_width)+20, ceil(map.bounds.size.y / Hexagons.triangle_height * 2.0)+20);
 	
 	# Init the grid
 	for x in range(vgrid.grid_w):
 		for y in range(vgrid.grid_h):
 			var at = Vector2i(x, y);
-			var vertex = _vertex_idx_to_point(at);
+			var vertex = HexagonTriangleVertexSpace.idx_to_point(at);
 			vgrid.put_thing(at, vertex);
 	
 	# Calculate that paths on the grid (per vertex)
-	var amount_path_grid = DataGrid.new();
 	amount_path_grid.init(vgrid.grid_w, vgrid.grid_h);
 	calculate_amount_path_grid(map, amount_path_grid, TileAreaType.PATH);
 	
 	# Calculate lake areas
-	var amount_lake_grid = DataGrid.new();
 	amount_lake_grid.init(vgrid.grid_w, vgrid.grid_h);
 	var amount_lake_grid2 = DataGrid.new();
 	amount_lake_grid2.init(vgrid.grid_w, vgrid.grid_h);
@@ -250,7 +248,7 @@ func generate(map: Map):
 	for x in range(vgrid.grid_w):
 		for y in range(vgrid.grid_h):
 			var at = Vector2i(x, y);
-			var loc = _vertex_idx_to_point(at);
+			var loc = HexagonTriangleVertexSpace.idx_to_point(at);
 			var vertex_2D = Vector2(loc.x, loc.z);
 			
 			var vertex = vgrid.get_thing(at);
@@ -267,7 +265,7 @@ func generate(map: Map):
 	for x in range(vgrid.grid_w):
 		for y in range(vgrid.grid_h):
 			var at = Vector2i(x, y);
-			var loc = _vertex_idx_to_point(at);
+			var loc = HexagonTriangleVertexSpace.idx_to_point(at);
 			var vertex_2D = Vector2(loc.x, loc.z);
 			
 			var vertex = vgrid.get_thing(at);
@@ -284,7 +282,7 @@ func generate(map: Map):
 	for x in range(vgrid.grid_w):
 		for y in range(vgrid.grid_h):
 			var at = Vector2i(x, y);
-			var loc = _vertex_idx_to_point(at);
+			var loc = HexagonTriangleVertexSpace.idx_to_point(at);
 			var vertex_2D = Vector2(loc.x, loc.z);
 			
 			var vertex = vgrid.get_thing(at);
@@ -309,11 +307,11 @@ func generate(map: Map):
 		var tmp = vgrid2;
 		vgrid2 = vgrid;
 		vgrid = tmp;
-	
+	if smooth_steps % 0 == 1:
+		copy_grid(vgrid2, vgrid);
 	
 	# Smoothen the path some more?
 	# (cut in the landscape?)
-	
 	for i in range(smooth_steps_paths):
 		smoothen_paths(vgrid, vgrid2, amount_path_grid);
 		var tmp = vgrid2;
@@ -351,7 +349,7 @@ func generate(map: Map):
 				
 				# Get the vertex displacements
 				for i in range(3):
-					var at = _vertex_point_to_idx(tri_vertices[i]);
+					var at = HexagonTriangleVertexSpace.point_to_idx(tri_vertices[i]);
 					tri_vertices[i] = vgrid.get_thing(at);
 				
 				# Calculate the normal
@@ -361,7 +359,7 @@ func generate(map: Map):
 				for i in range(3):
 					var v = tri_vertices[i];
 					var vertex_2D = tri_vertices_2D[i];
-					var at = _vertex_point_to_idx(vertices[i]);
+					var at = HexagonTriangleVertexSpace.point_to_idx(vertices[i]);
 					
 					# Get the amount path
 					var amount_path = amount_path_grid.get_thing(at);
