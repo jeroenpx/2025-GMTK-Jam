@@ -1,8 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqsdtbt1igram"]
+[gd_scene load_steps=9 format=3 uid="uid://bqsdtbt1igram"]
 
 [ext_resource type="PackedScene" uid="uid://ciw02q5m2than" path="res://systems/loop_manager/LoopManager.tscn" id="1_qdju4"]
 [ext_resource type="PackedScene" uid="uid://7rdp17ixhb6o" path="res://systems/point_of_interest/PointOfInterest.tscn" id="2_b8o63"]
+[ext_resource type="Script" uid="uid://bf681mrn6bhw5" path="res://systems/loop_manager/limitations.gd" id="2_esv6d"]
 [ext_resource type="Material" uid="uid://clx8oe6tk00e3" path="res://materials/testing_materials/testMaterial.tres" id="3_b8o63"]
+
+[sub_resource type="Resource" id="Resource_3mdte"]
+script = ExtResource("2_esv6d")
+visit_type = 1
+numerical_type = 0
+value = 1
+metadata/_custom_type_script = "uid://bf681mrn6bhw5"
+
+[sub_resource type="Resource" id="Resource_jy1m5"]
+script = ExtResource("2_esv6d")
+visit_type = 5
+numerical_type = 0
+value = 1
+metadata/_custom_type_script = "uid://bf681mrn6bhw5"
 
 [sub_resource type="SphereMesh" id="SphereMesh_qdju4"]
 
@@ -16,6 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 0.781749, 0.623593, 0, -0.623593, 0.781749, 
 [node name="LoopManager" parent="." node_paths=PackedStringArray("camera", "current_visit") instance=ExtResource("1_qdju4")]
 camera = NodePath("../Camera3D")
 current_visit = NodePath("PointOfInterest")
+limitations = Array[ExtResource("2_esv6d")]([SubResource("Resource_3mdte"), SubResource("Resource_jy1m5")])
 
 [node name="PointOfInterest" parent="LoopManager" node_paths=PackedStringArray("neighbours") instance=ExtResource("2_b8o63")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.28758, 0, 0)
