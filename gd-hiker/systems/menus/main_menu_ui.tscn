@@ -13,7 +13,13 @@ shader_parameter/outer_radius = 1.67
 [node name="MainMenuUI" instance=ExtResource("1_cguyp")]
 
 [node name="Menus" parent="." index="0" node_paths=PackedStringArray("menus")]
-menus = {}
+menus = {
+"accessibility": NodePath("OptionsMenuAccessibility"),
+"audio": NodePath("OptionsMenuAudio"),
+"credits": NodePath("CreditsMenu"),
+"graphics": NodePath("OptionsMenuVideo"),
+"options": NodePath("OptionsMenu")
+}
 
 [node name="PauseMenuBg" parent="Menus/PauseMenuMain" index="0"]
 visible = false

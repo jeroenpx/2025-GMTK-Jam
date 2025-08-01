@@ -20,12 +20,11 @@ func _ready() -> void:
 			points_of_interest.append(point)
 	for i in range(0, limitations.size()):
 		all_limitations_completed.append(false)
-		
-
 
 func _process(delta: float) -> void:
-	if !is_level_finished:
-		hover_over()
+	if GameState.isGameplayRunning():
+		if !is_level_finished:
+			hover_over()
 
 #handle the input
 func _unhandled_input(event: InputEvent) -> void:

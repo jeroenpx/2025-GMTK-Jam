@@ -24,6 +24,7 @@ buses/default_bus_layout="uid://cna11ffgt3ktw"
 AppConfig="*res://systems/menus/maaack/scenes/autoloads/app_config.tscn"
 BtnIndicators="*res://systems/button_indications/btn_indicators.tscn"
 GameState="*res://systems/game_state/game_state.tscn"
+LevelManager="*res://systems/level_manager/level_manager.tscn"
 
 [file_customization]
 
@@ -34,6 +35,11 @@ folder_colors={
 [global_group]
 
 "point of interest"=""
+
+[gui]
+
+theme/custom="uid://bndlqmsq8d6tl"
+theme/custom_font="uid://bc0yrxqd2gssk"
 
 [input]
 

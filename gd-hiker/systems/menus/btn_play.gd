@@ -5,3 +5,4 @@ func _ready() -> void:
 
 func _button_pressed() -> void:
 	GameState.enter_cinematic("play");
+	LevelManager.change_level("res://levels/ETestScene.tscn")
