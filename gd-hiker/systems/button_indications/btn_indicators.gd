@@ -11,14 +11,14 @@ func _ready() -> void:
 	_update_visibilities()
 	
 	# TODO: enable again
-	#GameState.on_game_state_changed.connect(_on_state_change);
+	GameState.on_game_state_changed.connect(_on_state_change);
 
-#func _on_state_change() -> void:
-#	if GameState.isGameplayRunning():
-#		_update_visibilities();
-#	else:
-#		navigate_indication.visible = false;
-#		undo_indication.visible = false;
+func _on_state_change() -> void:
+	if GameState.isGameplayRunning():
+		_update_visibilities();
+	else:
+		navigate_indication.visible = false;
+		undo_indication.visible = false;
 
 func show_navigate(show: bool) -> void:
 	showing_navigate = show;
