@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://ciw02q5m2than"]
+[gd_scene load_steps=5 format=3 uid="uid://ciw02q5m2than"]
 
 [ext_resource type="Script" uid="uid://b38ff3ypvc8nd" path="res://systems/loop_manager/loop_manager.gd" id="1_8x2cs"]
+[ext_resource type="Script" uid="uid://bf681mrn6bhw5" path="res://systems/loop_manager/limitations.gd" id="2_u3hmi"]
+
+[sub_resource type="Resource" id="Resource_u3hmi"]
+script = ExtResource("2_u3hmi")
+visit_type = 1
+numerical_type = 0
+value = 1
+metadata/_custom_type_script = "uid://bf681mrn6bhw5"
+
+[sub_resource type="Resource" id="Resource_rph87"]
+script = ExtResource("2_u3hmi")
+visit_type = 5
+numerical_type = 0
+value = 1
+metadata/_custom_type_script = "uid://bf681mrn6bhw5"
 
 [node name="LoopManager" type="Node3D"]
 script = ExtResource("1_8x2cs")
+limitations = Array[ExtResource("2_u3hmi")]([SubResource("Resource_u3hmi"), SubResource("Resource_rph87")])
