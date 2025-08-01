@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://i6ihop1vp2ei"
+
+[deps]
+
+files=["res://systems/menus/maaack/translations/menus_translations.en.translation", "res://systems/menus/maaack/translations/menus_translations.fr.translation", "res://systems/menus/maaack/translations/menus_translations.nl.translation"]
+
+source_file="res://systems/menus/maaack/translations/menus_translations.csv"
+dest_files=["res://systems/menus/maaack/translations/menus_translations.en.translation", "res://systems/menus/maaack/translations/menus_translations.fr.translation", "res://systems/menus/maaack/translations/menus_translations.nl.translation"]
+
+[params]
+
+compress=true
+delimiter=0

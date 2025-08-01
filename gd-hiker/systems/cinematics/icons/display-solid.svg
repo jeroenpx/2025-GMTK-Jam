@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 576 576"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="display-solid.svg"
+   width="576"
+   height="576"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#000000"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.79394531"
+     inkscape:cx="-79.98032"
+     inkscape:cy="188.30012"
+     inkscape:window-width="2560"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+  <path
+     d="m 94.858549,64.236163 c -30.437024,0 -55.183272,24.746248 -55.183272,55.183267 v 248.32473 c 0,30.43702 24.746248,55.18327 55.183272,55.18327 H 246.61255 l -9.22596,27.59164 h -59.75313 c -15.26163,0 -27.59164,12.33001 -27.59164,27.59163 0,15.26163 12.33001,27.59164 27.59164,27.59164 h 220.73308 c 15.26163,0 27.59164,-12.33001 27.59164,-27.59164 0,-15.26162 -12.33001,-27.59163 -27.59164,-27.59163 h -59.75313 l -9.22596,-27.59164 h 151.754 c 30.43702,0 55.18327,-24.74625 55.18327,-55.18327 V 119.41943 c 0,-30.437019 -24.74625,-55.183267 -55.18327,-55.183267 z M 481.14145,119.41943 V 367.74416 H 94.858549 V 119.41943 Z"
+     id="path1"
+     style="fill:#ffffff;fill-opacity:1;stroke-width:0.862239" />
+</svg>

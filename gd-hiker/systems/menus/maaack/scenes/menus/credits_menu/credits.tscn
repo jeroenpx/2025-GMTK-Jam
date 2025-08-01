@@ -1,0 +1,131 @@
+[gd_scene load_steps=2 format=3 uid="uid://t2dui8ppm3a4"]
+
+[ext_resource type="Script" uid="uid://32ldex3xsx3i" path="res://systems/menus/maaack/scenes/menus/credits_menu/credits.gd" id="4"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4")
+attribution_file_path = "res://systems/menus/maaack/ATTRIBUTION.md"
+h1_font_size = 64
+h2_font_size = 48
+h3_font_size = 32
+h4_font_size = 24
+current_speed = 0.5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+scroll_vertical = 100
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HeaderSpace" type="Control" parent="ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 648)
+layout_mode = 2
+
+[node name="CreditsLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1152, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+bbcode_enabled = true
+text = "[center]
+[font_size=48]A game made by:[/font_size]
+
+Jeroen Penninck ([url=https://jeroenpx.itch.io/]jeroenpx[/url])
+Sadie Melina (faedoll / mermaidprincessnovaya)
+Devon ([url=https://www.tiktok.com/@heartnaught]heartnaught[/url])
+Elliott Starr ([url=https://linktr.ee/Starrmanly]Starrmanly[/url])
+
+
+
+
+[font_size=48]Roles[/font_size]
+
+Jeroen Penninck ([url=https://jeroenpx.itch.io/]jeroenpx[/url])
+[font_size=24]Main Mermaid Character [/font_size]
+[font_size=24]Modeling, Texturing, Rigging,[/font_size]
+[font_size=24]Procedural Animation[/font_size]
+[font_size=24]Animation[/font_size]
+
+[font_size=24]All Programming[/font_size]
+[font_size=24]All Shaders & Effects[/font_size]
+[font_size=24]All UI & UI Animations[/font_size]
+[font_size=24]3D Assets[/font_size]
+[font_size=24]Color Design[/font_size]
+[font_size=24]Level Design[/font_size]
+
+
+Sadie Melina (faedoll / mermaidprincessnovaya)
+[font_size=24]Music[/font_size]
+[font_size=24]Bringing the other (2D art) Mermaids to life[/font_size]
+[font_size=24]By doing Modeling and Writing dialogue for the Mermaids[/font_size]
+
+
+Devon ([url=https://www.tiktok.com/@heartnaught]heartnaught[/url])
+[font_size=24]Mermaid Characters 2D Art[/font_size]
+[font_size=24]Rock 3D Models, Boat 3D Model[/font_size]
+
+
+Elliott Starr ([url=https://linktr.ee/Starrmanly]Starrmanly[/url])
+[font_size=24]2D environmental artist (flowers, sea onions, seaweed, text bubble)[/font_size]
+
+
+
+[font_size=48]Assets Used[/font_size]
+underwater ambience by akemov
+[url=https://freesound.org/s/255597/]https://freesound.org/s/255597/[/url]
+License: Attribution 4.0
+
+
+[font_size=48]Tools[/font_size]
+[font_size=24]Godot[/font_size]
+Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]  
+Source: [url=https://godotengine.org/]godotengine.org[/url]  
+License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url]
+
+[font_size=24]Godot Options Menus[/font_size]
+Author: [url=https://github.com/Maaack/Godot-Options-Menus/graphs/contributors]Marek Belski and contributors[/url]  
+Source: [url=https://github.com/Maaack/Godot-Options-Menus]github: Godot-Options-Menus[/url]  
+License: [url=https://github.com/Maaack/Godot-Options-Menus/blob/main/LICENSE.txt]MIT License[/url]  
+
+[font_size=24]Godot Radial Menu Control[/font_size]
+Authors: [url=https://github.com/jesuisse/godot-radial-menu-control/graphs/contributors]jesuisse and contributors[/url]
+Source: [url=https://github.com/jesuisse/godot-radial-menu-control]github: godot-radial-menu-control[/url]  
+License: [url=https://github.com/jesuisse/godot-radial-menu-control/blob/master/addons/RadialMenu/LICENSE]MIT License[/url] 
+
+
+
+
+
+[font_size=48]Thanks for Playing![/font_size]
+[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="FooterSpace" type="Control" parent="ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 648)
+layout_mode = 2
+
+[node name="ScrollResetTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="gui_input" from="ScrollContainer" to="." method="_on_scroll_container_gui_input"]
+[connection signal="resized" from="ScrollContainer" to="." method="_on_scroll_container_resized"]
+[connection signal="scroll_started" from="ScrollContainer" to="." method="_on_scroll_container_scroll_started"]
+[connection signal="meta_clicked" from="ScrollContainer/VBoxContainer/CreditsLabel" to="." method="_on_CreditsLabel_meta_clicked"]
+[connection signal="timeout" from="ScrollResetTimer" to="." method="_on_scroll_reset_timer_timeout"]

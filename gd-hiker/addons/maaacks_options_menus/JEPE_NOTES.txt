@@ -1,0 +1,24 @@
+STEP 1:
+ - Add gamepad to input settings (see override in the installer folder)
+  -> ui_cancel = start button
+  -> ui_accept = (x) button on playstation
+  -> ui_page_up = LB (button 9)
+  -> ui_page_down = RB (button 10)
+
+STEP 2:
+ - Deleted installer folder
+
+STEP 3: 
+ - Deleted maaacks_options_menus.gd folder
+
+STEP 4:
+ - Kept the "ATTRIBUTION.md" example in "examples"
+ - Deleted the "examples" folder
+
+STEP 5:
+ - Moved all files from "base/" to my own project
+
+
+NOTE: 
+ - See docs/ExistingProject for adding more options
+ - Get options using Config.get_config(section, key, default_value)

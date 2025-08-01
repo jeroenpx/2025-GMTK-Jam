@@ -1,0 +1,96 @@
+keys,en,fr,nl
+,,,
+___ MAIN MENU,,,
+,,,
+Niara ,Niara ,,Niara 
+&,&,,&
+Lio,Lio,,Lio
+The Lost City of Rel,The Lost City of Rel,,De verdwenen stad Rel
+,,,
+Play,Play,Jouer,Start Spel
+Options,Options,Options,Opties
+Credits,Credits,Crédits,Credits
+Exit,Exit,Quitter,Afsluiten
+Game Paused,Game Paused,Jeu En Pause,Spel gepauzeerd
+,,,
+___ LOADING SCREEN,,,
+Loading...,Loading...,Chargement...,Laden...
+,,,
+___ DIALOGS IN GAME,,,
+,,,
+You lose.,You lose.,Vous avez perdu.,
+You won!,You won!,Vous avez gagné !,
+Thanks for playing!,Thanks for playing!,Merci d'avoir joué !,
+,,,
+Exit Game,Exit Game,Quitter le jeu,Spel afsluiten
+Main Menu,Main Menu,Menu principal,Hoofdmenu
+Restart,Restart,Recommencer,
+Continue,Continue,Continuer,Verdergaan
+Menu,Menu,Menu,
+,,,
+Please Confirm...,Please Confirm...,Veuillez confirmer...,
+Go back to main menu?,Go back to main menu?,Retourner au menu principal ?,
+Quit the game?,Quit the game?,Quitter le jeu ?,
+Cancel,Cancel,Annuler,
+OK,OK,OK,
+,,,
+___ OPTIONS MENU,,,
+,,,
+Controls,Controls,Contrôles,
+Mouse Sensitivity :,Mouse Sensitivity :,Sensibilité souris :,
+Actions & Inputs,Actions & Inputs,Actions et contrôles,
+Add,Add,Ajouter,
+Remove,Remove,Enlever,
+Assign Key for {action},Assign Key for {action},Choisir le contrôle pour {action},
+Listening for input...,Listening for input...,Appuyez sur un bouton...,
+Press again to confirm...,Press again to confirm...,Appuyez encore pour confirmer...,
+Focus here to assign inputs.,Focus here to assign inputs.,Mettez le focus ici pour choisir le contrôle.,
+Already Assigned,Already Assigned,Déjà utilisé,
+{key} already assigned to {action}.,{key} already assigned to {action}.,{key} est déjà utilisé pour {action}.,
+Remove Key for {action},Remove Key for {action},Supprimer le contrôle pour {action},
+Are you sure you want to remove {key} from {action}?,Are you sure you want to remove {key} from {action}?,Êtes-vous sûr de vouloir supprimer {key} pour {action} ?,
+Reset,Reset,Réinitialiser,
+,,,
+Audio,Audio,Audio,Geluid
+Audio Options,Audio Options,Options Audio,Geluidsopties
+Master,Master,Principal,
+Music,Music,Musique,Muziek
+SoundFx,Sound Fx,Effets,Effecten
+Ambience,Ambience,Ambiance,Omgeving
+Mute,Mute,Silencieux,
+,,,
+Graphics,Graphics,Vidéo,Beeld
+Graphic Options,Graphic Options,Options Vidéo,Beeld Opties
+Fullscreen,Fullscreen,Plein écran,Volledig Scherm
+Resolution,Resolution,Résolution,Resolutie
+Anti-Aliasing,Anti-Aliasing,Anticrénelage,Anti-Aliasing
+Disabled (Fastest),Disabled (Fastest),Désactivé (Plus rapide),
+8x (Slowest),8x (Slowest),8x (Plus lent),
+MaxFPS,Max FPS,,Max FPS
+Unlimited,Unlimited,Illimitées,Ongelimiteerd
+VSyncMode,VSync,,VSync
+VSync Enabled,Enabled,Activé,Aan
+VSync Disabled,Disabled,Désactivé,Uit
+VSync Adaptive,Adaptive,Adaptatif,Adaptief
+ShowFPS,Show FPS,,Toon FPS
+,,,
+Accessibility,Accessibility,,Toegankelijkheid
+Accessibility Options,Accessibility Options,,Toegankelijkheidsopties
+Screen Shake,Screen Shake,Tremblement d'écran,Schokken van het scherm
+Screen Shake Normal,Normal,Normale,Normaal
+Screen Shake Reduced,Reduced,Réduite,Vermindered
+Screen Shake Minimal,Minimal,Minimum,Minimaal
+Screen Shake None,None,Aucune,Geen
+CameraFlipHorizontal,Camera Flip X,,Keer Camera X om
+CameraFlipVertical,Camera Flip Y,,Keer Camera Y om
+ShowSubtitles,Show Subtitles,,Toon ondertitels
+CameraSensitivity,Camera Sensitivity,,Cameragevoeligheid
+Language,Language,Langue,Taal
+LanguageAutomatic,Automatic,Automatique,Automatisch
+CurrentLanguageName,English,Français,Nederlands
+,,,
+Game,Game,Jeu,
+Reset Game :,Reset Game :,Réinitialiser le jeu :,
+Do you want to reset your game data?,Do you want to reset your game data?,Voulez-vous réinitialiser votre partie ?,
+,,,
+Back,Back,Retour,Terug

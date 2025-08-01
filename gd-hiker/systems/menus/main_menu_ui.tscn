@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://b25r8o7f67sg1"]
+
+[ext_resource type="PackedScene" uid="uid://d2by1bhaah44n" path="res://systems/menus/base_menu_ui.tscn" id="1_cguyp"]
+[ext_resource type="Shader" uid="uid://cylnwojaeshbb" path="res://systems/menus/vignette.gdshader" id="2_iv2oe"]
+[ext_resource type="Script" uid="uid://bf8ljw4rsxalf" path="res://systems/menus/btn_play.gd" id="3_cljp2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xc5y"]
+shader = ExtResource("2_iv2oe")
+shader_parameter/alpha = 1.3
+shader_parameter/inner_radius = 0.31
+shader_parameter/outer_radius = 1.67
+
+[node name="MainMenuUI" instance=ExtResource("1_cguyp")]
+
+[node name="Menus" parent="." index="0" node_paths=PackedStringArray("menus")]
+menus = {}
+
+[node name="PauseMenuBg" parent="Menus/PauseMenuMain" index="0"]
+visible = false
+scale = Vector2(1.265, 1.265)
+pivot_offset = Vector2(1152, 648)
+
+[node name="PauseBackgroundDark" parent="Menus/PauseMenuMain/PauseMenuBg" index="0"]
+visible = false
+
+[node name="PauseBackgroundVignette" parent="Menus/PauseMenuMain/PauseMenuBg" index="1"]
+material = SubResource("ShaderMaterial_7xc5y")
+
+[node name="TextureRect" type="TextureRect" parent="Menus/PauseMenuMain" index="1"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1369.55
+offset_top = 57.34
+offset_right = 52.455
+offset_bottom = 915.34
+grow_horizontal = 0
+scale = Vector2(0.32, 0.32)
+pivot_offset = Vector2(1422, 0)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="PauseMenuMainButtons" parent="Menus/PauseMenuMain" index="2"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -305.205
+offset_top = -342.145
+offset_right = -48.2051
+offset_bottom = -66.145
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TitlePaused" parent="Menus/PauseMenuMain/PauseMenuMainButtons" index="0"]
+visible = false
+
+[node name="ContinueButton" parent="Menus/PauseMenuMain/PauseMenuMainButtons" index="1"]
+visible = false
+
+[node name="PlayButton" type="Button" parent="Menus/PauseMenuMain/PauseMenuMainButtons" index="2"]
+layout_mode = 2
+text = "Play"
+script = ExtResource("3_cljp2")
+
+[node name="VBoxContainer" parent="Menus/PauseMenuMain/PauseMenuMainButtons/Video" index="0"]
+custom_minimum_size = Vector2(180, 0)
+
+[node name="FullscreenControl" parent="Menus/PauseMenuMain/PauseMenuMainButtons/Video/VBoxContainer" index="0"]
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="OptionLabel" parent="Menus/PauseMenuMain/PauseMenuMainButtons/Video/VBoxContainer/FullscreenControl" index="0"]
+visible = false
+custom_minimum_size = Vector2(172.54, 0)
+text = "Fullscreen"
+horizontal_alignment = 2
+
+[node name="CheckButton" parent="Menus/PauseMenuMain/PauseMenuMainButtons/Video/VBoxContainer/FullscreenControl" index="1"]
+text = "FULLSCREEN"
+
+[node name="ButtonToAccessibility" parent="Menus/OptionsMenu/OptionsMenuButtons" index="3"]
+visible = false
+
+[editable path="Menus/PauseMenuMain/PauseMenuBg"]
+[editable path="Menus/PauseMenuMain/PauseMenuMainButtons/Video"]
+[editable path="Menus/PauseMenuMain/PauseMenuMainButtons/Video/VBoxContainer/FullscreenControl"]

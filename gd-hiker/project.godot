@@ -15,9 +15,15 @@ run/main_scene="uid://bqsdtbt1igram"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://cna11ffgt3ktw"
+
 [autoload]
 
+AppConfig="*res://systems/menus/maaack/scenes/autoloads/app_config.tscn"
 BtnIndicators="*res://systems/button_indications/btn_indicators.tscn"
+GameState="*res://systems/game_state/game_state.tscn"
 
 [file_customization]
 
@@ -36,6 +42,10 @@ folder_colors={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"location":0,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://systems/menus/maaack/translations/menus_translations.en.translation")
 
 [rendering]
 

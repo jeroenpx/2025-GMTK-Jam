@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://c58hb5pmccsvf"]
+
+[ext_resource type="Script" uid="uid://1e6wuy4ve2o2" path="res://systems/menus/maaack/scenes/menus/options_menu/accessibility/accessibility_options_menu.gd" id="1_xxccr"]
+[ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://systems/menus/maaack/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="2_p55a0"]
+[ext_resource type="PackedScene" uid="uid://b6bl3n5mp3m1e" path="res://systems/menus/maaack/scenes/menus/options_menu/option_control/list_option_control.tscn" id="3_slshf"]
+[ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://systems/menus/maaack/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="4_tbwpe"]
+
+[node name="Accessibility" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xxccr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="LanguageControl" parent="VBoxContainer" instance=ExtResource("3_slshf")]
+unique_name_in_owner = true
+layout_mode = 2
+option_name = "Language"
+option_section = 4
+key = "Language"
+section = "AccessibilitySettings"
+
+[node name="ShowSubtitlesControl" parent="VBoxContainer" instance=ExtResource("2_p55a0")]
+unique_name_in_owner = true
+layout_mode = 2
+option_name = "ShowSubtitles"
+option_section = 4
+key = "ShowSubtitles"
+section = "AccessibilitySettings"
+
+[node name="FlipHorizControl" parent="VBoxContainer" instance=ExtResource("2_p55a0")]
+unique_name_in_owner = true
+layout_mode = 2
+option_name = "CameraFlipHorizontal"
+option_section = 4
+key = "CameraFlipHorizontal"
+section = "AccessibilitySettings"
+
+[node name="FlipVerticControl" parent="VBoxContainer" instance=ExtResource("2_p55a0")]
+unique_name_in_owner = true
+layout_mode = 2
+option_name = "CameraFlipVertical"
+option_section = 4
+key = "CameraFlipVertical"
+section = "AccessibilitySettings"
+
+[node name="ScreenShakeControl" parent="VBoxContainer" instance=ExtResource("3_slshf")]
+unique_name_in_owner = true
+layout_mode = 2
+lock_titles = true
+option_values = [10, 7, 3, 0]
+option_titles = Array[String](["Screen Shake Normal", "Screen Shake Reduced", "Screen Shake Minimal", "Screen Shake None"])
+lock_config_names = true
+option_name = "Screen Shake"
+option_section = 4
+key = "ScreenShake"
+section = "AccessibilitySettings"
+property_type = 2
+
+[node name="CameraSensitivityControl" parent="VBoxContainer" instance=ExtResource("4_tbwpe")]
+unique_name_in_owner = true
+layout_mode = 2
+option_name = "CameraSensitivity"
+option_section = 4
+key = "CameraSensitivity"
+section = "AccessibilitySettings"
+
+[node name="OptionLabel" parent="VBoxContainer/CameraSensitivityControl" index="0"]
+text = "CameraSensitivity"
+horizontal_alignment = 0
+
+[node name="HSlider" parent="VBoxContainer/CameraSensitivityControl" index="1"]
+min_value = 0.05
+max_value = 4.0
+value = 1.1
+
+[connection signal="setting_changed" from="VBoxContainer/LanguageControl" to="." method="_on_language_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/ShowSubtitlesControl" to="." method="_on_show_subtitles_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/FlipHorizControl" to="." method="_on_flip_horiz_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/FlipVerticControl" to="." method="_on_flip_vertic_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/ScreenShakeControl" to="." method="_on_screen_shake_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/CameraSensitivityControl" to="." method="_on_camera_sensitivity_control_setting_changed"]
+
+[editable path="VBoxContainer/CameraSensitivityControl"]

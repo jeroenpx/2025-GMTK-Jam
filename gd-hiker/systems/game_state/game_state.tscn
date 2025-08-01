@@ -1,0 +1,146 @@
+[gd_scene load_steps=15 format=3 uid="uid://cgr5de7j7m1ut"]
+
+[ext_resource type="Script" uid="uid://bdj4p5ofc7p42" path="res://systems/game_state/game_state.gd" id="1_1t0jf"]
+[ext_resource type="Script" uid="uid://hbat0mg1j7c0" path="res://systems/game_state/minimize_window_watcher.gd" id="2_vinmn"]
+[ext_resource type="Script" uid="uid://yhx8c2qxb0le" path="res://systems/game_state/game_state_pause_watcher.gd" id="2_yorry"]
+[ext_resource type="PackedScene" uid="uid://bx4h55hymuec4" path="res://systems/menus/pause_menu_ui.tscn" id="4_gnyib"]
+[ext_resource type="Script" uid="uid://ba3djlhs878vx" path="res://systems/game_state/game_state_pause_menu_toggle.gd" id="4_o5ocp"]
+[ext_resource type="Shader" uid="uid://cylnwojaeshbb" path="res://systems/menus/vignette.gdshader" id="6_prc06"]
+[ext_resource type="Script" uid="uid://bbrsj1h3avat8" path="res://systems/game_state/other/fps_counter.gd" id="8_6dflr"]
+[ext_resource type="Script" uid="uid://canvgi46bwcbi" path="res://systems/menus/menu_container.gd" id="9_7omsh"]
+[ext_resource type="PackedScene" uid="uid://dfbev1ixeqb5p" path="res://systems/menus/menu_bg.tscn" id="10_6dflr"]
+[ext_resource type="Script" uid="uid://o580paf35gid" path="res://systems/menus/maaack/scripts/capture_focus.gd" id="11_ydb4n"]
+[ext_resource type="Script" uid="uid://bmenb5r833ajm" path="res://systems/menus/btn_continue.gd" id="12_lt2xn"]
+[ext_resource type="Script" uid="uid://dse607mstjvcq" path="res://systems/menus/btn_to_menu.gd" id="13_hrxtq"]
+[ext_resource type="PackedScene" uid="uid://b25r8o7f67sg1" path="res://systems/menus/main_menu_ui.tscn" id="16_10k00"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xc5y"]
+shader = ExtResource("6_prc06")
+shader_parameter/alpha = 1.3
+shader_parameter/inner_radius = 0.31
+shader_parameter/outer_radius = 1.67
+
+[node name="GameState" type="Node3D"]
+script = ExtResource("1_1t0jf")
+
+[node name="MinimizeWindowWatcher" type="Node" parent="."]
+script = ExtResource("2_vinmn")
+
+[node name="ShouldPauseWatcher" type="Node" parent="."]
+script = ExtResource("2_yorry")
+
+[node name="PauseMenuBg2" parent="." instance=ExtResource("10_6dflr")]
+scale = Vector2(1.265, 1.265)
+pivot_offset = Vector2(1152, 648)
+mouse_filter = 2
+
+[node name="PauseBackgroundDark" parent="PauseMenuBg2" index="0"]
+visible = false
+mouse_filter = 2
+
+[node name="PauseBackgroundVignette" parent="PauseMenuBg2" index="1"]
+material = SubResource("ShaderMaterial_7xc5y")
+mouse_filter = 2
+
+[node name="ActiveMenuControl" type="Node" parent="." node_paths=PackedStringArray("pause_menu", "main_menu", "dev_menu", "main_menu_vignette")]
+script = ExtResource("4_o5ocp")
+pause_menu = NodePath("PauseMenuUI")
+main_menu = NodePath("MainMenuUI")
+dev_menu = NodePath("DevMenuUI")
+main_menu_vignette = NodePath("../PauseMenuBg2/PauseBackgroundVignette")
+
+[node name="DevMenuUI" type="Control" parent="ActiveMenuControl"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menus" type="Control" parent="ActiveMenuControl/DevMenuUI" node_paths=PackedStringArray("menu_initial")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_7omsh")
+menu_initial = NodePath("DevMenuMain")
+
+[node name="DevMenuMain" type="Control" parent="ActiveMenuControl/DevMenuUI/Menus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DevMenuBg" parent="ActiveMenuControl/DevMenuUI/Menus/DevMenuMain" instance=ExtResource("10_6dflr")]
+layout_mode = 1
+
+[node name="DevMenuMainButtons" type="VBoxContainer" parent="ActiveMenuControl/DevMenuUI/Menus/DevMenuMain"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.5
+offset_top = -128.0
+offset_right = 128.5
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+script = ExtResource("11_ydb4n")
+enabled = true
+
+[node name="TitleDevMenu" type="Label" parent="ActiveMenuControl/DevMenuUI/Menus/DevMenuMain/DevMenuMainButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Developer Menu"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="ActiveMenuControl/DevMenuUI/Menus/DevMenuMain/DevMenuMainButtons"]
+layout_mode = 2
+text = "Continue"
+script = ExtResource("12_lt2xn")
+
+[node name="PhotoMode" type="Button" parent="ActiveMenuControl/DevMenuUI/Menus/DevMenuMain/DevMenuMainButtons" node_paths=PackedStringArray("menu_container")]
+visible = false
+layout_mode = 2
+text = "Photo Mode"
+script = ExtResource("13_hrxtq")
+menu_container = NodePath("../../..")
+goto_menu_id = "photomode"
+
+[node name="PhotoMode" type="Control" parent="ActiveMenuControl/DevMenuUI/Menus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenuUI" parent="ActiveMenuControl" instance=ExtResource("4_gnyib")]
+visible = false
+
+[node name="MainMenuUI" parent="ActiveMenuControl" instance=ExtResource("16_10k00")]
+
+[node name="FPSCounter" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -76.0
+offset_top = 4.0
+offset_right = -5.0
+offset_bottom = 44.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 27
+text = "100"
+horizontal_alignment = 2
+script = ExtResource("8_6dflr")
+
+[editable path="PauseMenuBg2"]

@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx4h55hymuec4"]
+
+[ext_resource type="PackedScene" uid="uid://d2by1bhaah44n" path="res://systems/menus/base_menu_ui.tscn" id="1_rd6lj"]
+
+[node name="PauseMenuUI" instance=ExtResource("1_rd6lj")]
+
+[node name="Menus" parent="." index="0" node_paths=PackedStringArray("menus")]
+menus = {
+"accessibility": NodePath("OptionsMenuAccessibility"),
+"audio": NodePath("OptionsMenuAudio"),
+"credits": NodePath("CreditsMenu"),
+"graphics": NodePath("OptionsMenuVideo"),
+"options": NodePath("OptionsMenu")
+}
+
+[node name="VBoxContainer" parent="Menus/PauseMenuMain/PauseMenuMainButtons/Video" index="0"]
+custom_minimum_size = Vector2(180, 0)
+
+[node name="FullscreenControl" parent="Menus/PauseMenuMain/PauseMenuMainButtons/Video/VBoxContainer" index="0"]
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="OptionLabel" parent="Menus/PauseMenuMain/PauseMenuMainButtons/Video/VBoxContainer/FullscreenControl" index="0"]
+visible = false
+custom_minimum_size = Vector2(172.54, 0)
+text = "Fullscreen"
+horizontal_alignment = 2
+
+[node name="CheckButton" parent="Menus/PauseMenuMain/PauseMenuMainButtons/Video/VBoxContainer/FullscreenControl" index="1"]
+text = "FULLSCREEN"
+
+[node name="ButtonToAccessibility" parent="Menus/OptionsMenu/OptionsMenuButtons" index="3"]
+visible = false
+
+[editable path="Menus/PauseMenuMain/PauseMenuMainButtons/Video"]
+[editable path="Menus/PauseMenuMain/PauseMenuMainButtons/Video/VBoxContainer/FullscreenControl"]
