@@ -1,11 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://7rdp17ixhb6o"]
+[gd_scene load_steps=6 format=3 uid="uid://7rdp17ixhb6o"]
 
 [ext_resource type="Script" uid="uid://d1n2asaxrdb7x" path="res://systems/point_of_interest/point_of_interest.gd" id="1_a6jru"]
+[ext_resource type="Material" uid="uid://jminyutmo1om" path="res://materials/testing_materials/highlightTest.tres" id="2_0eivm"]
+[ext_resource type="Material" uid="uid://chkg7ofbxxb14" path="res://materials/testing_materials/greyedoutTest.tres" id="3_85y4s"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_a6jru"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_85y4s"]
 
 [node name="PointOfInterest" type="Area3D" groups=["point of interest"]]
 script = ExtResource("1_a6jru")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_a6jru")
+
+[node name="Highlight" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_85y4s")
+surface_material_override/0 = ExtResource("2_0eivm")
+
+[node name="GreyedOut" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_85y4s")
+surface_material_override/0 = ExtResource("3_85y4s")

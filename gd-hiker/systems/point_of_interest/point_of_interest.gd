@@ -1,15 +1,17 @@
 class_name PointOfInterest
 extends Node3D
-enum Type{DEFAULT, NATURE, ZIPLINE, PIER, CIVILISATION, }
+#enum Type{DEFAULT, NATURE, ZIPLINE, PIER, CIVILISATION, REST }
 @export var identifier: int
 @export var neighbours: Array[PointOfInterest] #possible neighbours
-@export var type_point_of_interest: Type
+@export var type_point_of_interest: Limitations.VisitType
+@onready var highlight = $Highlight
+@onready var greyedout = $GreyedOut
 var reference_point: Vector3 #reference point that hexagon map will read
 var is_visited: bool
-
+var default_color = Color(0,0.619,0.627)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,6 +22,7 @@ func on_clicked(current_visit: PointOfInterest) -> PointOfInterest:
 	print("click " + str(identifier))
 	is_visited = true
 	print("move to " + str(identifier))
+	greyed_out(true)
 	return self
 
 
@@ -39,16 +42,26 @@ func is_any_neighbour_available() -> bool:
 			return true
 	return false
 
-func update_points() -> int:
-	match type_point_of_interest:
-		Type.NATURE:
-			return 100
-		Type.ZIPLINE:
-			return 200
-		Type.PIER:
-			return 200
-		Type.CIVILISATION:
-			return 50
-		Type.DEFAULT:
-			return 0
-	return 0
+
+
+func hover_over(is_hover_over: bool) -> void:
+	highlight.visible = is_hover_over
+	print("hovering over = " + str(is_hover_over))
+
+func undo_point_of_interest() -> void:
+	is_visited = false
+	greyed_out(false)
+
+#func stop_hover_over() -> void:
+	#var material = mesh_instance.get_active_material(0)
+	#if material == null:
+	#	material = StandardMaterial3D.new()
+	#	mesh_instance.set_surface_override_material(0, material)
+
+# Change color
+	#material.albedo_color = default_color  # default
+#	highlight.visible = false
+#	print("stop hovering over")
+
+func greyed_out(is_greyed_out: bool) -> void:
+	greyedout.visible = is_greyed_out
