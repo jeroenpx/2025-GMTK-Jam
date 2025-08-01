@@ -195,8 +195,7 @@ func calculate_amount_path_grid(map: Map, to: DataGrid, type: TileAreaType):
 			var vertex_2D = Vector2(loc.x, loc.z);
 			
 			# which triangle are we in?
-			var at_shifted = at - HexagonTriangleVertexSpace.vertex_grid_shift;
-			var at_triangle = Vector2i(at_shifted.x*2, at_shifted.y);
+			var at_triangle = HexagonTriangleVertexSpace.idx_to_triangle(at);
 			
 			# which hexagon are we in?
 			var hex = Hexagons.triangle_to_hex_space(at_triangle);
@@ -307,8 +306,8 @@ func generate(map: Map):
 		var tmp = vgrid2;
 		vgrid2 = vgrid;
 		vgrid = tmp;
-	if smooth_steps % 0 == 1:
-		copy_grid(vgrid2, vgrid);
+	if smooth_steps % 2 == 1:
+		copy_grid(vgrid, vgrid2);
 	
 	# Smoothen the path some more?
 	# (cut in the landscape?)
