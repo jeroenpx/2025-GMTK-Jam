@@ -29,15 +29,15 @@ void vertex() {
 void fragment() {
 	vec4 sampled_path_noise = texture(path_noise, world_position.xz * path_noise_scale);
 	float amount_path = COLOR.r + sampled_path_noise.r;
-	
+
 	float sampled_color_noise = texture(color_noise, world_position.xz * color_noise_scale).r;
 	float sampled_color_noise2 = texture(color_noise2, world_position.xz * color_noise2_scale).r;
 	float sampled_color_noise_path = texture(color_noise, world_position.xz * color_noise_scale_path).r;
-	
+
 	vec3 terrain = mix(terrain_color, terrain_colorB, sampled_color_noise);
 	terrain = mix(terrain, terrain_colorC, sampled_color_noise2);
 	vec3 path = mix(path_color, path_colorB, sampled_color_noise_path);
-	
+
 	float stepped = 0.0;
 	stepped = texture(path_step_grad, vec2(amount_path/2.0, 0)).r;
 	//stepped = step(path_step, amount_path);

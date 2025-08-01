@@ -1,0 +1,53 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://cr8yf6r3utjih"]
+
+[ext_resource type="Shader" uid="uid://qqy71teeohb4" path="res://materials/water/ocean.gdshader" id="1_6f12v"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rc8no"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pkjdy"]
+seamless = true
+noise = SubResource("FastNoiseLite_rc8no")
+
+[sub_resource type="Gradient" id="Gradient_r5afu"]
+offsets = PackedFloat32Array(0, 0.1983)
+colors = PackedColorArray(0.0295066, 0.0295066, 0.0295066, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vhs06"]
+gradient = SubResource("Gradient_r5afu")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lbhii"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yywxd"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_lbhii")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6f12v")
+shader_parameter/absorption_color = Color(1, 0.714682, 0.463564, 1)
+shader_parameter/fresnel_radius = 0.58
+shader_parameter/fresnel_color = Color(0.0175321, 0.418984, 0.501032, 1)
+shader_parameter/roughness = 0.15
+shader_parameter/specular = 0.25
+shader_parameter/depth_distance = 1.9
+shader_parameter/beers_law = 4.5
+shader_parameter/edge_thickness = 0.1
+shader_parameter/edge_speed = 0.35
+shader_parameter/edge_noise_scale = Vector2(0.2, 0.2)
+shader_parameter/edge_noise = SubResource("NoiseTexture2D_pkjdy")
+shader_parameter/edge_ramp = SubResource("GradientTexture1D_vhs06")
+shader_parameter/ssr_mix_strength = 0.65
+shader_parameter/ssr_travel = 100.0
+shader_parameter/ssr_resolution_near = 1.0
+shader_parameter/ssr_resolution_far = 5.0
+shader_parameter/ssr_tolerance = 1.0
+shader_parameter/refraction_strength = 1.25
+shader_parameter/normal_map_strength = 1.0
+shader_parameter/scroll_speed = 0.06
+shader_parameter/scroll_offset = Vector2(0.1, -0.3)
+shader_parameter/scale_offset = 0.5
+shader_parameter/normal_map_scale = Vector2(0.1, 0.1)
+shader_parameter/normal_map = SubResource("NoiseTexture2D_yywxd")
+shader_parameter/wind_intensity = 0.01
+shader_parameter/wind_direction = Vector3(1, 0, 1)
