@@ -1,85 +1,61 @@
-[gd_scene load_steps=2 format=3 uid="uid://dr7iyddfemech"]
+[gd_scene load_steps=5 format=3 uid="uid://dr7iyddfemech"]
 
 [ext_resource type="Texture2D" uid="uid://cpuljlaq0gr7u" path="res://assets-2D/R - button.png" id="1_c7mkw"]
+[ext_resource type="Script" uid="uid://cglhrp75w7c52" path="res://systems/limitiations_indications/limitations_indication.gd" id="1_ssxor"]
+[ext_resource type="Script" uid="uid://0cc2xd3liphh" path="res://systems/limitiations_indications/visit_indicator.gd" id="2_avwou"]
+[ext_resource type="Texture2D" uid="uid://enuhqtddxgll" path="res://assets-2D/checkmark2.png" id="4_vqbcy"]
 
-[node name="LimitationsIndication" type="Control"]
+[node name="LimitationsIndication" type="Control" node_paths=PackedStringArray("nature_ind", "civil_ind", "rest_ind", "zipline_ind", "boat_ind")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ssxor")
+nature_ind = NodePath("HBoxContainer/NatureIndicator")
+civil_ind = NodePath("")
+rest_ind = NodePath("")
+zipline_ind = NodePath("")
+boat_ind = NodePath("")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-clip_contents = true
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 40.0
+offset_top = 8.485
+offset_bottom = 48.485
 grow_horizontal = 2
+pivot_offset = Vector2(0, 30)
 theme_override_constants/separation = 33
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 20)
+[node name="NatureIndicator" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 20)
 layout_mode = 2
+theme_override_constants/separation = 11
+script = ExtResource("2_avwou")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/HBoxContainer"]
-clip_contents = true
+[node name="TextureLogo" type="TextureRect" parent="HBoxContainer/NatureIndicator"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("1_c7mkw")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "max 5"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 20)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/HBoxContainer2"]
-clip_contents = true
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("1_c7mkw")
+[node name="CheckMark" type="TextureRect" parent="HBoxContainer/NatureIndicator/TextureLogo"]
+visible = false
+layout_mode = 0
+offset_left = 30.0
+offset_top = -1.485
+offset_right = 45.0
+offset_bottom = 13.515
+pivot_offset = Vector2(0, 20)
+texture = ExtResource("4_vqbcy")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "max 5"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 20)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/HBoxContainer3"]
-clip_contents = true
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("1_c7mkw")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer3"]
-layout_mode = 2
-text = "max 5"
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 20)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/HBoxContainer4"]
-clip_contents = true
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("1_c7mkw")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer4"]
+[node name="Label" type="Label" parent="HBoxContainer/NatureIndicator"]
 layout_mode = 2
 text = "max 5"

@@ -25,6 +25,7 @@ AppConfig="*res://systems/menus/maaack/scenes/autoloads/app_config.tscn"
 BtnIndicators="*res://systems/button_indications/btn_indicators.tscn"
 GameState="*res://systems/game_state/game_state.tscn"
 LevelManager="*res://systems/level_manager/level_manager.tscn"
+LimitationsIndication="*res://systems/limitiations_indications/limitations_indication.tscn"
 
 [file_customization]
 

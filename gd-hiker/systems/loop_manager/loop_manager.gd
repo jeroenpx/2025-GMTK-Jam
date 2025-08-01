@@ -20,6 +20,8 @@ func _ready() -> void:
 			points_of_interest.append(point)
 	for i in range(0, limitations.size()):
 		all_limitations_completed.append(false)
+		LimitationsIndication.show_indicator(limitations[i])
+		LimitationsIndication.set_indicator(limitations[i], false)
 
 func _process(delta: float) -> void:
 	if GameState.isGameplayRunning():
@@ -45,7 +47,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					var current_path: Array[int] = [previous_visit.identifier, point.identifier]
 					if !is_path_taken(current_path):
 						current_visit = point.on_clicked(previous_visit)
-						update_status(current_visit)
+						update_status(current_visit,-1)
 						visited_paths.append(current_path)
 						print("From " + str(previous_visit.identifier) + " to " + str(current_visit.identifier))
 						if current_visit == start_point:
@@ -76,33 +78,39 @@ func is_path_taken(current_path: Array[int]) -> bool:
 	return false
 
 #update the limitation status
-func update_status(visit: PointOfInterest)-> void:
+func update_status(visit: PointOfInterest, addOn: int)-> void:
 	var i : int = 0
 	for limitation in limitations:
 		if limitation.visit_type == visit.type_point_of_interest:
-			limitation.value -=1
+			limitation.value += addOn
 			print("Limit " + str(limitation.visit_type) + " " + str(limitation.value))
 			match limitation.numerical_type:
 				Limitations.NumericalType.MIN:
 					if limitation.value <= 0:
 						all_limitations_completed[i] = true
+						LimitationsIndication.set_indicator(limitations[i], true)
 						print("minimun okay")
 					else:
 						all_limitations_completed[i] = false
+						LimitationsIndication.set_indicator(limitations[i], false)
 						print("minimun not okay")
 				Limitations.NumericalType.MAX:
 					if limitation.value >= 0:
 						all_limitations_completed[i] = true
+						LimitationsIndication.set_indicator(limitations[i], true)
 						print("max okay")
 					else:
 						all_limitations_completed[i] = false
+						LimitationsIndication.set_indicator(limitations[i], false)
 						print("max not okay")
 				Limitations.NumericalType.CONSTANT:
 					if limitation.value == 0:
 						all_limitations_completed[i] = true
+						LimitationsIndication.set_indicator(limitations[i], true)
 						print("const okay")
 					else:
 						all_limitations_completed[i] = false
+						LimitationsIndication.set_indicator(limitations[i], false)
 						print("const not okay")
 		i+=1
 
@@ -126,6 +134,7 @@ func undo_path() -> void:
 	var last_path = visited_paths.pop_back()
 	if last_path:
 		points_of_interest[last_path[1]].undo_point_of_interest()
+		update_status(points_of_interest[last_path[1]], 1)
 		current_visit = points_of_interest[last_path[0]]
 		print("current visit = " + str(current_visit.identifier))
 		#Spawn player at node current_visit
@@ -136,10 +145,10 @@ func reset_path() -> void:
 	BtnIndicators.show_undo(false)
 	visited_paths.clear()
 	current_visit = start_point
-	current_num_of_undos = 0
 	print("Reset - current visit = " + str(current_visit.identifier))
 	for point in points_of_interest:
-		point.is_visited = false
+		update_status(point, 1)
+		point.undo_point_of_interest()
 
 #hover over functionality
 func hover_over() -> void:
