@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b5n2u7566wa2q"]
+
+[resource]
+resource_name = "TreeGreen"
+cull_mode = 2
+albedo_color = Color(0.33644, 0.165324, 0.103816, 1)
+emission_enabled = true
+emission = Color(0.360127, 0.29572, 0.126744, 1)
+emission_energy_multiplier = 0.76
+backlight_enabled = true
+backlight = Color(0.201156, 0.166956, 0.0464637, 1)

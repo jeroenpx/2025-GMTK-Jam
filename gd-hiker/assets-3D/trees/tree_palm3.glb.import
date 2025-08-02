@@ -32,6 +32,27 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"TreeBrown": {
+"use_external/enabled": true,
+"use_external/path": "uid://djehut8j4w2h2"
+},
+"TreeGreen": {
+"use_external/enabled": true,
+"use_external/path": "uid://yr30tr1txtil"
+}
+},
+"meshes": {
+"tree_palm3_tree_palm3": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://assets-3D/trees/tree_palm3.res"
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1
