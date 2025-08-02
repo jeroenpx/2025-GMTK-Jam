@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dr3ujwwhwlt1v"]
+[gd_scene load_steps=4 format=3 uid="uid://dr3ujwwhwlt1v"]
 
-[ext_resource type="Script" uid="uid://bw42estgjts86" path="res://systems/button_skip_back/btn_skipback.gd" id="1_a11ty"]
+[ext_resource type="Theme" uid="uid://46nkkxfbs5a7" path="res://assets-2D/UI/button_theme.tres" id="1_55pmt"]
+[ext_resource type="Script" uid="uid://bw42estgjts86" path="res://systems/button_skip_back/btn_skip.gd" id="1_a11ty"]
+[ext_resource type="Script" uid="uid://pljyy37gsg4p" path="res://systems/button_skip_back/btn_previous.gd" id="2_vgvuo"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,21 +11,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Skip Button" type="Button" parent="."]
+custom_minimum_size = Vector2(120, 60)
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -76.0
-offset_top = -51.0
-offset_right = -16.0
-offset_bottom = -11.0
+anchors_preset = -1
+anchor_left = 0.992
+anchor_top = 0.011
+anchor_right = 0.992
+anchor_bottom = 0.011
+offset_left = -131.784
+offset_top = 7.872
+offset_right = -11.7841
+offset_bottom = 67.872
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(60, 40)
+theme = ExtResource("1_55pmt")
 theme_override_font_sizes/font_size = 25
 text = "skip"
 script = ExtResource("1_a11ty")
@@ -31,15 +36,18 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Previous Button" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 15.985
-offset_top = -57.0
-offset_right = 75.985
-offset_bottom = -11.0
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.011
+anchor_right = 0.003
+anchor_bottom = 0.011
+offset_left = 11.544
+offset_top = 7.872
+offset_right = 131.544
+offset_bottom = 67.872
 grow_vertical = 0
 pivot_offset = Vector2(60, 40)
+theme = ExtResource("1_55pmt")
 theme_override_font_sizes/font_size = 25
 text = "previous"
-script = ExtResource("1_a11ty")
+script = ExtResource("2_vgvuo")

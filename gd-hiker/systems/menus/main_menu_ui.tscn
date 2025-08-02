@@ -67,6 +67,7 @@ visible = false
 visible = false
 
 [node name="PlayButton" type="Button" parent="Menus/PauseMenuMain/PauseMenuMainButtons" index="2"]
+custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 text = "Play"
 script = ExtResource("3_cljp2")
@@ -85,6 +86,7 @@ text = "Fullscreen"
 horizontal_alignment = 2
 
 [node name="CheckButton" parent="Menus/PauseMenuMain/PauseMenuMainButtons/Video/VBoxContainer/FullscreenControl" index="1"]
+button_pressed = true
 text = "FULLSCREEN"
 
 [node name="ButtonToAccessibility" parent="Menus/OptionsMenu/OptionsMenuButtons" index="3"]

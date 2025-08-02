@@ -26,6 +26,7 @@ BtnIndicators="*res://systems/button_indications/btn_indicators.tscn"
 GameState="*res://systems/game_state/game_state.tscn"
 LevelManager="*res://systems/level_manager/level_manager.tscn"
 LimitationsIndication="*res://systems/limitiations_indications/limitations_indication.tscn"
+TransitionScreen="*res://systems/Transitioning/transitions.tscn"
 
 [file_customization]
 
@@ -39,7 +40,7 @@ folder_colors={
 
 [gui]
 
-theme/custom="uid://d07c2o37xju4"
+theme/custom="uid://46nkkxfbs5a7"
 theme/custom_font="uid://cvm5nk5h0v2i7"
 
 [input]

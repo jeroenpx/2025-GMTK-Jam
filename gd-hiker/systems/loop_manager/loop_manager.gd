@@ -6,7 +6,6 @@ signal reset(starting_point)
 
 signal reseting_hover_over()
 @export var camera: Camera3D 
-@export var next_level: String 
 @export var ray_distance: float = 1000.0
 @export var current_visit: PointOfInterest = null
 @export var limitations: Array[Limitations] = []
@@ -30,8 +29,8 @@ func _ready() -> void:
 	for i in range(0, limitations.size()):
 		all_limitations_completed.append(false)
 		limitations_start_values.append(limitations[i].value)
-		LimitationsIndication.show_indicator(limitations[i])
-		LimitationsIndication.set_indicator(limitations[i], false)
+		LimitationsIndication.show_indicator(limitations[i],i)
+		#LimitationsIndication.set_indicator(limitations[i],i, false)
 
 func _process(delta: float) -> void:
 	if GameState.isGameplayRunning():
@@ -93,34 +92,34 @@ func update_status(visit: PointOfInterest, addOn: int)-> void:
 	for limitation in limitations:
 		if limitation.visit_type == visit.type_point_of_interest:
 			limitation.value += addOn
+			var value = limitations_start_values[i] - limitation.value 
 			print("Limit " + str(limitation.visit_type) + " " + str(limitation.value))
-			match limitation.numerical_type:
-				Limitations.NumericalType.MIN:
+			if limitation.numerical_type== Limitations.NumericalType.MIN:
 					if limitation.value <= 0:
 						all_limitations_completed[i] = true
-						LimitationsIndication.set_indicator(limitations[i], true)
+						LimitationsIndication.set_indicator(limitations[i],i, value, true)
 						print("minimun okay")
 					else:
 						all_limitations_completed[i] = false
-						LimitationsIndication.set_indicator(limitations[i], false)
+						LimitationsIndication.set_indicator(limitations[i],i,value, false)
 						print("minimun not okay")
-				Limitations.NumericalType.MAX:
+			if limitation.numerical_type == Limitations.NumericalType.MAX:
 					if limitation.value >= 0:
 						all_limitations_completed[i] = true
-						LimitationsIndication.set_indicator(limitations[i], true)
+						LimitationsIndication.set_indicator(limitations[i],i,value, true)
 						print("max okay")
 					else:
 						all_limitations_completed[i] = false
-						LimitationsIndication.set_indicator(limitations[i], false)
+						LimitationsIndication.set_indicator(limitations[i],i, value, false)
 						print("max not okay")
-				Limitations.NumericalType.CONSTANT:
+			if limitation.numerical_type ==Limitations.NumericalType.CONSTANT:
 					if limitation.value == 0:
 						all_limitations_completed[i] = true
-						LimitationsIndication.set_indicator(limitations[i], true)
+						LimitationsIndication.set_indicator(limitations[i],i, value, true)
 						print("const okay")
 					else:
 						all_limitations_completed[i] = false
-						LimitationsIndication.set_indicator(limitations[i], false)
+						LimitationsIndication.set_indicator(limitations[i],i, value, false)
 						print("const not okay")
 		i+=1
 
@@ -135,10 +134,7 @@ func are_all_limitations_completed() -> bool:
 func level_complete() -> void:
 	is_level_finished = true
 	LimitationsIndication.hide_indicators()
-	if next_level!="" : 
-		LevelManager.change_level(next_level)
-	else: #if empty go to main menu
-		LevelManager.change_level("res://levels/main_menu")
+	LevelManager.to_next_level()
 
 func visit_point() -> void:
 	update_status(current_visit,-1) #update limitation status
@@ -147,13 +143,14 @@ func visit_point() -> void:
 
 #undo path
 func undo_path() -> void:
-	if current_visit != start_point:
+	
+	if visited_paths.size()>=1 or current_visit != start_point:
 		if last_hover_over:
 			last_hover_over.hover_over(false)
 		BtnIndicators.show_undo(false)
 		BtnIndicators.show_reset(false)
-		
 		var last_path = visited_paths.pop_back()
+		
 		if last_path:
 			last_path[1].undo_point_of_interest()
 			update_status(last_path[1], 1)
@@ -180,7 +177,7 @@ func reset_path() -> void:
 	var i : int = 0
 	for limitation in limitations:
 		limitation.value = limitations_start_values[i]
-		LimitationsIndication.set_indicator(limitations[i], false)
+		LimitationsIndication.set_indicator(limitations[i],i, 0, false)
 		i=+1
 	reseting_hover_over.emit()
 	reset.emit(current_visit)
