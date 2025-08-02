@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://w2oprdjyk5le"]
+
+[ext_resource type="Texture2D" uid="uid://bomuh75e3muhi" path="res://assets-3D/car/car_CarTexture.png" id="1_fenlh"]
+
+[resource]
+resource_name = "CarAndRoad"
+cull_mode = 2
+albedo_texture = ExtResource("1_fenlh")

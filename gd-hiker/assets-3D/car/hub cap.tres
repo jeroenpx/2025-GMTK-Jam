@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c6qodord0fbkj"]
+
+[resource]
+resource_name = "hub cap"
+cull_mode = 2
+albedo_color = Color(0.544222, 0.544222, 0.544222, 1)
+metallic = 0.715517
+roughness = 0.258621
