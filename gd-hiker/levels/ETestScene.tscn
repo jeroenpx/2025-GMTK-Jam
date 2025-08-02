@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://bf681mrn6bhw5"
 [node name="test" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.781749, 0.623593, 0, -0.623593, 0.781749, 0, 2.35838, 6.94852)
+transform = Transform3D(1, 0, 0, 0, 0.781749, 0.623593, 0, -0.623593, 0.781749, 0, 5.08629, 11.2811)
 
 [node name="LoopManager" parent="." node_paths=PackedStringArray("camera", "current_visit") instance=ExtResource("1_qdju4")]
 camera = NodePath("../Camera3D")
@@ -35,7 +35,7 @@ current_visit = NodePath("PointOfInterest")
 limitations = Array[ExtResource("2_esv6d")]([SubResource("Resource_3mdte"), SubResource("Resource_jy1m5")])
 
 [node name="PointOfInterest" parent="LoopManager" node_paths=PackedStringArray("neighbours") instance=ExtResource("2_b8o63")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.28758, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3707, 0, 0)
 neighbours = [NodePath("../PointOfInterest2"), NodePath("../PointOfInterest3")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LoopManager/PointOfInterest"]
@@ -43,7 +43,7 @@ mesh = SubResource("SphereMesh_qdju4")
 surface_material_override/0 = ExtResource("3_b8o63")
 
 [node name="PointOfInterest2" parent="LoopManager" node_paths=PackedStringArray("neighbours") instance=ExtResource("2_b8o63")]
-identifier = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.34102, 0, 0)
 neighbours = [NodePath("../PointOfInterest"), NodePath("../PointOfInterest3"), NodePath("../PointOfInterest4"), NodePath("../PointOfInterest5")]
 type_point_of_interest = 1
 
@@ -52,8 +52,7 @@ mesh = SubResource("SphereMesh_b8o63")
 surface_material_override/0 = ExtResource("3_b8o63")
 
 [node name="PointOfInterest3" parent="LoopManager" node_paths=PackedStringArray("neighbours") instance=ExtResource("2_b8o63")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62447, 0, 3.083)
-identifier = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62447, 0, 8.30824)
 neighbours = [NodePath("../PointOfInterest2"), NodePath("../PointOfInterest4"), NodePath("../PointOfInterest")]
 type_point_of_interest = 4
 
@@ -62,8 +61,7 @@ mesh = SubResource("SphereMesh_b8o63")
 surface_material_override/0 = ExtResource("3_b8o63")
 
 [node name="PointOfInterest4" parent="LoopManager" node_paths=PackedStringArray("neighbours") instance=ExtResource("2_b8o63")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.33691, 0, 0.436443)
-identifier = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3521, 0, 0.436443)
 neighbours = [NodePath("../PointOfInterest2"), NodePath("../PointOfInterest3"), NodePath("../PointOfInterest5")]
 type_point_of_interest = 1
 
@@ -73,7 +71,6 @@ surface_material_override/0 = ExtResource("3_b8o63")
 
 [node name="PointOfInterest5" parent="LoopManager" node_paths=PackedStringArray("neighbours") instance=ExtResource("2_b8o63")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10752, 0, -5.51437)
-identifier = 4
 neighbours = [NodePath("../PointOfInterest2"), NodePath("../PointOfInterest4")]
 type_point_of_interest = 5
 

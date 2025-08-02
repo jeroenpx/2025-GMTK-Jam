@@ -1,16 +1,18 @@
 class_name PointOfInterest
 extends Node3D
 #enum Type{DEFAULT, NATURE, ZIPLINE, PIER, CIVILISATION, REST }
-@export var identifier: int
+
 @export var neighbours: Array[PointOfInterest] #possible neighbours
 @export var type_point_of_interest: Limitations.VisitType
 @onready var highlight = $Highlight
 @onready var greyedout = $GreyedOut
+var identifier: PointOfInterest #use the self
 var reference_point: Vector3 #reference point that hexagon map will read
 var is_visited: bool
 var default_color = Color(0,0.619,0.627)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	identifier = self
 	pass
 
 
@@ -27,7 +29,7 @@ func on_clicked(current_visit: PointOfInterest) -> PointOfInterest:
 
 
 #check if the previous pointofinterest is in neighbours and this pointofinterest wasn't visited
-func can_visit(pointId: int) -> bool:
+func can_visit(pointId: PointOfInterest) -> bool:
 	if is_visited:
 		return false
 	for neighbour in neighbours:
@@ -46,7 +48,7 @@ func is_any_neighbour_available() -> bool:
 
 func hover_over(is_hover_over: bool) -> void:
 	highlight.visible = is_hover_over
-	print("hovering over = " + str(is_hover_over))
+	print("hovering over = " + str(is_hover_over) + " on " + identifier.name)
 
 func undo_point_of_interest() -> void:
 	is_visited = false
