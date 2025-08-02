@@ -6,3 +6,7 @@
 resource_name = "CarAndRoad"
 cull_mode = 2
 albedo_texture = ExtResource("1_fenlh")
+emission_enabled = true
+emission = Color(0.644872, 0.402244, 0.393753, 1)
+emission_energy_multiplier = 0.22
+emission_texture = ExtResource("1_fenlh")

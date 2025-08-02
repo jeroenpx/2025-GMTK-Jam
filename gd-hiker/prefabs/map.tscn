@@ -124,9 +124,10 @@ _grid_data = [PackedStringArray("0", "0", "0", "0", "0", "0", "0", "0", "0", "0"
 dim = Vector2i(80, 80)
 bounds = Rect2(0, 0, 80.5, 69.282)
 
-[node name="GenerateLandscape" type="Node3D" parent="." node_paths=PackedStringArray("output", "displacement_grid", "amount_path_grid", "amount_lake_grid", "smooth_normals_grid")]
+[node name="GenerateLandscape" type="Node3D" parent="." node_paths=PackedStringArray("output", "output_collider", "displacement_grid", "amount_path_grid", "amount_lake_grid", "smooth_normals_grid")]
 script = ExtResource("2_dq20s")
 output = NodePath("LandscapeMesh")
+output_collider = NodePath("LandscapeCollision/Shape")
 smooth_steps_paths = 10
 lake_spread_factor = 0.85
 lake_valley_depth = 2.1
@@ -144,6 +145,10 @@ vertex_displace_down_shift = 8.0
 
 [node name="LandscapeMesh" type="MeshInstance3D" parent="GenerateLandscape"]
 material_override = ExtResource("4_dq20s")
+
+[node name="LandscapeCollision" type="StaticBody3D" parent="GenerateLandscape"]
+
+[node name="Shape" type="CollisionShape3D" parent="GenerateLandscape/LandscapeCollision"]
 
 [node name="PathGrid" type="Node" parent="GenerateLandscape"]
 script = ExtResource("4_4pfjn")
