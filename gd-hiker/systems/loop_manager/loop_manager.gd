@@ -197,7 +197,7 @@ func hover_over() -> void:
 	query.collide_with_areas = true
 	
 	var hit = space_state.intersect_ray(query)
-	if hit:
+	if hit and hit.collider is PointOfInterest:
 		var point = hit.collider
 		if point != last_hover_over:
 			

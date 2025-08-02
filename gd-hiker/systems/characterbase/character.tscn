@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjwvemcer5vti"]
+
+[ext_resource type="Script" uid="uid://dtbvlthsnxwrf" path="res://systems/characterbase/character.gd" id="1_3mkkt"]
+[ext_resource type="Script" uid="uid://iui4fcsnlg5x" path="res://systems/characterbase/character_pivot.gd" id="4_3o5se"]
+[ext_resource type="Script" uid="uid://db2sw02n61imi" path="res://systems/damage/character_kickback.gd" id="5_cxjlo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i2qd5"]
+size = Vector3(1.34, 1.345, 1)
+
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("model", "kickback")]
+script = ExtResource("1_3mkkt")
+model = NodePath("Model")
+kickback = NodePath("Logic/Kickback")
+
+[node name="Logic" type="Node3D" parent="."]
+
+[node name="Kickback" type="Node3D" parent="Logic" node_paths=PackedStringArray("me", "kill_zone")]
+script = ExtResource("5_cxjlo")
+me = NodePath("../..")
+kill_zone = NodePath("KickBackZone")
+
+[node name="KickBackZone" type="Area3D" parent="Logic/Kickback"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Logic/Kickback/KickBackZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912439, -0.88307)
+shape = SubResource("BoxShape3D_i2qd5")
+
+[node name="Model" type="Node3D" parent="." node_paths=PackedStringArray("me")]
+script = ExtResource("4_3o5se")
+me = NodePath("..")
