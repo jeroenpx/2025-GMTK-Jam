@@ -14,13 +14,8 @@ func to_next_level() -> void:
 		current_scene_id +=1
 		scene_path = all_levels[current_scene_id]
 	
-	
-		TransitionScreen.transition_to_black()
-		await TransitionScreen.transition_to_black_finished
-	
-		get_tree().change_scene_to_packed(loading_screen)
-		#get_tree().change_scene_to_packed(load("res://levels/ETestScene.tscn"))
-		TransitionScreen.transition_from_black()
+		TransitionScreen.transition_to_scene(scene_path)
+		
 	else:
 		GameState.pauseGame()
 		on_end_game.emit()
@@ -35,14 +30,11 @@ func to_previous_level() -> void:
 		current_scene_id = 0
 		GameState.enter_cinematic("main_menu")
 	scene_path = all_levels[current_scene_id]
-	TransitionScreen.transition_to_black()
-	await TransitionScreen.transition_to_black_finished
-	get_tree().change_scene_to_packed(loading_screen)
-	TransitionScreen.transition_from_black()
+	TransitionScreen.transition_to_scene(scene_path)
 	
 
 func to_main_menu() -> void:
 	current_scene_id =0
 	scene_path = all_levels[current_scene_id]
 	GameState.enter_cinematic("main_menu")
-	get_tree().change_scene_to_packed(loading_screen)
+	TransitionScreen.transition_to_scene(scene_path)

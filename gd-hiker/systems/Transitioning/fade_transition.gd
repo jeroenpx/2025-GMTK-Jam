@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 signal transition_to_black_finished
 signal transition_from_black_finished
 @onready var image:ColorRect = $ColorRect

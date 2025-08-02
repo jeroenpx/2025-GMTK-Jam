@@ -3,42 +3,50 @@
 ## A game made by:
 
 Jeroen Penninck ([jeroenpx](https://jeroenpx.itch.io/))
+Eleni Evripidou ([eleni](https://eevrip.github.io/))
+Inane ([inane](https://www.artstation.com/inanity))
 Sadie Melina (faedoll / mermaidprincessnovaya)
-Devon ([heartnaught](https://www.tiktok.com/@heartnaught))
 Elliott Starr ([Starrmanly](https://linktr.ee/Starrmanly))
-EEEEEE
+
 
 
 
 ## Roles
 
 Jeroen Penninck ([jeroenpx](https://jeroenpx.itch.io/))
-#### Main Mermaid Character 
 #### Modeling, Texturing, Rigging,
 #### Procedural Animation
+#### Procedural Environment
 #### Animation
 
-#### All Programming
+#### Programming
 #### All Shaders & Effects
-#### All UI & UI Animations
+#### UI & UI Animations
 #### 3D Assets
 #### Color Design
 #### Level Design
 
 
+Eleni Evripidou ([eleni](https://eevrip.github.io/))
+#### Gameplay Programming
+#### UI
+#### UI Assets
+#### Level Design
+
+
+Inane ([inane](https://www.artstation.com/inanity))
+#### 3D Assets
+#### 2D Assets
+#### UI Assets
+
+
 Sadie Melina (faedoll / mermaidprincessnovaya)
-#### Music
-#### Bringing the other (2D art) Mermaids to life
-#### By doing Modeling and Writing dialogue for the Mermaids
-
-
-Devon ([heartnaught](https://www.tiktok.com/@heartnaught))
-#### Mermaid Characters 2D Art
-#### Rock 3D Models, Boat 3D Model
+#### Music & SFX
 
 
 Elliott Starr ([Starrmanly](https://linktr.ee/Starrmanly))
-#### 2D environmental artist (flowers, sea onions, seaweed, text bubble)
+#### UI Assets
+#### SFX
 
 
 
