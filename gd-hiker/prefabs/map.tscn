@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cdqv31d3821e8"]
+[gd_scene load_steps=17 format=3 uid="uid://cdqv31d3821e8"]
 
 [ext_resource type="Script" uid="uid://ba2ebcko7uar4" path="res://systems/map/map.gd" id="1_g0w84"]
 [ext_resource type="Script" uid="uid://cnsjf7dn0f155" path="res://systems/map/generation/generate_landscape.gd" id="2_dq20s"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://bsii35udp3c74" path="res://systems/map/generation/generate_points_of_interest.gd" id="7_go7kh"]
 [ext_resource type="PackedScene" uid="uid://7rdp17ixhb6o" path="res://systems/point_of_interest/PointOfInterest.tscn" id="8_4pfjn"]
 [ext_resource type="PackedScene" uid="uid://dawr2dgsmwxri" path="res://prefabs/placeholder_point_of_interest_graphic.tscn" id="9_6wqpt"]
+[ext_resource type="Script" uid="uid://bkaqta415ccjt" path="res://systems/map/generation/generate_point_of_interest_floor.gd" id="10_8dnx5"]
+[ext_resource type="PackedScene" uid="uid://c2y40ww76r4au" path="res://prefabs/point_of_interest_floor.tscn" id="11_0mk57"]
 
 [sub_resource type="Gradient" id="Gradient_ui1lk"]
 offsets = PackedFloat32Array(0, 0.501355, 0.655827, 1)
@@ -38,7 +40,7 @@ _grid_data = [PackedStringArray("0", "0", "0", "0", "0", "0", "0", "0", "0", "0"
 dim = Vector2i(80, 80)
 bounds = Rect2(0, 0, 80.5, 69.282)
 
-[node name="GenerateLandscape" type="Node3D" parent="." node_paths=PackedStringArray("output", "displacement_grid", "amount_path_grid", "amount_lake_grid")]
+[node name="GenerateLandscape" type="Node3D" parent="." node_paths=PackedStringArray("output", "displacement_grid", "amount_path_grid", "amount_lake_grid", "smooth_normals_grid")]
 script = ExtResource("2_dq20s")
 output = NodePath("LandscapeMesh")
 smooth_steps_paths = 10
@@ -48,6 +50,7 @@ lake_depth = 0.1
 displacement_grid = NodePath("HeightGrid")
 amount_path_grid = NodePath("PathGrid")
 amount_lake_grid = NodePath("LakeGrid")
+smooth_normals_grid = NodePath("SmoothNormalsGrid")
 path_sample_straight = ExtResource("3_go7kh")
 vertex_displace_noise = SubResource("NoiseTexture2D_m7y0n")
 vertex_displace_noise_scale = 0.01
@@ -70,6 +73,10 @@ metadata/_custom_type_script = "uid://bg0wqssp11cvi"
 script = ExtResource("4_4pfjn")
 metadata/_custom_type_script = "uid://bg0wqssp11cvi"
 
+[node name="SmoothNormalsGrid" type="Node" parent="GenerateLandscape"]
+script = ExtResource("4_4pfjn")
+metadata/_custom_type_script = "uid://bg0wqssp11cvi"
+
 [node name="GenerateTrees" type="Node3D" parent="."]
 script = ExtResource("5_6wqpt")
 
@@ -80,6 +87,15 @@ script = ExtResource("7_go7kh")
 prefab_point_of_interest = ExtResource("8_4pfjn")
 prefab_point_of_interest_graphic = ExtResource("9_6wqpt")
 input_height_grid = NodePath("../GenerateLandscape/HeightGrid")
+
+[node name="GeneratePointOfInterestFloor" type="Node3D" parent="." node_paths=PackedStringArray("input_height_grid", "smooth_normals_grid", "point_generator")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.042305, 0)
+script = ExtResource("10_8dnx5")
+min_dist = -1.0
+input_height_grid = NodePath("../GenerateLandscape/HeightGrid")
+smooth_normals_grid = NodePath("../GenerateLandscape/SmoothNormalsGrid")
+point_generator = NodePath("../GeneratePointsOfInterest")
+prefab_point_of_interest_floor = ExtResource("11_0mk57")
 
 [node name="Lakes" type="MeshInstance3D" parent="."]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 39.44, -1.77785, 37.216)
