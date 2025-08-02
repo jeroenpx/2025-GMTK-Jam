@@ -20,6 +20,7 @@ var _do_randomize = _randomize;
 @export var displacement_grid: DataGrid;
 @export var amount_path_grid: DataGrid;
 @export var amount_lake_grid: DataGrid;
+@export var smooth_normals_grid: DataGrid;
 
 @export_category("Path Vertex Color Generation")
 @export var path_sample_straight: Texture2D;
@@ -319,7 +320,6 @@ func generate(map: Map):
 	
 	
 	# Calculate smooth normals
-	var smooth_normals_grid = DataGrid.new();
 	smooth_normals_grid.init(vgrid.grid_w, vgrid.grid_h);
 	calculate_smooth_vertex_normals(vgrid, smooth_normals_grid);
 	

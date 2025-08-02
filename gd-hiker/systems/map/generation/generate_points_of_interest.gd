@@ -1,5 +1,6 @@
 @tool
 @icon("res://systems/map/icons/trowel-bricks-solid-full.svg")
+class_name PointOfInterestGenerator
 extends MapGen
 
 @export var prefab_point_of_interest: PackedScene;
@@ -39,7 +40,7 @@ func _follow_paths(map: Map, origin: Vector2i, start_name: String):
 		visited[at] = true;
 		
 		var near_point = map.find_point_name(at, 2.5);
-		if near_point == "" or near_point == start_name:
+		if near_point == "" or near_point == start_name or not _generated_points.has(near_point):
 			# Ok, continue traversing
 			# Find all neighbouring path tiles
 			for dir in range(6):
