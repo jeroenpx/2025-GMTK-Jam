@@ -3,6 +3,7 @@
 extends MapGen
 
 @export var output: MeshInstance3D;
+@export var output_collider: CollisionShape3D;
 @export var use_smooth_normals: bool = true;
 @export var smooth_steps: int = 1;
 @export var smooth_steps_paths: int = 1;
@@ -15,6 +16,11 @@ extends MapGen
 var _do_generate = _generate;
 @export_tool_button("Randomize")
 var _do_randomize = _randomize;
+
+#(no rivers or lakes, no path erosion)
+@export_category("!!!! --- UGLY BUT FASTER (30 sec -> 5 sec) --- !!!!")
+@export var skip_river_erosion: bool = false;
+@export var skip_path_erosion: bool = false;
 
 @export_category("Grid Output")
 @export var displacement_grid: DataGrid;
@@ -259,9 +265,11 @@ func generate(map: Map):
 			vgrid.put_thing(at, vertex);
 	
 	# Displace areas around lakes
-	for i in range(lake_spread_iterations):
-		spread(amount_lake_grid, amount_lake_grid2, lake_spread_factor);
-		spread(amount_lake_grid2, amount_lake_grid, lake_spread_factor);
+	if not skip_river_erosion:
+		for i in range(lake_spread_iterations):
+			spread(amount_lake_grid, amount_lake_grid2, lake_spread_factor);
+			spread(amount_lake_grid2, amount_lake_grid, lake_spread_factor);
+	
 	for x in range(vgrid.grid_w):
 		for y in range(vgrid.grid_h):
 			var at = Vector2i(x, y);
@@ -312,11 +320,12 @@ func generate(map: Map):
 	
 	# Smoothen the path some more?
 	# (cut in the landscape?)
-	for i in range(smooth_steps_paths):
-		smoothen_paths(vgrid, vgrid2, amount_path_grid);
-		var tmp = vgrid2;
-		vgrid2 = vgrid;
-		vgrid = tmp;
+	if not skip_path_erosion:
+		for i in range(smooth_steps_paths):
+			smoothen_paths(vgrid, vgrid2, amount_path_grid);
+			var tmp = vgrid2;
+			vgrid2 = vgrid;
+			vgrid = tmp;
 	
 	
 	# Calculate smooth normals
@@ -381,3 +390,7 @@ func generate(map: Map):
 	# Make the mesh
 	var arr_mesh = st.commit();
 	output.mesh = arr_mesh;
+	
+	# Make the collider
+	var collision_shape = arr_mesh.create_trimesh_shape();
+	output_collider.shape = collision_shape;

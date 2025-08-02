@@ -3,14 +3,14 @@
 [ext_resource type="Shader" uid="uid://v53rl4himaxy" path="res://materials/point_circle/floor_circle_shader.gdshader" id="1_nhgv0"]
 
 [sub_resource type="Gradient" id="Gradient_nhgv0"]
-offsets = PackedFloat32Array(0.59854, 0.635036, 0.708029, 0.832117)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.388235, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.0729927, 0.59854, 0.635036, 0.708029, 0.832117)
+colors = PackedColorArray(0.838982, 0.848236, 0.817409, 0.709804, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.388235, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_iqu3f"]
 gradient = SubResource("Gradient_nhgv0")
 
 [sub_resource type="Gradient" id="Gradient_iqu3f"]
-offsets = PackedFloat32Array(0.562044, 0.605839)
+offsets = PackedFloat32Array(0, 0.605839)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nhgv0"]
 fractal_octaves = 1
