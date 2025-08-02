@@ -1,10 +1,16 @@
 extends Node3D
+
+signal going_at(current_visit)
+signal going_back(current_visit)
+signal reset(starting_point)
+
 @export var camera: Camera3D 
 @export var next_level: String 
 @export var ray_distance: float = 1000.0
 @export var current_visit: PointOfInterest = null
 @export var number_of_undos: int = 500
 @export var limitations: Array[Limitations] = []
+
 var points_of_interest: Array[PointOfInterest] = []
 var last_hover_over: Node3D
 var visited_paths = []
@@ -13,7 +19,8 @@ var start_point: PointOfInterest = null
 var is_level_finished: bool = false
 var all_limitations_completed: Array[bool] = []
 var limitations_start_values: Array[int] = []
-# Called when the node enters the scene tree for the first time.
+var current_path: Array[int] = []
+
 func _ready() -> void:
 	start_point = current_visit
 	var temp = get_tree().get_nodes_in_group("point of interest")
@@ -35,6 +42,7 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if !is_level_finished:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			#region raycast
 			var space_state = get_world_3d().direct_space_state
 			var mouse_pos = event.position
 			var origin = camera.project_ray_origin(mouse_pos)
@@ -42,23 +50,20 @@ func _unhandled_input(event: InputEvent) -> void:
 			var query = PhysicsRayQueryParameters3D.create(origin, end)
 			query.collide_with_areas = true
 			var hit = space_state.intersect_ray(query)
+			#endregion
 			if hit:
 				var point = hit.collider
 				var previous_visit = current_visit
 			
 				if point.can_visit(previous_visit.identifier):
-					var current_path: Array[int] = [previous_visit.identifier, point.identifier]
-					if !is_path_taken(current_path):
+					current_path = [previous_visit.identifier, point.identifier]
+					if !is_path_taken():
 						current_visit = point.on_clicked(previous_visit)
-						update_status(current_visit,-1)
-						visited_paths.append(current_path)
+						visit_point()
 						print("From " + str(previous_visit.identifier) + " to " + str(current_visit.identifier))
 						if current_visit == start_point:
 							if are_all_limitations_completed():
-								is_level_finished = true
-								LimitationsIndication.hide_indicators()
-								if next_level!="" :
-									LevelManager.change_level(next_level)
+								level_complete()
 							else:
 								BtnIndicators.show_undo(true)
 								BtnIndicators.show_reset(true)
@@ -74,7 +79,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 #check if path is already taken
-func is_path_taken(current_path: Array[int]) -> bool:
+func is_path_taken() -> bool:
 	for path in visited_paths:
 		if path.has(current_path[0]) and path.has(current_path[1]):
 			print(str(current_path) + " path taken" + str(path))
@@ -127,8 +132,18 @@ func are_all_limitations_completed() -> bool:
 			return false
 	return true
 
+func level_complete() -> void:
+	is_level_finished = true
+	LimitationsIndication.hide_indicators()
+	if next_level!="" : 
+		LevelManager.change_level(next_level)
+	else: #if empty go to main menu
+		LevelManager.change_level("res://levels/main_menu")
 
-
+func visit_point() -> void:
+	update_status(current_visit,-1) #update limitation status
+	visited_paths.append(current_path)
+	going_at.emit(current_visit) #probably you need the current_visit as an input?
 
 #undo path
 func undo_path() -> void:
@@ -142,7 +157,7 @@ func undo_path() -> void:
 		update_status(points_of_interest[last_path[1]], 1)
 		current_visit = points_of_interest[last_path[0]]
 		print("current visit = " + str(current_visit.identifier))
-		#Spawn player at node current_visit
+		going_back.emit()
 
 #reset path
 func reset_path() -> void:
@@ -160,6 +175,7 @@ func reset_path() -> void:
 		limitation.value = limitations_start_values[i]
 		LimitationsIndication.set_indicator(limitations[i], false)
 		i=+1
+	reset.emit(current_visit)
 
 #hover over functionality
 func hover_over() -> void:
@@ -180,7 +196,7 @@ func hover_over() -> void:
 			last_hover_over = point
 			if point.can_visit(current_visit.identifier):
 				var current_path: Array[int] = [current_visit.identifier, point.identifier]
-				if !is_path_taken(current_path):
+				if !is_path_taken():
 					point.hover_over(true)
 				else:
 					point.hover_over(false)
