@@ -4,6 +4,7 @@ signal going_at(current_visit)
 signal going_back(current_visit)
 signal reset(starting_point)
 
+signal reseting_hover_over()
 @export var camera: Camera3D 
 @export var next_level: String 
 @export var ray_distance: float = 1000.0
@@ -20,6 +21,7 @@ var limitations_start_values: Array[int] = []
 var current_path: Array[PointOfInterest] = []
 var is_reseting: bool = false
 func _ready() -> void:
+	reseting_hover_over.connect(_on_reseting_hover_over)
 	start_point = current_visit
 	var temp = get_tree().get_nodes_in_group("point of interest")
 	for point in temp:
@@ -34,8 +36,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if GameState.isGameplayRunning():
 		if !is_level_finished:
-			if !is_reseting:
-				hover_over()
+			hover_over()
 
 #handle the input
 func _unhandled_input(event: InputEvent) -> void:
@@ -146,19 +147,21 @@ func visit_point() -> void:
 
 #undo path
 func undo_path() -> void:
-	
-	if last_hover_over:
-		last_hover_over.hover_over(false)
-	BtnIndicators.show_undo(false)
-	BtnIndicators.show_reset(false)
+	if current_visit != start_point:
+		if last_hover_over:
+			last_hover_over.hover_over(false)
+		BtnIndicators.show_undo(false)
+		BtnIndicators.show_reset(false)
 		
-	var last_path = visited_paths.pop_back()
-	if last_path:
-		last_path[1].undo_point_of_interest()
-		update_status(last_path[1], 1)
-		current_visit = last_path[0]
-		print("current visit = " + str(current_visit.identifier))
-		going_back.emit()
+		var last_path = visited_paths.pop_back()
+		if last_path:
+			last_path[1].undo_point_of_interest()
+			update_status(last_path[1], 1)
+			current_visit = last_path[0]
+			print("current visit = " + str(current_visit.identifier))
+			reseting_hover_over.emit()
+			going_back.emit()
+		
 	
 #reset path
 func reset_path() -> void:
@@ -179,8 +182,13 @@ func reset_path() -> void:
 		limitation.value = limitations_start_values[i]
 		LimitationsIndication.set_indicator(limitations[i], false)
 		i=+1
-	
+	reseting_hover_over.emit()
 	reset.emit(current_visit)
+
+
+func _on_reseting_hover_over() -> void:
+	is_reseting = true
+
 
 #hover over functionality
 func hover_over() -> void:
@@ -207,6 +215,19 @@ func hover_over() -> void:
 					point.hover_over(true)
 				else:
 					point.hover_over(false)
+		else:
+			
+			if last_hover_over and is_reseting:
+				print("is reseting " + str(is_reseting))
+				
+				if last_hover_over.can_visit(current_visit.identifier):
+					current_path = [current_visit.identifier, last_hover_over.identifier]
+					if !is_path_taken():
+						last_hover_over.hover_over(true)
+					else:
+						last_hover_over.hover_over(false)
+			is_reseting = false
+				
 	else:
 		if last_hover_over:
 			print("mouse exited " + last_hover_over.name)
