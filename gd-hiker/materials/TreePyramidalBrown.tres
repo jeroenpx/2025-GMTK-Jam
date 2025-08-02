@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b1tq16du8r3mn"]
+
+[resource]
+resource_name = "TreeBrown"
+cull_mode = 2
+albedo_color = Color(0.506318, 0.14283, 0, 1)
+roughness = 0.5
+emission_enabled = true
+emission = Color(0.0142752, 0.0142752, 0.0142752, 1)
