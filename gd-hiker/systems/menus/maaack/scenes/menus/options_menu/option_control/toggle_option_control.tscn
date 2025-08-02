@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsxh6v7j0257h"]
+[gd_scene load_steps=3 format=3 uid="uid://bsxh6v7j0257h"]
 
 [ext_resource type="PackedScene" uid="uid://d7te75il06t7" path="res://systems/menus/maaack/scenes/menus/options_menu/option_control/option_control.tscn" id="1_8rnmo"]
+[ext_resource type="Theme" uid="uid://dafh5hfuv571o" path="res://assets-2D/UI/emptyButton.tres" id="2_pf6gr"]
 
 [node name="OptionControl" instance=ExtResource("1_8rnmo")]
 
 [node name="CheckButton" type="CheckButton" parent="." index="1"]
 layout_mode = 2
+theme = ExtResource("2_pf6gr")

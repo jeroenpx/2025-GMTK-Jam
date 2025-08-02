@@ -47,6 +47,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="ResetButton" type="Button" parent="VBoxContainer/InputMappingContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 text = "Reset"
 

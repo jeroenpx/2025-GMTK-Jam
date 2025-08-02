@@ -7,13 +7,14 @@ extends Control
 var menu_stack: Array[String];
 
 func _ready() -> void:
-	pass
-	
 	# NOTE: automatically open the credits at the end?
-	#EndGame.on_open_credits.connect(func():
-	#	if menus.has("credits"):
-	#		goto_menu("credits");
-	#);
+	LevelManager.on_end_game.connect(goto_credits);
+
+
+
+func goto_credits()->void:
+	if menus.has("credits"):
+		goto_menu("credits");
 
 func goto_menu(menu_id: String):
 	if menu_stack.size() > 0:

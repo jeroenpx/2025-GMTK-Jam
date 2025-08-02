@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dr7iyddfemech"]
+[gd_scene load_steps=11 format=3 uid="uid://dr7iyddfemech"]
 
-[ext_resource type="Texture2D" uid="uid://cpuljlaq0gr7u" path="res://assets-2D/R - button.png" id="1_c7mkw"]
 [ext_resource type="Script" uid="uid://cglhrp75w7c52" path="res://systems/limitiations_indications/limitations_indication.gd" id="1_ssxor"]
 [ext_resource type="Script" uid="uid://0cc2xd3liphh" path="res://systems/limitiations_indications/visit_indicator.gd" id="2_avwou"]
-[ext_resource type="Texture2D" uid="uid://enuhqtddxgll" path="res://assets-2D/checkmark2.png" id="4_vqbcy"]
+[ext_resource type="Texture2D" uid="uid://2rv6mrqlrkuu" path="res://assets-2D/UI/UI_notepad.png" id="2_vqbcy"]
+[ext_resource type="Texture2D" uid="uid://vsrea6i2lg8e" path="res://assets-2D/UI/UI-nature.png" id="4_vqbcy"]
+[ext_resource type="Texture2D" uid="uid://b05tni1cavxqj" path="res://assets-2D/UI/UI_checkMark.png" id="5_7r3ua"]
+[ext_resource type="Texture2D" uid="uid://d3qoer6ejyrek" path="res://assets-2D/UI/UI-civilisation.png" id="6_8t3ac"]
+[ext_resource type="Texture2D" uid="uid://1ihd6cl4joqm" path="res://assets-2D/UI/UI-boat.png" id="7_06vyi"]
+[ext_resource type="Texture2D" uid="uid://bo2ldgwa61yw3" path="res://assets-2D/UI/UI-zipline.png" id="8_aptbf"]
+[ext_resource type="Texture2D" uid="uid://ruiur5eknssw" path="res://assets-2D/UI/UI-rest.png" id="9_tr4s6"]
+[ext_resource type="PackedScene" uid="uid://dr3ujwwhwlt1v" path="res://systems/button_skip_back/button_skip_back.tscn" id="10_06vyi"]
 
-[node name="LimitationsIndication" type="Control" node_paths=PackedStringArray("nature_ind", "civil_ind", "rest_ind", "zipline_ind", "boat_ind", "array_indicators")]
+[node name="LimitationsIndication" type="Control" node_paths=PackedStringArray("array_indicators")]
 z_index = -1
 layout_mode = 3
 anchors_preset = 15
@@ -15,180 +21,220 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ssxor")
-nature_ind = NodePath("HBoxContainer/NatureIndicator")
-civil_ind = NodePath("HBoxContainer/CivilisationIndicator")
-rest_ind = NodePath("HBoxContainer/RestIndicator")
-zipline_ind = NodePath("HBoxContainer/ZiplineIndicator")
-boat_ind = NodePath("HBoxContainer/PierIndicator")
-array_indicators = [NodePath("HBoxContainer/NatureIndicator"), NodePath("HBoxContainer/ZiplineIndicator"), NodePath("HBoxContainer/PierIndicator"), NodePath("HBoxContainer/RestIndicator"), NodePath("HBoxContainer/CivilisationIndicator")]
+array_indicators = [NodePath("TextureRect/VBoxContainer/NatureIndicator"), NodePath("TextureRect/VBoxContainer/CivilIndi"), NodePath("TextureRect/VBoxContainer/BoatIndi"), NodePath("TextureRect/VBoxContainer/ZiplineIndi"), NodePath("TextureRect/VBoxContainer/RestIndi")]
+array_logo = Array[Texture2D]([ExtResource("4_vqbcy"), ExtResource("6_8t3ac"), ExtResource("7_06vyi"), ExtResource("8_aptbf"), ExtResource("9_tr4s6")])
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(100, 20)
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 8.485
-offset_bottom = 48.485
-grow_horizontal = 2
-pivot_offset = Vector2(0, 30)
-theme_override_constants/separation = 19
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -238.0
+offset_right = 252.0
+offset_bottom = 2.0
+grow_vertical = 0
+pivot_offset = Vector2(100, 120)
+texture = ExtResource("2_vqbcy")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="NatureIndicator" type="HBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056
+anchor_top = 0.193
+anchor_right = 0.17
+anchor_bottom = 0.273
+offset_right = 152.52
+offset_bottom = 28.96
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(80, 20)
+
+[node name="NatureIndicator" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
 visible = false
-custom_minimum_size = Vector2(60, 20)
+custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 11
 script = ExtResource("2_avwou")
 type = 1
 
-[node name="TextureLogo" type="TextureRect" parent="HBoxContainer/NatureIndicator"]
+[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/NatureIndicator"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("1_c7mkw")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="CheckMark" type="TextureRect" parent="HBoxContainer/NatureIndicator/TextureLogo"]
-visible = false
-layout_mode = 0
-offset_left = 30.0
-offset_top = -1.485
-offset_right = 50.0
-offset_bottom = 18.515
-pivot_offset = Vector2(0, 20)
 texture = ExtResource("4_vqbcy")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="HBoxContainer/NatureIndicator"]
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/NatureIndicator"]
 layout_mode = 2
-theme_override_constants/outline_size = 10
-text = "max 5"
+theme_override_colors/font_color = Color(0.0461385, 0.456653, 0.819464, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
+theme_override_constants/outline_size = 1
+text = "0"
 
-[node name="ZiplineIndicator" type="HBoxContainer" parent="HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(60, 20)
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/NatureIndicator"]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_colors/font_color = Color(0.139194, 0.188424, 0.244464, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
+theme_override_constants/outline_size = 1
+text = "/ max 5"
+
+[node name="TextureLogo2" type="TextureRect" parent="TextureRect/VBoxContainer/NatureIndicator"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("5_7r3ua")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CivilIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(70, 20)
+layout_mode = 2
+theme_override_constants/separation = 11
 script = ExtResource("2_avwou")
-type = 2
+type = 1
 
-[node name="TextureLogo" type="TextureRect" parent="HBoxContainer/ZiplineIndicator"]
+[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/CivilIndi"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("1_c7mkw")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="CheckMark" type="TextureRect" parent="HBoxContainer/ZiplineIndicator/TextureLogo"]
-visible = false
-layout_mode = 0
-offset_left = 30.0
-offset_top = -1.485
-offset_right = 50.0
-offset_bottom = 18.515
-pivot_offset = Vector2(0, 20)
 texture = ExtResource("4_vqbcy")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="HBoxContainer/ZiplineIndicator"]
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/CivilIndi"]
 layout_mode = 2
-theme_override_constants/outline_size = 10
-text = "max 5"
+theme_override_colors/font_color = Color(0.0461385, 0.456653, 0.819464, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
+theme_override_constants/outline_size = 1
+text = "0"
 
-[node name="PierIndicator" type="HBoxContainer" parent="HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(60, 20)
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/CivilIndi"]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_colors/font_color = Color(0.139194, 0.188424, 0.244464, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
+theme_override_constants/outline_size = 1
+text = "/ max 5"
+
+[node name="TextureLogo2" type="TextureRect" parent="TextureRect/VBoxContainer/CivilIndi"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("5_7r3ua")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="BoatIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(70, 20)
+layout_mode = 2
+theme_override_constants/separation = 11
 script = ExtResource("2_avwou")
-type = 3
+type = 1
 
-[node name="TextureLogo" type="TextureRect" parent="HBoxContainer/PierIndicator"]
+[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/BoatIndi"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("1_c7mkw")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="CheckMark" type="TextureRect" parent="HBoxContainer/PierIndicator/TextureLogo"]
-visible = false
-layout_mode = 0
-offset_left = 30.0
-offset_top = -1.485
-offset_right = 50.0
-offset_bottom = 18.515
-pivot_offset = Vector2(0, 20)
 texture = ExtResource("4_vqbcy")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="HBoxContainer/PierIndicator"]
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/BoatIndi"]
 layout_mode = 2
-theme_override_constants/outline_size = 10
-text = "max 5"
+theme_override_colors/font_color = Color(0.0461385, 0.456653, 0.819464, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
+theme_override_constants/outline_size = 1
+text = "0"
 
-[node name="RestIndicator" type="HBoxContainer" parent="HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(60, 20)
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/BoatIndi"]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_colors/font_color = Color(0.139194, 0.188424, 0.244464, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
+theme_override_constants/outline_size = 1
+text = "/ max 5"
+
+[node name="TextureLogo2" type="TextureRect" parent="TextureRect/VBoxContainer/BoatIndi"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("5_7r3ua")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ZiplineIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(70, 20)
+layout_mode = 2
+theme_override_constants/separation = 11
 script = ExtResource("2_avwou")
-type = 5
+type = 1
 
-[node name="TextureLogo" type="TextureRect" parent="HBoxContainer/RestIndicator"]
+[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/ZiplineIndi"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("1_c7mkw")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="CheckMark" type="TextureRect" parent="HBoxContainer/RestIndicator/TextureLogo"]
-visible = false
-layout_mode = 0
-offset_left = 30.0
-offset_top = -1.485
-offset_right = 50.0
-offset_bottom = 18.515
-pivot_offset = Vector2(0, 20)
 texture = ExtResource("4_vqbcy")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="HBoxContainer/RestIndicator"]
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/ZiplineIndi"]
 layout_mode = 2
-theme_override_constants/outline_size = 10
-text = "max 5"
+theme_override_colors/font_color = Color(0.0461385, 0.456653, 0.819464, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
+theme_override_constants/outline_size = 1
+text = "0"
 
-[node name="CivilisationIndicator" type="HBoxContainer" parent="HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(60, 20)
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/ZiplineIndi"]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_colors/font_color = Color(0.139194, 0.188424, 0.244464, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
+theme_override_constants/outline_size = 1
+text = "/ max 5"
+
+[node name="TextureLogo2" type="TextureRect" parent="TextureRect/VBoxContainer/ZiplineIndi"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("5_7r3ua")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RestIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(70, 20)
+layout_mode = 2
+theme_override_constants/separation = 11
 script = ExtResource("2_avwou")
-type = 4
+type = 1
 
-[node name="TextureLogo" type="TextureRect" parent="HBoxContainer/CivilisationIndicator"]
+[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/RestIndi"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("1_c7mkw")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="CheckMark" type="TextureRect" parent="HBoxContainer/CivilisationIndicator/TextureLogo"]
-visible = false
-layout_mode = 0
-offset_left = 30.0
-offset_top = -1.485
-offset_right = 50.0
-offset_bottom = 18.515
-pivot_offset = Vector2(0, 20)
 texture = ExtResource("4_vqbcy")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="HBoxContainer/CivilisationIndicator"]
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/RestIndi"]
 layout_mode = 2
-theme_override_constants/outline_size = 10
-text = "max 5"
+theme_override_colors/font_color = Color(0.0461385, 0.456653, 0.819464, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
+theme_override_constants/outline_size = 1
+text = "0"
+
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/RestIndi"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.139194, 0.188424, 0.244464, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
+theme_override_constants/outline_size = 1
+text = "/ max 5"
+
+[node name="TextureLogo2" type="TextureRect" parent="TextureRect/VBoxContainer/RestIndi"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("5_7r3ua")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Control" parent="." instance=ExtResource("10_06vyi")]
+layout_mode = 1

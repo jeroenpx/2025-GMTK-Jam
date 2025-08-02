@@ -55,10 +55,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.5
-offset_top = -128.0
-offset_right = 128.5
-offset_bottom = 128.0
+offset_left = -200.0
+offset_top = -234.5
+offset_right = 200.0
+offset_bottom = 234.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -70,6 +70,7 @@ text = "Game Paused"
 horizontal_alignment = 1
 
 [node name="ContinueButton" type="Button" parent="Menus/PauseMenuMain/PauseMenuMainButtons"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Continue"
 script = ExtResource("3_sy75v")
@@ -93,6 +94,7 @@ visible = false
 visible = false
 
 [node name="OptionsButton" type="Button" parent="Menus/PauseMenuMain/PauseMenuMainButtons" node_paths=PackedStringArray("menu_container")]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Options"
 script = ExtResource("5_vga8g")
@@ -100,6 +102,7 @@ menu_container = NodePath("../../..")
 goto_menu_id = "options"
 
 [node name="CreditsButton" type="Button" parent="Menus/PauseMenuMain/PauseMenuMainButtons" node_paths=PackedStringArray("menu_container")]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Credits"
 script = ExtResource("5_vga8g")
@@ -107,6 +110,7 @@ menu_container = NodePath("../../..")
 goto_menu_id = "credits"
 
 [node name="ExitButton" type="Button" parent="Menus/PauseMenuMain/PauseMenuMainButtons"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Exit Game"
 script = ExtResource("4_7rsme")
@@ -150,6 +154,7 @@ text = "Options"
 horizontal_alignment = 1
 
 [node name="ButtonToGraphics" type="Button" parent="Menus/OptionsMenu/OptionsMenuButtons" node_paths=PackedStringArray("menu_container")]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Graphics"
 script = ExtResource("5_vga8g")
@@ -157,6 +162,7 @@ menu_container = NodePath("../../..")
 goto_menu_id = "graphics"
 
 [node name="ButtonToAudio" type="Button" parent="Menus/OptionsMenu/OptionsMenuButtons" node_paths=PackedStringArray("menu_container")]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Audio"
 script = ExtResource("5_vga8g")
@@ -164,6 +170,7 @@ menu_container = NodePath("../../..")
 goto_menu_id = "audio"
 
 [node name="ButtonToAccessibility" type="Button" parent="Menus/OptionsMenu/OptionsMenuButtons" node_paths=PackedStringArray("menu_container")]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Accessibility"
 script = ExtResource("5_vga8g")
@@ -171,6 +178,7 @@ menu_container = NodePath("../../..")
 goto_menu_id = "accessibility"
 
 [node name="BackButton" type="Button" parent="Menus/OptionsMenu/OptionsMenuButtons" node_paths=PackedStringArray("menu_container")]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Back"
 script = ExtResource("8_yek3w")
@@ -213,6 +221,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="Menus/OptionsMenuAudio/OptionsMenuButtons" node_paths=PackedStringArray("menu_container")]
+custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 text = "Back"
 script = ExtResource("8_yek3w")
@@ -255,6 +264,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="Menus/OptionsMenuVideo/OptionsMenuButtons" node_paths=PackedStringArray("menu_container")]
+custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 text = "Back"
 script = ExtResource("8_yek3w")
@@ -279,10 +289,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -65.5
-offset_right = 200.0
-offset_bottom = 65.5
+offset_left = -253.0
+offset_top = -215.0
+offset_right = 253.0
+offset_bottom = 215.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -297,6 +307,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="Menus/OptionsMenuAccessibility/OptionsMenuButtons" node_paths=PackedStringArray("menu_container")]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 text = "Back"
 script = ExtResource("8_yek3w")

@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://46nkkxfbs5a7"]
+
+[ext_resource type="Texture2D" uid="uid://cq58311tfmk5m" path="res://assets-2D/UI/sign_plate.png" id="1_2g8a6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2g8a6"]
+texture = ExtResource("1_2g8a6")
+region_rect = Rect2(13.6276, 34.3045, 924.433, 525.026)
+modulate_color = Color(0.439049, 0.439049, 0.439049, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_30uqx"]
+texture = ExtResource("1_2g8a6")
+region_rect = Rect2(13.6276, 34.3045, 924.433, 525.026)
+modulate_color = Color(0.691357, 0.691357, 0.691357, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qvo31"]
+texture = ExtResource("1_2g8a6")
+region_rect = Rect2(13.6276, 34.3045, 924.433, 525.026)
+modulate_color = Color(0.505344, 0.505344, 0.505344, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_spetv"]
+texture = ExtResource("1_2g8a6")
+region_rect = Rect2(13.6276, 34.3045, 924.433, 525.026)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ntxu7"]
+texture = ExtResource("1_2g8a6")
+region_rect = Rect2(13.6276, 34.3045, 924.433, 525.026)
+modulate_color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[resource]
+Button/styles/disabled = SubResource("StyleBoxTexture_2g8a6")
+Button/styles/focus = SubResource("StyleBoxTexture_30uqx")
+Button/styles/hover = SubResource("StyleBoxTexture_qvo31")
+Button/styles/normal = SubResource("StyleBoxTexture_spetv")
+Button/styles/pressed = SubResource("StyleBoxTexture_ntxu7")
+Label/font_sizes/font_size = 22
