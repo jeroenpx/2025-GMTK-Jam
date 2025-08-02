@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://crvqht856gpj"]
+
+[ext_resource type="Texture2D" uid="uid://bshno2gy7hiun" path="res://assets-2D/points_of_interest/pier.png" id="1_7ov57"]
+
+[resource]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_7ov57")

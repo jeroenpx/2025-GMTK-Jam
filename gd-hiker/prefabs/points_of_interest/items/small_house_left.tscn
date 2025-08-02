@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://de0hecqkeqgky"]
+
+[ext_resource type="Texture2D" uid="uid://c55121t56evn1" path="res://assets-2D/points_of_interest/House 1.png" id="1_dyxwn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_206mr"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_dyxwn")
+
+[sub_resource type="QuadMesh" id="QuadMesh_y8bnd"]
+material = SubResource("StandardMaterial3D_206mr")
+size = Vector2(2.296, 2.204)
+
+[node name="SmallHouseLeft" type="MeshInstance3D"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+mesh = SubResource("QuadMesh_y8bnd")

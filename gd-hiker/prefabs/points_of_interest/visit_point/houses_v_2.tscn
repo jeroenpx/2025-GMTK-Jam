@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://crxmlfn7m01yi"]
+
+[ext_resource type="Texture2D" uid="uid://c55121t56evn1" path="res://assets-2D/points_of_interest/House 1.png" id="1_t7osq"]
+[ext_resource type="PackedScene" uid="uid://uclhbj7m1nrp" path="res://prefabs/points_of_interest/items/small_house_right.tscn" id="2_ewh4e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rkj1"]
+transparency = 1
+cull_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_t7osq")
+
+[sub_resource type="QuadMesh" id="QuadMesh_206mr"]
+material = SubResource("StandardMaterial3D_4rkj1")
+size = Vector2(2.296, 2.204)
+
+[node name="HousesV2" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="BigHouseRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, -1.39569, 0.123972, 1.96466)
+mesh = SubResource("QuadMesh_206mr")
+
+[node name="SmallHouseRight" parent="." instance=ExtResource("2_ewh4e")]
+transform = Transform3D(-1.2, 0, -1.81195e-07, 0, 1.2, 0, 1.81195e-07, 0, -1.2, -0.510906, 0.814438, -0.104156)

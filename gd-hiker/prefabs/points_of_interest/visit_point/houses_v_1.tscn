@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://csgdbu7c87y6e"]
+
+[ext_resource type="PackedScene" uid="uid://b70t0ey2spj71" path="res://prefabs/points_of_interest/items/big_house_right.tscn" id="1_f8rxk"]
+[ext_resource type="PackedScene" uid="uid://de0hecqkeqgky" path="res://prefabs/points_of_interest/items/small_house_left.tscn" id="2_x78mo"]
+
+[node name="HousesV1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="BigHouseRight" parent="." instance=ExtResource("1_f8rxk")]
+transform = Transform3D(-1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, -1.39569, 1.56273, 3.40342)
+
+[node name="SmallHouseLeft" parent="." instance=ExtResource("2_x78mo")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.248775, 1.75908, 1.76036)

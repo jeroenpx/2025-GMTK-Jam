@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://3v4djyqlx2ai"]
+
+[ext_resource type="PackedScene" uid="uid://chs40t0p7efbg" path="res://prefabs/points_of_interest/items/pier_right.tscn" id="1_3egrf"]
+
+[node name="PierV1" type="Node3D"]
+
+[node name="pierRight" parent="." instance=ExtResource("1_3egrf")]
+transform = Transform3D(3, 0, 0, 0, 2.12132, 0.545179, 0, -2.12132, 0.545179, 1.88789, -0.107932, 0.893368)
