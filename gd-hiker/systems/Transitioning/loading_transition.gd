@@ -17,7 +17,7 @@ func transition_to_scene(scene_path: String) ->void:
 		var status = ResourceLoader.load_threaded_get_status(scene_path, progress)
 		if progress[0] > loaded:
 			loaded = progress[0]
-		label.text = str("Loading... ", int(loaded)*100.0, "%")
+		label.text = str("Loading... ")
 		if status == ResourceLoader.THREAD_LOAD_LOADED:
 			break
 		
@@ -34,7 +34,7 @@ func transition_to_scene(scene_path: String) ->void:
 
 	
 	var packed_scene: PackedScene = ResourceLoader.load_threaded_get(scene_path)
-	await get_tree().create_timer(1.0).timeout
+	
 	GameState.enter_cinematic("")
 	if packed_scene:
 		get_tree().change_scene_to_packed(packed_scene)
