@@ -2,8 +2,10 @@ class_name PointOfInterest
 extends Node3D
 
 @export_category("Config")
-@export var neighbours: Array[PointOfInterest] #possible neighbours
-@export var type_point_of_interest: Limitations.VisitType
+@export var neighbours: Array[PointOfInterest]; #possible neighbours
+@export var type_point_of_interest: Limitations.VisitType;
+@export var boats_available: int = 0;
+@export var boats: Array[Boat];
 
 # Highlight stuff
 @export_category("Visuals")
@@ -14,6 +16,10 @@ var is_start: bool = false;
 var is_visited: bool = false;
 var is_hover: bool = false;
 var is_canvisitnext: bool = false;
+
+func _ready() -> void:
+	for i in range(boats.size()):
+		boats[i].visible = i < boats_available;
 
 # A) Change visited state
 func on_clicked(current_visit: PointOfInterest) -> PointOfInterest:
