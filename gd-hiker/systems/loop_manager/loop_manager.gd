@@ -50,7 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			query.collide_with_areas = true
 			var hit = space_state.intersect_ray(query)
 			#endregion
-			if hit:
+			if hit and hit.collider is PointOfInterest:
 				var point: PointOfInterest = hit.collider
 				var previous_visit = current_visit
 			

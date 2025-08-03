@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2y40ww76r4au"]
+[gd_scene load_steps=6 format=3 uid="uid://c2y40ww76r4au"]
 
-[ext_resource type="Material" uid="uid://cv5p3k75jyi7m" path="res://materials/point_circle/floor_circle.tres" id="1_wiiob"]
+[ext_resource type="Material" uid="uid://cv5p3k75jyi7m" path="res://materials/point_circle/floor_circle_available.tres" id="1_wiiob"]
+[ext_resource type="Script" uid="uid://d3slnoc53267g" path="res://systems/point_of_interest/circle_effect/circle_effect.gd" id="2_tqb6g"]
+[ext_resource type="Material" uid="uid://87byaejq8tl3" path="res://materials/point_circle/floor_circle_visited.tres" id="3_0gstu"]
+[ext_resource type="Material" uid="uid://mavswuev81gn" path="res://materials/point_circle/floor_circle_visit_option.tres" id="4_2ixl7"]
+[ext_resource type="Material" uid="uid://bal7j4fvqejnd" path="res://materials/point_circle/floor_circle_visit_option_hover.tres" id="5_jib1y"]
 
 [node name="PointOfInterestFloor" type="MeshInstance3D"]
 material_override = ExtResource("1_wiiob")
+script = ExtResource("2_tqb6g")
+material_options = Dictionary[int, Material]({
+0: ExtResource("3_0gstu"),
+1: ExtResource("4_2ixl7"),
+2: ExtResource("5_jib1y"),
+3: ExtResource("1_wiiob")
+})

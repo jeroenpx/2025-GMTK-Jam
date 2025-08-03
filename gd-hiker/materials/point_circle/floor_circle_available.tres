@@ -1,0 +1,29 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://cv5p3k75jyi7m"]
+
+[ext_resource type="Shader" uid="uid://v53rl4himaxy" path="res://materials/point_circle/floor_circle_shader.gdshader" id="1_4srwf"]
+
+[sub_resource type="Gradient" id="Gradient_rqv5i"]
+offsets = PackedFloat32Array(0.29682, 0.332155, 0.427562, 0.448763)
+colors = PackedColorArray(0.838982, 0.848236, 0.817409, 0.709804, 1, 1, 1, 1, 1, 1, 1, 0.388235, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p4xv6"]
+gradient = SubResource("Gradient_rqv5i")
+
+[sub_resource type="Gradient" id="Gradient_iqu3f"]
+offsets = PackedFloat32Array(0, 0.605839)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nhgv0"]
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wamqr"]
+color_ramp = SubResource("Gradient_iqu3f")
+noise = SubResource("FastNoiseLite_nhgv0")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_4srwf")
+shader_parameter/color = Color(1, 1, 1, 0.627451)
+shader_parameter/edge = SubResource("GradientTexture1D_p4xv6")
+shader_parameter/noise = SubResource("NoiseTexture2D_wamqr")
+shader_parameter/polar_uv_scale = Vector2(2.7, 0.385)
+shader_parameter/time_speed = -0.05

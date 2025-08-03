@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bx3htd1i8ptwh"]
+[gd_scene load_steps=10 format=3 uid="uid://bx3htd1i8ptwh"]
 
 [ext_resource type="Script" uid="uid://8ugpps12qt26" path="res://systems/cinematics/cinematic.gd" id="1_1d7jr"]
+[ext_resource type="Script" uid="uid://iee6dakip3i0" path="res://systems/froggy/starter_area.gd" id="1_mty2f"]
 [ext_resource type="Script" uid="uid://bb2ka0cke0q3q" path="res://systems/cinematics/cine_onload_trigger.gd" id="2_6mlh5"]
 [ext_resource type="Script" uid="uid://vj0ynr1jo73m" path="res://systems/cinematics/cine_action_emit.gd" id="3_v3edf"]
 [ext_resource type="Script" uid="uid://2d654tb8yudh" path="res://systems/cinematics/cine_action_play_simple_animation.gd" id="4_cbdoa"]
@@ -11,6 +12,7 @@
 
 [node name="StarterArea" type="Node3D"]
 transform = Transform3D(0.999701, 0, -0.0244496, 0, 1, 0, 0.0244496, 0, 0.999701, 0, 0, 0)
+script = ExtResource("1_mty2f")
 
 [node name="CarArrivingCinematic" type="Node" parent="." node_paths=PackedStringArray("pausables")]
 script = ExtResource("1_1d7jr")
@@ -54,5 +56,8 @@ transform = Transform3D(-5.60494e-08, 6.22378e-15, 0.482653, 3.80315e-15, 0.4826
 transform = Transform3D(-0.499851, 0, -0.0122247, 0, 0.5, 0, 0.0122247, 0, -0.499851, 2.23301, 0.552028, -5.62307)
 
 [node name="Froggy" parent="StartLocation" groups=["froggy"] instance=ExtResource("8_sqr1q")]
+
+[connection signal="act" from="CarArrivingCinematic/Froggy Inside Car" to="." method="_on_froggy_inside_car_act"]
+[connection signal="act" from="CarArrivingCinematic/Froggy Exit Car" to="." method="_on_froggy_exit_car_act"]
 
 [editable path="car"]
