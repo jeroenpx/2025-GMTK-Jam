@@ -19,6 +19,9 @@ var all_limitations_completed: Array[bool] = []
 var limitations_start_values: Array[int] = []
 var current_path: Array[PointOfInterest] = []
 var is_reseting: bool = false
+
+var available_to_visit: Array[PointOfInterest] = [];
+
 func _ready() -> void:
 	reseting_hover_over.connect(_on_reseting_hover_over)
 	start_point = current_visit
@@ -31,6 +34,22 @@ func _ready() -> void:
 		limitations_start_values.append(limitations[i].value)
 		LimitationsIndication.show_indicator(limitations[i],i)
 		#LimitationsIndication.set_indicator(limitations[i],i, false)
+	
+	start_point.set_is_start(true);
+	_update_available_to_visit();
+
+func _update_available_to_visit() -> void:
+	for point in available_to_visit:
+		point.set_can_next_visit(false);
+	
+	available_to_visit = current_visit.get_all_can_visit();
+	
+	for point in available_to_visit:
+		if not point.is_visited:
+			if point.is_start and current_path.size() < 3:
+				continue;
+			
+			point.set_can_next_visit(true);
 
 func _process(delta: float) -> void:
 	if GameState.isGameplayRunning():
@@ -54,12 +73,12 @@ func _unhandled_input(event: InputEvent) -> void:
 				var point: PointOfInterest = hit.collider
 				var previous_visit = current_visit
 			
-				if point.can_visit(previous_visit.identifier):
-					current_path = [previous_visit.identifier, point.identifier]
+				if previous_visit.can_visit_towards(point):
+					current_path = [previous_visit, point]
 					if !is_path_taken():
 						current_visit = point.on_clicked(previous_visit)
 						visit_point()
-						print("Start" + str(start_point.identifier) +" From " + str(previous_visit.identifier) + " to " + str(current_visit.identifier))
+						print("Start" + str(start_point) +" From " + str(previous_visit) + " to " + str(current_visit))
 						if current_visit == start_point:
 							if are_all_limitations_completed():
 								level_complete()
@@ -69,8 +88,10 @@ func _unhandled_input(event: InputEvent) -> void:
 						elif !current_visit.is_any_neighbour_available():
 							BtnIndicators.show_undo(true)
 							BtnIndicators.show_reset(true)
+						
+						_update_available_to_visit();
 				else:
-					print("Don't move. Stay at " + str(current_visit.identifier))
+					print("Don't move. Stay at " + str(current_visit))
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			undo_path()
 		if event.is_action_pressed("reset path"):
@@ -155,9 +176,11 @@ func undo_path() -> void:
 			last_path[1].undo_point_of_interest()
 			update_status(last_path[1], 1)
 			current_visit = last_path[0]
-			print("current visit = " + str(current_visit.identifier))
+			print("current visit = " + str(current_visit))
 			reseting_hover_over.emit()
 			going_back.emit()
+			
+			_update_available_to_visit();
 		
 	
 #reset path
@@ -169,7 +192,7 @@ func reset_path() -> void:
 	BtnIndicators.show_undo(false)
 	visited_paths.clear()
 	current_visit = start_point
-	print("Reset - current visit = " + str(current_visit.identifier))
+	print("Reset - current visit = " + str(current_visit))
 	
 	for point in points_of_interest:
 		point.undo_point_of_interest()
@@ -181,6 +204,8 @@ func reset_path() -> void:
 		i=+1
 	reseting_hover_over.emit()
 	reset.emit(current_visit)
+	
+	_update_available_to_visit();
 
 
 func _on_reseting_hover_over() -> void:
@@ -206,8 +231,8 @@ func hover_over() -> void:
 				print("mouse exited " + last_hover_over.name)
 			print("mouse enter " + point.name)
 			last_hover_over = point
-			if point.can_visit(current_visit.identifier):
-				current_path = [current_visit.identifier, point.identifier]
+			if current_visit.can_visit_towards(point):
+				current_path = [current_visit, point]
 				if !is_path_taken():
 					point.hover_over(true)
 				else:
@@ -217,8 +242,8 @@ func hover_over() -> void:
 			if last_hover_over and is_reseting:
 				print("is reseting " + str(is_reseting))
 				
-				if last_hover_over.can_visit(current_visit.identifier):
-					current_path = [current_visit.identifier, last_hover_over.identifier]
+				if current_visit.can_visit_towards(last_hover_over):
+					current_path = [current_visit, last_hover_over]
 					if !is_path_taken():
 						last_hover_over.hover_over(true)
 					else:

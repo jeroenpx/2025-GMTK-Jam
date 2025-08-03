@@ -41,6 +41,9 @@ func generate(map: Map):
 			var meshInst = _generated_grounds[name_of_point];
 			
 			meshInst.mesh = generate_mesh_for(map, point);
+			
+			# Connect the floor to the point
+			point.floor_indication = meshInst;
 
 
 func generate_mesh_for(map: Map, point: PointOfInterest) -> ArrayMesh:
