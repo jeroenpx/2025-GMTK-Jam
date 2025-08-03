@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cavx8kbpdjfjd"]
 
-[ext_resource type="Script" uid="uid://bxjoi2nt022gh" path="res://systems/point_of_interest/boat.gd" id="1_3juas"]
+[ext_resource type="Script" uid="uid://bxjoi2nt022gh" path="res://systems/point_of_interest/vehicle.gd" id="1_3juas"]
 [ext_resource type="PackedScene" uid="uid://bg0gdi1wlyjjy" path="res://assets-3D/boat.glb" id="1_niqom"]
 
 [node name="Boat" type="Node3D"]

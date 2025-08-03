@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbmjrdbf68kf1"]
+
+[ext_resource type="Script" uid="uid://bxjoi2nt022gh" path="res://systems/point_of_interest/vehicle.gd" id="1_trsgy"]
+[ext_resource type="PackedScene" uid="uid://d0k2ymvrk2b71" path="res://assets-3D/zipline_vehicle.glb" id="2_25ytw"]
+
+[node name="ZiplineVehicle" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.605637, 0, 0, 0, 0.48029, 0, 0, 0)
+script = ExtResource("1_trsgy")
+
+[node name="zipline_vehicle" parent="." instance=ExtResource("2_25ytw")]
+transform = Transform3D(1.83433, 0, 0, 0, 0.6, 0, 0, 0, 3.84723, 0, 0, 0)

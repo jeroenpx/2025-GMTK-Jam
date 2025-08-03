@@ -44,9 +44,10 @@ func _update_available_to_visit() -> void:
 	
 	available_to_visit = current_visit.get_all_can_visit();
 	
+	print("Av:", available_to_visit.size());
 	for point in available_to_visit:
 		if not point.is_visited:
-			if point.is_start and current_path.size() < 3:
+			if point.is_start and visited_paths.size() < 3:
 				continue;
 			
 			point.set_can_next_visit(true);
@@ -95,7 +96,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			undo_path()
 		if event.is_action_pressed("reset path"):
-			reset_path()
+			# DISABLE RESET feature
+			#reset_path()
+			pass;
 
 
 #check if path is already taken
@@ -173,7 +176,7 @@ func undo_path() -> void:
 		var last_path = visited_paths.pop_back()
 		
 		if last_path:
-			last_path[1].undo_point_of_interest()
+			last_path[1].undo_point_of_interest(last_path[0])
 			update_status(last_path[1], 1)
 			current_visit = last_path[0]
 			print("current visit = " + str(current_visit))
@@ -194,8 +197,9 @@ func reset_path() -> void:
 	current_visit = start_point
 	print("Reset - current visit = " + str(current_visit))
 	
-	for point in points_of_interest:
-		point.undo_point_of_interest()
+	# COMMENTED OUT - NEED TO RESET BOATS AND SUCH
+	#for point in points_of_interest:
+	#	point.undo_point_of_interest()
 		
 	var i : int = 0
 	for limitation in limitations:
