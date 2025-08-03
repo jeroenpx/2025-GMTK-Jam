@@ -37,9 +37,9 @@ func get_texture(limitation: Limitations)-> Texture2D:
 		Limitations.VisitType.CIVILISATION:
 			return array_logo[1]
 		Limitations.VisitType.PIER:
-			return array_logo[3]
+			return array_logo[2]
 		Limitations.VisitType.ZIPLINE:
-			return array_logo[4]
+			return array_logo[3]
 		Limitations.VisitType.REST:
-			return array_logo[5]
+			return array_logo[4]
 	return array_logo[0]

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bshno2gy7hiun" path="res://assets-2D/points_of_interest/pier.png" id="1_7ov57"]
 
 [resource]
+render_priority = 1
 transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("1_7ov57")
