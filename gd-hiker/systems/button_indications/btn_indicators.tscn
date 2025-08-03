@@ -118,15 +118,18 @@ theme_override_constants/outline_size = 10
 text = " Undo"
 
 [node name="ResetIndication" type="HBoxContainer" parent="BtnLocation/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
 [node name="IconHolder" type="Control" parent="BtnLocation/HBoxContainer/ResetIndication"]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="BtnLocation/HBoxContainer/ResetIndication/IconHolder"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -145,6 +148,7 @@ expand_mode = 4
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="BtnLocation/HBoxContainer/ResetIndication"]
+visible = false
 layout_mode = 2
 theme = ExtResource("7_oq0vk")
 theme_override_constants/outline_size = 10

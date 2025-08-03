@@ -4,8 +4,11 @@ extends Node3D
 @export_category("Config")
 @export var neighbours: Array[PointOfInterest]; #possible neighbours
 @export var type_point_of_interest: Limitations.VisitType;
-@export var boats_available: int = 0;
-@export var boats: Array[Boat];
+
+@export_category("Config - travel by vehicle")
+@export var neighbours_by_vehicle: Array[PointOfInterest];
+@export var vehicles_available: int = 0;
+@export var vehicles: Array[Vehicle];
 
 # Highlight stuff
 @export_category("Visuals")
@@ -18,16 +21,37 @@ var is_hover: bool = false;
 var is_canvisitnext: bool = false;
 
 func _ready() -> void:
-	for i in range(boats.size()):
-		boats[i].visible = i < boats_available;
+	_update_vehicles();
+
+func add_vehicle(amount: int) -> void:
+	vehicles_available += amount;
+	_update_vehicles();
+
+func _update_vehicles() -> void:
+	for i in range(vehicles.size()):
+		vehicles[i].visible = i < vehicles_available;
+
+func is_travel_by_vehicle(towards: PointOfInterest) -> bool:
+	for vehicle_neighbour in neighbours_by_vehicle:
+		if vehicle_neighbour == towards:
+			return true;
+	return false;
 
 # A) Change visited state
 func on_clicked(current_visit: PointOfInterest) -> PointOfInterest:
+	if current_visit.is_travel_by_vehicle(self):
+		self.add_vehicle(1);
+		current_visit.add_vehicle(-1);
+	
 	is_visited = true
 	_update_floor_color();
 	return self
 
-func undo_point_of_interest() -> void:
+func undo_point_of_interest(from: PointOfInterest) -> void:
+	if from.is_travel_by_vehicle(self):
+		self.add_vehicle(-1);
+		from.add_vehicle(1);
+	
 	is_visited = false
 	_update_floor_color();
 
@@ -36,16 +60,23 @@ func undo_point_of_interest() -> void:
 func can_visit_towards(towards: PointOfInterest) -> bool:
 	if towards.is_visited:
 		return false
-	for neighbour in neighbours:
+	for neighbour in get_all_can_visit():
 		if towards == neighbour:
 			return true 
 	return false
 
 func get_all_can_visit() -> Array[PointOfInterest]:
-	return neighbours;
+	var results: Array[PointOfInterest] = [];
+	for n in neighbours:
+		results.push_back(n);
+	if vehicles_available > 0:
+		for n in neighbours_by_vehicle:
+			results.push_back(n);
+		
+	return results;
 
 func is_any_neighbour_available() -> bool:
-	for neighbour in neighbours:
+	for neighbour in get_all_can_visit():
 		if !neighbour.is_visited:
 			return true
 	return false
@@ -64,6 +95,7 @@ func set_can_next_visit(is_next_visit: bool) -> void:
 # D) Start point should always show as "visited" (unless you can visit it next)
 func set_is_start(is_start: bool) -> void:
 	self.is_start = is_start;
+	_update_floor_color();
 
 # Change the state of the floor circle
 func _update_floor_color() -> void:
