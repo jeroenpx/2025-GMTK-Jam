@@ -1,42 +1,42 @@
 class_name PointOfInterest
 extends Node3D
-#enum Type{DEFAULT, NATURE, ZIPLINE, PIER, CIVILISATION, REST }
 
+@export_category("Config")
 @export var neighbours: Array[PointOfInterest] #possible neighbours
 @export var type_point_of_interest: Limitations.VisitType
-@onready var highlight = $Highlight
-@onready var greyedout = $GreyedOut
-var identifier: PointOfInterest #use the self
-var reference_point: Vector3 #reference point that hexagon map will read
-var is_visited: bool
-var default_color = Color(0,0.619,0.627)
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	identifier = self
-	pass
 
+# Highlight stuff
+@export_category("Visuals")
+@export var floor_indication: CircleEffect;
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# State
+var is_start: bool = false;
+var is_visited: bool = false;
+var is_hover: bool = false;
+var is_canvisitnext: bool = false;
 
+# A) Change visited state
 func on_clicked(current_visit: PointOfInterest) -> PointOfInterest:
-	print("click " + str(identifier))
 	is_visited = true
-	print("move to " + str(identifier))
-	greyed_out(true)
+	_update_floor_color();
 	return self
+
+func undo_point_of_interest() -> void:
+	is_visited = false
+	_update_floor_color();
 
 
 #check if the previous pointofinterest is in neighbours and this pointofinterest wasn't visited
-func can_visit(pointId: PointOfInterest) -> bool:
-	if is_visited:
+func can_visit_towards(towards: PointOfInterest) -> bool:
+	if towards.is_visited:
 		return false
 	for neighbour in neighbours:
-		if pointId == neighbour.identifier:
+		if towards == neighbour:
 			return true 
 	return false
 
+func get_all_can_visit() -> Array[PointOfInterest]:
+	return neighbours;
 
 func is_any_neighbour_available() -> bool:
 	for neighbour in neighbours:
@@ -45,25 +45,28 @@ func is_any_neighbour_available() -> bool:
 	return false
 
 
-
+# B) Change hover state
 func hover_over(is_hover_over: bool) -> void:
-	highlight.visible = is_hover_over
-	print("hovering over = " + str(is_hover_over) + " on " + identifier.name)
+	is_hover = is_hover_over;
+	_update_floor_color();
 
-func undo_point_of_interest() -> void:
-	is_visited = false
-	greyed_out(false)
+# C) Change "next visit" state
+func set_can_next_visit(is_next_visit: bool) -> void:
+	is_canvisitnext = is_next_visit;
+	_update_floor_color();
 
-#func stop_hover_over() -> void:
-	#var material = mesh_instance.get_active_material(0)
-	#if material == null:
-	#	material = StandardMaterial3D.new()
-	#	mesh_instance.set_surface_override_material(0, material)
+# D) Start point should always show as "visited" (unless you can visit it next)
+func set_is_start(is_start: bool) -> void:
+	self.is_start = is_start;
 
-# Change color
-	#material.albedo_color = default_color  # default
-#	highlight.visible = false
-#	print("stop hovering over")
-
-func greyed_out(is_greyed_out: bool) -> void:
-	greyedout.visible = is_greyed_out
+# Change the state of the floor circle
+func _update_floor_color() -> void:
+	if is_canvisitnext:
+		if is_hover:
+			floor_indication.set_state(CircleEffect.State.VISIT_OPTION_HOVER);
+		else:
+			floor_indication.set_state(CircleEffect.State.VISIT_OPTION);
+	elif is_visited or is_start:
+		floor_indication.set_state(CircleEffect.State.VISITED);
+	else:
+		floor_indication.set_state(CircleEffect.State.AVAILABLE);

@@ -20,3 +20,4 @@ func _ready() -> void:
 
 func set_state(state: State):
 	self.state = state;
+	_update_state();
