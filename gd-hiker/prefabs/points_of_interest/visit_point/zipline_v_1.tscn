@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0vaehty6qr2l"]
 
 [ext_resource type="PackedScene" uid="uid://pkia5bf77rbj" path="res://prefabs/points_of_interest/items/zipline.tscn" id="1_s4d1r"]
-[ext_resource type="PackedScene" uid="uid://hcbfjruvubej" path="res://prefabs/points_of_interest/items/sign.tscn" id="2_lmq87"]
+[ext_resource type="PackedScene" uid="uid://cypkriqvjpyts" path="res://prefabs/points_of_interest/items/sign_grounded.tscn" id="2_s4d1r"]
 
 [node name="ZiplineSpot" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
@@ -9,10 +9,9 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="Zipline" parent="." instance=ExtResource("1_s4d1r")]
 transform = Transform3D(4.5, 0, 0, 0, 3, 0, 0, 0, 3, 0.455, 2.64, -0.565)
 
-[node name="sign" parent="." instance=ExtResource("2_lmq87")]
-transform = Transform3D(3.28892, 1.02606, 0, -1.19707, 2.81908, 0, 0, 0, 3.5, 2.18, 0.86, -1.105)
+[node name="sign-grounded" parent="." instance=ExtResource("2_s4d1r")]
 
-[node name="logo-zipline" parent="sign" index="4"]
+[node name="logo-zipline" parent="sign-grounded" index="4"]
 visible = true
 
-[editable path="sign"]
+[editable path="sign-grounded"]

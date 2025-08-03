@@ -9,4 +9,3 @@ size = Vector2(1.685, 1.182)
 [node name="pierRight" type="MeshInstance3D"]
 transform = Transform3D(3, 0, 0, 0, 2.12132, 0.545179, 0, -2.12132, 0.545179, 0, 0, 0)
 mesh = SubResource("QuadMesh_fbb6t")
-skeleton = NodePath("../../../../GameBasics")

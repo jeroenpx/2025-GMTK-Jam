@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b70t0ey2spj71" path="res://prefabs/points_of_interest/items/big_house.tscn" id="1_f8rxk"]
 [ext_resource type="PackedScene" uid="uid://de0hecqkeqgky" path="res://prefabs/points_of_interest/items/small_house.tscn" id="2_x78mo"]
-[ext_resource type="PackedScene" uid="uid://hcbfjruvubej" path="res://prefabs/points_of_interest/items/sign.tscn" id="3_x78mo"]
+[ext_resource type="PackedScene" uid="uid://cypkriqvjpyts" path="res://prefabs/points_of_interest/items/sign_grounded.tscn" id="3_x78mo"]
 
 [node name="HousesV1" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.2, 0)
@@ -13,13 +13,10 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.4818, 0.270505, 4.017
 [node name="SmallHouseLeft" parent="." instance=ExtResource("2_x78mo")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.0440242, 0.768772, 2.07245)
 
-[node name="sign" parent="." instance=ExtResource("3_x78mo")]
-transform = Transform3D(3.48668, 0.261467, 0, -0.305045, 2.98858, 0, 0, 0, 3.5, 2.36273, 2.07634, -2.07634)
+[node name="sign-grounded" parent="." instance=ExtResource("3_x78mo")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 
-[node name="logo-house" parent="sign" index="1"]
+[node name="logo-house" parent="sign-grounded" index="1"]
 visible = true
 
-[node name="logo-zipline" parent="sign" index="4"]
-visible = false
-
-[editable path="sign"]
+[editable path="sign-grounded"]
