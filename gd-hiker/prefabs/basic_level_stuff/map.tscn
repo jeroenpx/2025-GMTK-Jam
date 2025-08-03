@@ -175,7 +175,6 @@ script = ExtResource("4_4pfjn")
 metadata/_custom_type_script = "uid://bg0wqssp11cvi"
 
 [node name="GeneratePathBorderZone" type="Node3D" parent="."]
-script = ExtResource("11_y7fc5")
 
 [node name="GenerateTrees" type="Node3D" parent="." node_paths=PackedStringArray("input_height_grid", "smooth_normals_grid", "no_plant_zones")]
 script = ExtResource("5_6wqpt")

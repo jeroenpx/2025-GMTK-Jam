@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhf7teji3egta"
 path.s3tc="res://.godot/imported/UI-Parking.png-fc0f7ac5d220ce6a5e65effddb0aab81.s3tc.ctex"
+path.etc2="res://.godot/imported/UI-Parking.png-fc0f7ac5d220ce6a5e65effddb0aab81.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets-2D/UI/UI-Parking.png"
-dest_files=["res://.godot/imported/UI-Parking.png-fc0f7ac5d220ce6a5e65effddb0aab81.s3tc.ctex"]
+dest_files=["res://.godot/imported/UI-Parking.png-fc0f7ac5d220ce6a5e65effddb0aab81.s3tc.ctex", "res://.godot/imported/UI-Parking.png-fc0f7ac5d220ce6a5e65effddb0aab81.etc2.ctex"]
 
 [params]
 

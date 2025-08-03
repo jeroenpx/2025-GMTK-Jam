@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://d3kqfj6f3ksht"]
+[gd_resource type="StandardMaterial3D" load_steps=0 format=3 uid="uid://d3kqfj6f3ksht"]
 
 [resource]
 resource_name = "TreeBrown"

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpt2dsovjc00g"
 path.s3tc="res://.godot/imported/restroom.png-aa0977492fa7fb0a2b51854bf0c50ee8.s3tc.ctex"
+path.etc2="res://.godot/imported/restroom.png-aa0977492fa7fb0a2b51854bf0c50ee8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets-2D/points_of_interest/restroom.png"
-dest_files=["res://.godot/imported/restroom.png-aa0977492fa7fb0a2b51854bf0c50ee8.s3tc.ctex"]
+dest_files=["res://.godot/imported/restroom.png-aa0977492fa7fb0a2b51854bf0c50ee8.s3tc.ctex", "res://.godot/imported/restroom.png-aa0977492fa7fb0a2b51854bf0c50ee8.etc2.ctex"]
 
 [params]
 

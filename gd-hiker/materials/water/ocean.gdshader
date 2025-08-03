@@ -225,8 +225,8 @@ void fragment() {
 	#endif
 
 	float time_factor = TIME * scroll_speed * wind_intens_factor;
-	vec3 n1 = textureLod(normal_map, fma_(global_position.xz, normal_map_scale, time_factor * -normalized_wind_direction.xz), 2.0).xyz;
-	vec3 n2 = textureLod(normal_map, fma_(global_position.xz, normal_map_scale * scale_offset, time_factor * 0.8 * (-normalized_wind_direction.xz + scroll_offset)), 2.0).xyz;
+	vec3 n1 = texture(normal_map, fma_(global_position.xz, normal_map_scale, time_factor * -normalized_wind_direction.xz)/*, 2.0*/).xyz;
+	vec3 n2 = texture(normal_map, fma_(global_position.xz, normal_map_scale * scale_offset, time_factor * 0.8 * (-normalized_wind_direction.xz + scroll_offset))/*, 2.0*/).xyz;
 	NORMAL_MAP = mix(n1, n2, 0.5);
 	NORMAL_MAP_DEPTH = normal_map_strength;
 
@@ -265,8 +265,8 @@ void fragment() {
 	clip_pos.xyz /= clip_pos.w;
 	//DEPTH = clip_pos.z;
 	// Refract UV
-	vec2 refracted_uv = SCREEN_UV;
-	refract_uv(refracted_uv, NORMAL_MAP, sqrt(DEPTH) * relative_depth);
+	vec2 refracted_uv = vec2(0,0);// SCREEN_UV;
+	//refract_uv(refracted_uv, NORMAL_MAP, sqrt(DEPTH) * relative_depth);
 
 	vec3 screen;
 	float depth_blend;
@@ -324,7 +324,7 @@ void fragment() {
 		current_depth = get_view_position_from_uv(current_screen_pos, texture(depth_texture, current_screen_pos).x, INV_PROJECTION_MATRIX).z - current_view_pos.z;
 
 		if (current_depth > -0.0001 && current_depth <= ssr_tolerance * current_stepD) {
-			sampled_color = textureLod(screen_texture, current_screen_pos, 0.5).rgb;
+			sampled_color = texture(screen_texture, current_screen_pos/*, 0.5*/).rgb;
 			vec2 ruv = 1.0 - abs(current_screen_pos * 2.0 - 1.0);
 			ruv = pow(ruv, vec2(0.5));
 			alpha_hit = clamp(min(ruv.x, ruv.y), 0.0, 1.0);

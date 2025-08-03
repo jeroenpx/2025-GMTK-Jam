@@ -11,6 +11,9 @@ var _do_update_map = _update_map;
 @export_tool_button("Update Map Only")
 var _do_update_map_only = _update_map_only;
 
+@export_tool_button("Cleanup")
+var _do_cleanup = _run_cleanup;
+
 @export_group("Parsed Data")
 @export var _grid_data: Array;
 @export var _annotations: Dictionary[String, Vector3];
@@ -111,3 +114,12 @@ func _regenerate_scene() -> void:
 	for child in get_children():
 		if child is MapGen:
 			child.generate(self);
+
+
+func _run_cleanup() -> void:
+	_grid_data = [];
+	_annotations.clear();
+	
+	for child in get_children():
+		if child is MapGen:
+			child.do_cleanup(self);

@@ -99,6 +99,10 @@ func set_is_start(is_start: bool) -> void:
 
 # Change the state of the floor circle
 func _update_floor_color() -> void:
+	if not floor_indication:
+		print("Point Of Interest without floor???")
+		return;
+	
 	if is_canvisitnext:
 		if is_hover:
 			floor_indication.set_state(CircleEffect.State.VISIT_OPTION_HOVER);

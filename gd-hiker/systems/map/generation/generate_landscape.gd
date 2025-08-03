@@ -17,6 +17,8 @@ extends MapGen
 var _do_generate = _generate;
 @export_tool_button("Randomize")
 var _do_randomize = _randomize;
+@export_tool_button("Cleanup ALL !!!!!!")
+var _do_cleanup_all = cleanup_all;
 
 #(no rivers or lakes, no path erosion)
 @export_category("!!!! --- UGLY BUT FASTER (30 sec -> 5 sec) --- !!!!")
@@ -42,6 +44,24 @@ var path_sample_straight_img: Image;
 var vertex_displace_noise_img: Image;
 
 var rng = RandomNumberGenerator.new();
+
+func _ready() -> void:
+	if not Engine.is_editor_hint():
+		build(self.get_parent() as Map);
+
+func do_cleanup(map: Map):
+	path_sample_straight_img = null;
+	vertex_displace_noise_img = null;
+	amount_lake_grid.init(1,1);
+	output_collider.shape = null;
+	output.mesh = null;
+
+func cleanup_all():
+	displacement_grid.init(1,1);
+	amount_path_grid.init(1,1);
+	smooth_normals_grid.init(1,1);
+	do_cleanup(self.get_parent() as Map);
+	
 
 # Sample one of the helper images which contain the gradient of the path
 func sample(img: Image, pos: Vector2) -> float:
@@ -337,6 +357,10 @@ func generate(map: Map):
 	smooth_normals_grid.init(vgrid.grid_w, vgrid.grid_h);
 	calculate_smooth_vertex_normals(vgrid, smooth_normals_grid);
 	
+	build(map);
+	
+
+func build(map: Map) -> void:
 	# Build the mesh
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -363,7 +387,7 @@ func generate(map: Map):
 				# Get the vertex displacements
 				for i in range(3):
 					var at = HexagonTriangleVertexSpace.point_to_idx(tri_vertices[i]);
-					tri_vertices[i] = vgrid.get_thing(at);
+					tri_vertices[i] = displacement_grid.get_thing(at);
 				
 				# Calculate the normal
 				var normal = calculate_normal(tri_vertices[0], tri_vertices[1], tri_vertices[2]);
@@ -386,9 +410,9 @@ func generate(map: Map):
 					
 					# Push vertex
 					st.set_color(color);
-					st.set_uv(vertex_2D);# not used
+					#st.set_uv(vertex_2D);# not used
 					# uv2 for light maps
-					st.set_uv2((vertex_2D - map.bounds.position) / map.bounds.size);
+					#st.set_uv2((vertex_2D - map.bounds.position) / map.bounds.size);
 					st.set_normal(smooth_normal if use_smooth_normals else normal);
 					st.add_vertex(v);
 	

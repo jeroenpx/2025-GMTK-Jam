@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bshno2gy7hiun"
 path.s3tc="res://.godot/imported/pier.png-36498bf93cf573f3101c50728edde18d.s3tc.ctex"
+path.etc2="res://.godot/imported/pier.png-36498bf93cf573f3101c50728edde18d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets-2D/points_of_interest/pier.png"
-dest_files=["res://.godot/imported/pier.png-36498bf93cf573f3101c50728edde18d.s3tc.ctex"]
+dest_files=["res://.godot/imported/pier.png-36498bf93cf573f3101c50728edde18d.s3tc.ctex", "res://.godot/imported/pier.png-36498bf93cf573f3101c50728edde18d.etc2.ctex"]
 
 [params]
 
