@@ -106,13 +106,17 @@ func generate_layer(map: Map, layer: GenerateTreesAssetLayer):
 		
 		# Set it in the MultiMesh
 		var multimesh: MultiMeshInstance3D = layer.multi_meshes[m];
-		if multimesh.multimesh.instance_count == 0:
-			multimesh.multimesh.transform_format = MultiMesh.TRANSFORM_3D;
-		multimesh.multimesh.custom_aabb = AABB(Vector3(0, 0, 0), Vector3(map.bounds.size.x, 10, map.bounds.size.y));
-		multimesh.multimesh.instance_count = transforms.size();
-		multimesh.multimesh.visible_instance_count = transforms.size();
+		var new_multi = MultiMesh.new();
+		new_multi.transform_format = MultiMesh.TRANSFORM_3D;
+		new_multi.mesh = multimesh.multimesh.mesh;
+		new_multi.transform_format = MultiMesh.TRANSFORM_3D;
+		new_multi.custom_aabb = AABB(Vector3(0, 0, 0), Vector3(map.bounds.size.x, 10, map.bounds.size.y));
+		new_multi.instance_count = transforms.size();
+		new_multi.visible_instance_count = transforms.size();
 		for i in range(transforms.size()):
-			multimesh.multimesh.set_instance_transform(i, transforms[i]);
+			new_multi.set_instance_transform(i, transforms[i]);
+		
+		multimesh.multimesh = new_multi;
 
 # Implement this function in a subclass
 func generate(map: Map):

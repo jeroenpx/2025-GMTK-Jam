@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmnrcxa4f22f6"]
+
+[ext_resource type="Script" uid="uid://bh1k43ndotprh" path="res://systems/froggy/froggy_control.gd" id="1_5loff"]
+[ext_resource type="PackedScene" uid="uid://bx3htd1i8ptwh" path="res://prefabs/other/starter_area.tscn" id="2_i4ct1"]
+
+[node name="FroggyAndStuff" type="Node3D"]
+metadata/_edit_lock_ = true
+
+[node name="FroggyController" type="Node" parent="." node_paths=PackedStringArray("root", "location_start")]
+script = ExtResource("1_5loff")
+root = NodePath("..")
+location_start = NodePath("../StarterArea")
+
+[node name="StarterArea" parent="." instance=ExtResource("2_i4ct1")]
+transform = Transform3D(0.999701, 0, -0.0244496, 0, 1, 0, 0.0244496, 0, 0.999701, 38.6887, -0.204983, 62.974)

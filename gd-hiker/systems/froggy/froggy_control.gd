@@ -1,12 +1,13 @@
 extends Node
 
 @export var root: Node3D;
-
 @export var location_start: Node3D;
 
-@export var froggy_display: Character;
+var froggy_display: Character;
 
 func _ready() -> void:
+	froggy_display = get_tree().get_nodes_in_group("froggy")[0] as Character;
+	
 	# Move the froggy out of the start location (easier to remap locations
 	froggy_display.model.rotation.y = froggy_display.global_rotation.y;
 	root.add_child(froggy_display);

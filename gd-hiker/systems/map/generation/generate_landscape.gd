@@ -11,6 +11,7 @@ extends MapGen
 @export var lake_spread_factor: float = 0.90;
 @export var lake_valley_depth: float = 2.0;
 @export var lake_depth: float = 0.5;
+@export var randomize_next_run: bool = false;
 
 @export_tool_button("Generate")
 var _do_generate = _generate;
@@ -110,7 +111,7 @@ func calculate_normal(A: Vector3, B: Vector3, C: Vector3) -> Vector3:
 	return norm;
 
 func _randomize():
-	vertex_displace_noise_shifted = Vector2(rng.randf(), rng.randf());
+	randomize_next_run = true;
 	_generate();
 
 func _generate():
@@ -220,6 +221,10 @@ func based_log(base = 10, x = 10) -> float:
 
 # Implement this function in a subclass
 func generate(map: Map):
+	if randomize_next_run:
+		randomize_next_run = false;
+		vertex_displace_noise_shifted = Vector2(rng.randf(), rng.randf());
+	
 	# Load the images from the GPU
 	path_sample_straight_img = path_sample_straight.get_image();
 	vertex_displace_noise_img = vertex_displace_noise.get_image();

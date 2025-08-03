@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bqsdtbt1igram"]
 
-[ext_resource type="PackedScene" uid="uid://ciw02q5m2than" path="res://systems/loop_manager/LoopManager.tscn" id="1_qdju4"]
+[ext_resource type="PackedScene" uid="uid://ciw02q5m2than" path="res://prefabs/basic_level_stuff/loop_manager.tscn" id="1_qdju4"]
 [ext_resource type="PackedScene" uid="uid://7rdp17ixhb6o" path="res://systems/point_of_interest/PointOfInterest.tscn" id="2_b8o63"]
 [ext_resource type="Script" uid="uid://bf681mrn6bhw5" path="res://systems/loop_manager/limitations.gd" id="2_esv6d"]
 [ext_resource type="Material" uid="uid://clx8oe6tk00e3" path="res://materials/testing_materials/testMaterial.tres" id="3_b8o63"]

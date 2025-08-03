@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwaqyc7tjry6c"]
+
+[sub_resource type="Environment" id="Environment_ui1lk"]
+ambient_light_source = 2
+ambient_light_color = Color(0.351563, 0.351563, 0.351563, 1)
+ambient_light_energy = 0.0
+
+[node name="StandardLighting" type="Node3D"]
+metadata/_edit_lock_ = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999999, 0.00102709, -0.000293368, -0.000519606, 0.707703, 0.70651, 0.000933264, -0.706509, 0.707703, 39.7526, 15.1249, 64.87)
+projection = 1
+fov = 60.9
+size = 30.845
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0411619, -0.571081, 0.819862, 0.0485433, 0.820731, 0.569249, -0.997972, 0.0163673, 0.061505, 53.2032, 11.9445, 13.671)
+light_color = Color(0.930245, 0.911489, 0.915032, 1)
+light_energy = 4.262
+shadow_enabled = true
+shadow_opacity = 0.61
+metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ui1lk")

@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhsw0uj4twd6d"]
+
+[ext_resource type="Script" uid="uid://dtbvlthsnxwrf" path="res://systems/characterbase/character.gd" id="1_cfa78"]
+[ext_resource type="Script" uid="uid://ew78tfvkst5q" path="res://systems/characterbase/character_movement_input_provider.gd" id="2_h50sq"]
+[ext_resource type="Script" uid="uid://ciyaff6dgt2rm" path="res://systems/characterbase/character_movement.gd" id="3_by27r"]
+[ext_resource type="Script" uid="uid://wdrso53ve158" path="res://systems/characterbase/character_movement_gravity.gd" id="4_pkjke"]
+[ext_resource type="Script" uid="uid://cb2ppywati5q1" path="res://systems/characterbase/character_movement_move.gd" id="5_fro5i"]
+[ext_resource type="Script" uid="uid://iui4fcsnlg5x" path="res://systems/characterbase/character_pivot.gd" id="6_jjkur"]
+[ext_resource type="PackedScene" uid="uid://ccumtmh5o0u8l" path="res://assets-3D/frog/frog.glb" id="7_of0s0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rdwy"]
+radius = 1.5
+height = 5.0
+
+[node name="Froggy" type="CharacterBody3D" node_paths=PackedStringArray("model")]
+script = ExtResource("1_cfa78")
+model = NodePath("Pivot")
+
+[node name="InputProvider" type="Node" parent="."]
+script = ExtResource("2_h50sq")
+
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("me", "input_provider")]
+script = ExtResource("3_by27r")
+me = NodePath("..")
+input_provider = NodePath("../InputProvider")
+
+[node name="Gravity" type="Node" parent="Movement" node_paths=PackedStringArray("me", "mv")]
+script = ExtResource("4_pkjke")
+me = NodePath("../..")
+mv = NodePath("..")
+
+[node name="Move" type="Node" parent="Movement" node_paths=PackedStringArray("me", "mv")]
+script = ExtResource("5_fro5i")
+me = NodePath("../..")
+mv = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3834, 0)
+shape = SubResource("CapsuleShape3D_6rdwy")
+
+[node name="Pivot" type="Node3D" parent="."]
+script = ExtResource("6_jjkur")
+
+[node name="frog" parent="Pivot" instance=ExtResource("7_of0s0")]
+metadata/_edit_lock_ = true

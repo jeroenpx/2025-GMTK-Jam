@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2y40ww76r4au"]
+
+[ext_resource type="Material" uid="uid://cv5p3k75jyi7m" path="res://materials/point_circle/floor_circle.tres" id="1_wiiob"]
+
+[node name="PointOfInterestFloor" type="MeshInstance3D"]
+material_override = ExtResource("1_wiiob")
