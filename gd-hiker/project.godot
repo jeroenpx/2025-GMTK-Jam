@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gd-hiker"
-run/main_scene="uid://bqsdtbt1igram"
+run/main_scene="uid://bqpb1fry6ek2v"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -28,6 +28,11 @@ LevelManager="*res://systems/level_manager/level_manager.tscn"
 LimitationsIndication="*res://systems/limitiations_indications/limitations_indication.tscn"
 TransitionScreen="*res://systems/Transitioning/transitions.tscn"
 BackgroundMusic="*res://systems/audio/background_music.tscn"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [file_customization]
 
@@ -66,3 +71,4 @@ locale/translations=PackedStringArray("res://systems/menus/maaack/translations/m
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

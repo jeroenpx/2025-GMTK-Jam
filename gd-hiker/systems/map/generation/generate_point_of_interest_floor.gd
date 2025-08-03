@@ -18,7 +18,9 @@ var _do_generate = _generate;
 
 func _generate():
 	generate(self.get_parent() as Map)
-	
+
+func do_cleanup(map: Map):
+	pass
 
 func _make_mesh(name_of_point: String):
 	var new_ground: Node3D = prefab_point_of_interest_floor.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE);

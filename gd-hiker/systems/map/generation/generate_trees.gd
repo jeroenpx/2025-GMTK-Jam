@@ -26,6 +26,8 @@ func _randomize():
 func _generate():
 	generate_impl(self.get_parent() as Map)
 
+func do_cleanup(map: Map):
+	pass;
 
 var rng = RandomNumberGenerator.new();
 

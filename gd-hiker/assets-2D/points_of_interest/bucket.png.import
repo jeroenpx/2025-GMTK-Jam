@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxq4knk3gw56u"
 path.s3tc="res://.godot/imported/bucket.png-5eed1c4aa91f8bc62cae257c945d162f.s3tc.ctex"
+path.etc2="res://.godot/imported/bucket.png-5eed1c4aa91f8bc62cae257c945d162f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets-2D/points_of_interest/bucket.png"
-dest_files=["res://.godot/imported/bucket.png-5eed1c4aa91f8bc62cae257c945d162f.s3tc.ctex"]
+dest_files=["res://.godot/imported/bucket.png-5eed1c4aa91f8bc62cae257c945d162f.s3tc.ctex", "res://.godot/imported/bucket.png-5eed1c4aa91f8bc62cae257c945d162f.etc2.ctex"]
 
 [params]
 

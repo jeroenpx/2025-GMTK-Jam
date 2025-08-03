@@ -18,6 +18,9 @@ var _do_generate = _generate;
 func _generate():
 	generate(self.get_parent() as Map)
 
+func do_cleanup(map: Map):
+	output_interest_zone.init(1, 1);
+
 # Implement this function in a subclass
 func generate(map: Map):
 	generate_interest_zones(map);

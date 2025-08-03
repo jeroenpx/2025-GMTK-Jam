@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://di3gu3knfiu66"
 path.s3tc="res://.godot/imported/shell.png-3275d7bb106f56f65446b6f0670535bd.s3tc.ctex"
+path.etc2="res://.godot/imported/shell.png-3275d7bb106f56f65446b6f0670535bd.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets-2D/points_of_interest/shell.png"
-dest_files=["res://.godot/imported/shell.png-3275d7bb106f56f65446b6f0670535bd.s3tc.ctex"]
+dest_files=["res://.godot/imported/shell.png-3275d7bb106f56f65446b6f0670535bd.s3tc.ctex", "res://.godot/imported/shell.png-3275d7bb106f56f65446b6f0670535bd.etc2.ctex"]
 
 [params]
 

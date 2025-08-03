@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://baqxsnt5tk2mr"
 path.s3tc="res://.godot/imported/icon_bench.png-a875313ca55c72c18fbaa74bbce1a40e.s3tc.ctex"
+path.etc2="res://.godot/imported/icon_bench.png-a875313ca55c72c18fbaa74bbce1a40e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets-2D/UI/icon_bench.png"
-dest_files=["res://.godot/imported/icon_bench.png-a875313ca55c72c18fbaa74bbce1a40e.s3tc.ctex"]
+dest_files=["res://.godot/imported/icon_bench.png-a875313ca55c72c18fbaa74bbce1a40e.s3tc.ctex", "res://.godot/imported/icon_bench.png-a875313ca55c72c18fbaa74bbce1a40e.etc2.ctex"]
 
 [params]
 

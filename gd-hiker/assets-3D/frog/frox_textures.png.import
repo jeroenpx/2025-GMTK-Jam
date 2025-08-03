@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://0p5jk7lvtat2"
 path.s3tc="res://.godot/imported/frox_textures.png-6d6182a0e25764cc8d15826bf57e2864.s3tc.ctex"
+path.etc2="res://.godot/imported/frox_textures.png-6d6182a0e25764cc8d15826bf57e2864.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets-3D/frog/frox_textures.png"
-dest_files=["res://.godot/imported/frox_textures.png-6d6182a0e25764cc8d15826bf57e2864.s3tc.ctex"]
+dest_files=["res://.godot/imported/frox_textures.png-6d6182a0e25764cc8d15826bf57e2864.s3tc.ctex", "res://.godot/imported/frox_textures.png-6d6182a0e25764cc8d15826bf57e2864.etc2.ctex"]
 
 [params]
 

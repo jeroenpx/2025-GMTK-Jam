@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ybld377g4gny"
 path.s3tc="res://.godot/imported/umbrella.png-926a34798ae61496fca7984e79ab6fb9.s3tc.ctex"
+path.etc2="res://.godot/imported/umbrella.png-926a34798ae61496fca7984e79ab6fb9.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets-2D/points_of_interest/umbrella.png"
-dest_files=["res://.godot/imported/umbrella.png-926a34798ae61496fca7984e79ab6fb9.s3tc.ctex"]
+dest_files=["res://.godot/imported/umbrella.png-926a34798ae61496fca7984e79ab6fb9.s3tc.ctex", "res://.godot/imported/umbrella.png-926a34798ae61496fca7984e79ab6fb9.etc2.ctex"]
 
 [params]
 

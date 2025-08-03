@@ -5,3 +5,6 @@ extends Node3D
 # Implement this function in a subclass
 func generate(map: Map):
 	pass
+
+func do_cleanup(map: Map):
+	pass

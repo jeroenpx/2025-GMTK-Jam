@@ -14,6 +14,9 @@ var _do_generate = _generate;
 @export_group("Generated Data")
 @export var _generated_points: Dictionary[String, PointOfInterest];
 
+func do_cleanup(map: Map):
+	pass
+
 func _generate():
 	generate(self.get_parent() as Map)
 
