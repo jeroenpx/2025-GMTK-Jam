@@ -4,4 +4,4 @@
 
 [node name="Node" type="Node"]
 script = ExtResource("1_wp16b")
-all_levels = Array[String](["uid://bqpb1fry6ek2v", "uid://bqsdtbt1igram", "uid://dm50rko3uordx"])
+all_levels = Array[String](["uid://bqpb1fry6ek2v", "uid://dsf4mwf6srtf7", "uid://b30k6fqy0y851"])

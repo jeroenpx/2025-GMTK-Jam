@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dr7iyddfemech"]
+[gd_scene load_steps=12 format=3 uid="uid://dr7iyddfemech"]
 
 [ext_resource type="Script" uid="uid://cglhrp75w7c52" path="res://systems/limitiations_indications/limitations_indication.gd" id="1_ssxor"]
 [ext_resource type="Texture2D" uid="uid://b033iatll5eiy" path="res://assets-2D/UI/icon_trees.png" id="2_aptbf"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://baqxsnt5tk2mr" path="res://assets-2D/UI/icon_bench.png" id="6_6v8m7"]
 [ext_resource type="PackedScene" uid="uid://dr3ujwwhwlt1v" path="res://systems/button_skip_back/button_skip_back.tscn" id="10_06vyi"]
 [ext_resource type="Texture2D" uid="uid://dxplqt76pux1q" path="res://assets-2D/UI/icon_bench-ui.png" id="10_aptbf"]
-[ext_resource type="Texture2D" uid="uid://bjmca4twj6iul" path="res://assets-2D/UI/icon_bench_32.png" id="11_tr4s6"]
 
 [node name="LimitationsIndication" type="Control" node_paths=PackedStringArray("array_indicators")]
 z_index = -1
@@ -54,6 +53,7 @@ scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(80, 20)
 
 [node name="NatureIndicator" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
 theme_override_constants/separation = 11
@@ -90,6 +90,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="CivilIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
 theme_override_constants/separation = 11
@@ -126,6 +127,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="BoatIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
 theme_override_constants/separation = 11
@@ -162,6 +164,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="ZiplineIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
 theme_override_constants/separation = 11
@@ -171,7 +174,7 @@ type = 1
 [node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/ZiplineIndi"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("10_aptbf")
+texture = ExtResource("5_ss6vr")
 expand_mode = 1
 stretch_mode = 4
 
@@ -198,6 +201,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="RestIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
 theme_override_constants/separation = 11
@@ -207,7 +211,7 @@ type = 1
 [node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/RestIndi"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("11_tr4s6")
+texture = ExtResource("10_aptbf")
 expand_mode = 2
 
 [node name="Label2" type="Label" parent="TextureRect/VBoxContainer/RestIndi"]

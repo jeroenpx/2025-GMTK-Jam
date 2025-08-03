@@ -6,9 +6,6 @@
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.2, 0)
 
 [node name="sign" parent="." instance=ExtResource("1_b04a1")]
-transform = Transform3D(3.48668, -0.261467, 0, 0.305045, 2.98858, 0, 0, 0, 3.5, -1.27, 0.93, -0.725)
-
-[node name="logo-parking" parent="sign" index="5"]
-visible = true
+transform = Transform3D(2.98858, -0.261467, 0, 0.261467, 2.98858, 0, 0, 0, 3, -1.27, 0.93, -0.725)
 
 [editable path="sign"]
