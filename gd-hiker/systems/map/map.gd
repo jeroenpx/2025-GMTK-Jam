@@ -5,6 +5,9 @@ extends Node3D
 
 @export var source_file: String = "res://levels/maps/map-test.tmx";
 
+
+@export var color: Color = Color.WHITE;
+
 @export_tool_button("Update Map")
 var _do_update_map = _update_map;
 
@@ -20,6 +23,10 @@ var _do_cleanup = _run_cleanup;
 
 @export var dim: Vector2i;
 @export var bounds: Rect2;
+
+func _ready() -> void:
+	RenderingServer.global_shader_parameter_set("circle_color_global", color)
+	
 
 
 # Get data at a certain position in the map

@@ -9,6 +9,8 @@ uniform vec2 polar_uv_scale = vec2(1, 1);
 
 uniform float time_speed = 1;
 
+global uniform vec4 circle_color_global;
+
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
@@ -22,7 +24,7 @@ void fragment() {
 	float noise_sample = texture(noise, polar * polar_uv_scale + vec2(TIME * time_speed, 0)).r;
 	
 	// Called for every pixel the material is visible on.
-	ALBEDO = sample.rgb;
+	ALBEDO = sample.rgb * circle_color_global.rgb;
 	ALPHA = sample.a * noise_sample;
 }
 
