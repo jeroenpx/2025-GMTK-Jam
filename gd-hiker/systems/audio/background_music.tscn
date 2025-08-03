@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bycmnypw80un5"]
+
+[ext_resource type="AudioStream" uid="uid://dy8eh7ijqn20" path="res://Music/GMTK2025BGMusicBounce9.mp3" id="1_h74qy"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_h74qy")
+volume_db = -14.857
+autoplay = true
+bus = &"Music"

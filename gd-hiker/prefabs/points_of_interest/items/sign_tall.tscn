@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://nklo00gpml2x"]
+
+[ext_resource type="PackedScene" uid="uid://hcbfjruvubej" path="res://prefabs/points_of_interest/items/sign.tscn" id="2_nr5wc"]
+
+[node name="signTall" type="Node3D"]
+transform = Transform3D(0.996195, 0.0871557, 0, -0.0616284, 0.704416, 0.707107, 0.0616284, -0.704416, 0.707107, 0, 0, 0)
+
+[node name="sign" parent="." instance=ExtResource("2_nr5wc")]
+
+[node name="logo-parking" parent="sign" index="0"]
+visible = false
+
+[editable path="sign"]
