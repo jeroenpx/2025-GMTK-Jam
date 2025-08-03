@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://87byaejq8tl3"]
+
+[ext_resource type="Shader" uid="uid://v53rl4himaxy" path="res://materials/point_circle/floor_circle_shader.gdshader" id="1_cn251"]
+
+[sub_resource type="Gradient" id="Gradient_cn251"]
+offsets = PackedFloat32Array(0.0918728, 0.102473, 0.130742, 0.14841, 0.24735)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0.388235, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ctyja"]
+gradient = SubResource("Gradient_cn251")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_cn251")
+shader_parameter/color = Color(1, 1, 1, 0.701961)
+shader_parameter/edge = SubResource("GradientTexture1D_ctyja")
+shader_parameter/polar_uv_scale = Vector2(2.7, 0.385)
+shader_parameter/time_speed = -0.05
