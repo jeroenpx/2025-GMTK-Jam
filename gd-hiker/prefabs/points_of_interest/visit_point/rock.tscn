@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp1mt0xik7oq1"]
+
+[ext_resource type="Texture2D" uid="uid://bkrxvk7f1ipa0" path="res://assets-2D/points_of_interest/king rock.png" id="1_sdpxd"]
+[ext_resource type="PackedScene" uid="uid://md4lxqh0s1dt" path="res://prefabs/points_of_interest/items/sign_All.tscn" id="2_m4qmr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0sds"]
+render_priority = 2
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("1_sdpxd")
+
+[sub_resource type="QuadMesh" id="QuadMesh_1mu32"]
+material = SubResource("StandardMaterial3D_n0sds")
+size = Vector2(2.296, 3.014)
+
+[node name="Rock" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1.04317, -0.0326538, 2.76556)
+mesh = SubResource("QuadMesh_1mu32")
+skeleton = NodePath("../..")
+
+[node name="signTall" parent="." instance=ExtResource("2_m4qmr")]
+transform = Transform3D(2.97714, -0.261353, -0.261353, 0.261353, 2.98857, -0.0114275, 0.261353, -0.0114275, 2.98857, 0.526726, 0.501091, -0.501091)
