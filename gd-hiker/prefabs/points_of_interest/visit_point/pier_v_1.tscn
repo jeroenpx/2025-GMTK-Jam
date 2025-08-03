@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://3v4djyqlx2ai"]
+[gd_scene load_steps=3 format=3 uid="uid://3v4djyqlx2ai"]
 
 [ext_resource type="PackedScene" uid="uid://chs40t0p7efbg" path="res://prefabs/points_of_interest/items/pier_right.tscn" id="1_3egrf"]
+[ext_resource type="PackedScene" uid="uid://hcbfjruvubej" path="res://prefabs/points_of_interest/items/sign.tscn" id="2_r6plt"]
 
 [node name="PierV1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.2, 0)
 
 [node name="pierRight" parent="." instance=ExtResource("1_3egrf")]
-transform = Transform3D(3, 0, 0, 0, 2.12132, 0.545179, 0, -2.12132, 0.545179, 1.88789, -0.107932, 0.893368)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 0.771, 1.88789, -0.919925, 1.70536)
+
+[node name="sign" parent="." instance=ExtResource("2_r6plt")]
+transform = Transform3D(3.48668, 0.261467, 0, -0.305045, 2.98858, 0, 0, 0, 3.5, 1.29204, 0.255757, -0.69103)
+
+[node name="logo-boat" parent="sign" index="3"]
+visible = true
+
+[node name="logo-zipline" parent="sign" index="4"]
+visible = false
+
+[editable path="sign"]

@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://dr7iyddfemech"]
+[gd_scene load_steps=13 format=3 uid="uid://dr7iyddfemech"]
 
 [ext_resource type="Script" uid="uid://cglhrp75w7c52" path="res://systems/limitiations_indications/limitations_indication.gd" id="1_ssxor"]
+[ext_resource type="Texture2D" uid="uid://b033iatll5eiy" path="res://assets-2D/UI/icon_trees.png" id="2_aptbf"]
 [ext_resource type="Script" uid="uid://0cc2xd3liphh" path="res://systems/limitiations_indications/visit_indicator.gd" id="2_avwou"]
 [ext_resource type="Texture2D" uid="uid://2rv6mrqlrkuu" path="res://assets-2D/UI/UI_notepad.png" id="2_vqbcy"]
-[ext_resource type="Texture2D" uid="uid://vsrea6i2lg8e" path="res://assets-2D/UI/UI-nature.png" id="4_vqbcy"]
+[ext_resource type="Texture2D" uid="uid://c6qw77olkj74e" path="res://assets-2D/UI/icon_house.png" id="3_tr4s6"]
+[ext_resource type="Texture2D" uid="uid://w40f6u8gulbw" path="res://assets-2D/UI/icon_boat.png" id="4_htaca"]
 [ext_resource type="Texture2D" uid="uid://b05tni1cavxqj" path="res://assets-2D/UI/UI_checkMark.png" id="5_7r3ua"]
-[ext_resource type="Texture2D" uid="uid://d3qoer6ejyrek" path="res://assets-2D/UI/UI-civilisation.png" id="6_8t3ac"]
-[ext_resource type="Texture2D" uid="uid://1ihd6cl4joqm" path="res://assets-2D/UI/UI-boat.png" id="7_06vyi"]
-[ext_resource type="Texture2D" uid="uid://bo2ldgwa61yw3" path="res://assets-2D/UI/UI-zipline.png" id="8_aptbf"]
-[ext_resource type="Texture2D" uid="uid://ruiur5eknssw" path="res://assets-2D/UI/UI-rest.png" id="9_tr4s6"]
+[ext_resource type="Texture2D" uid="uid://bdnfd73smuptc" path="res://assets-2D/UI/icon_zipline.png" id="5_ss6vr"]
+[ext_resource type="Texture2D" uid="uid://baqxsnt5tk2mr" path="res://assets-2D/UI/icon_bench.png" id="6_6v8m7"]
 [ext_resource type="PackedScene" uid="uid://dr3ujwwhwlt1v" path="res://systems/button_skip_back/button_skip_back.tscn" id="10_06vyi"]
+[ext_resource type="Texture2D" uid="uid://dxplqt76pux1q" path="res://assets-2D/UI/icon_bench-ui.png" id="10_aptbf"]
+[ext_resource type="Texture2D" uid="uid://bjmca4twj6iul" path="res://assets-2D/UI/icon_bench_32.png" id="11_tr4s6"]
 
 [node name="LimitationsIndication" type="Control" node_paths=PackedStringArray("array_indicators")]
 z_index = -1
@@ -22,7 +24,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ssxor")
 array_indicators = [NodePath("TextureRect/VBoxContainer/NatureIndicator"), NodePath("TextureRect/VBoxContainer/CivilIndi"), NodePath("TextureRect/VBoxContainer/BoatIndi"), NodePath("TextureRect/VBoxContainer/ZiplineIndi"), NodePath("TextureRect/VBoxContainer/RestIndi")]
-array_logo = Array[Texture2D]([ExtResource("4_vqbcy"), ExtResource("6_8t3ac"), ExtResource("7_06vyi"), ExtResource("8_aptbf"), ExtResource("9_tr4s6")])
+array_logo = Array[Texture2D]([ExtResource("2_aptbf"), ExtResource("3_tr4s6"), ExtResource("4_htaca"), ExtResource("5_ss6vr"), ExtResource("6_6v8m7")])
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -52,7 +54,6 @@ scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(80, 20)
 
 [node name="NatureIndicator" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
 theme_override_constants/separation = 11
@@ -62,7 +63,7 @@ type = 1
 [node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/NatureIndicator"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("4_vqbcy")
+texture = ExtResource("2_aptbf")
 expand_mode = 1
 stretch_mode = 4
 
@@ -89,7 +90,6 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="CivilIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
 theme_override_constants/separation = 11
@@ -99,7 +99,7 @@ type = 1
 [node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/CivilIndi"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("4_vqbcy")
+texture = ExtResource("3_tr4s6")
 expand_mode = 1
 stretch_mode = 4
 
@@ -126,7 +126,6 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="BoatIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
 theme_override_constants/separation = 11
@@ -136,7 +135,7 @@ type = 1
 [node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/BoatIndi"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("4_vqbcy")
+texture = ExtResource("4_htaca")
 expand_mode = 1
 stretch_mode = 4
 
@@ -163,7 +162,6 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="ZiplineIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
 theme_override_constants/separation = 11
@@ -173,7 +171,7 @@ type = 1
 [node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/ZiplineIndi"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("4_vqbcy")
+texture = ExtResource("10_aptbf")
 expand_mode = 1
 stretch_mode = 4
 
@@ -200,7 +198,6 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="RestIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
 theme_override_constants/separation = 11
@@ -210,9 +207,8 @@ type = 1
 [node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/RestIndi"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("4_vqbcy")
-expand_mode = 1
-stretch_mode = 4
+texture = ExtResource("11_tr4s6")
+expand_mode = 2
 
 [node name="Label2" type="Label" parent="TextureRect/VBoxContainer/RestIndi"]
 layout_mode = 2

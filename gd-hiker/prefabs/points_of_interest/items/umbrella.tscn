@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ybld377g4gny" path="res://assets-2D/points_of_interest/umbrella.png" id="1_sr7mu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pd01j"]
+render_priority = 3
 transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("1_sr7mu")

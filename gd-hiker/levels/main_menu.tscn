@@ -1,8 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqpb1fry6ek2v"]
+[gd_scene load_steps=3 format=3 uid="uid://bqpb1fry6ek2v"]
 
 [ext_resource type="Script" uid="uid://bb2ka0cke0q3q" path="res://systems/cinematics/cine_onload_trigger.gd" id="1_0ettg"]
+[ext_resource type="Texture2D" uid="uid://chdydulgo55tb" path="res://assets-2D/UI/title.png" id="2_duh7t"]
 
 [node name="MainMenu" type="Node3D"]
 
 [node name="Trigger Menu Menu Overlay" type="Node" parent="."]
 script = ExtResource("1_0ettg")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 1
+offset_right = 535.0
+offset_bottom = 397.0
+pivot_offset = Vector2(500, 211)
+texture = ExtResource("2_duh7t")
+expand_mode = 1
+stretch_mode = 4
