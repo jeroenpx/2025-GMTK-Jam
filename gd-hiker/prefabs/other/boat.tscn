@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cavx8kbpdjfjd"]
+
+[ext_resource type="PackedScene" uid="uid://bg0gdi1wlyjjy" path="res://assets-3D/boat.glb" id="1_niqom"]
+
+[node name="Boat" type="Node3D"]
+
+[node name="boat" parent="." instance=ExtResource("1_niqom")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
