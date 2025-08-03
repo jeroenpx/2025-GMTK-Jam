@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dhni4dslabwmg"]
+
+[ext_resource type="Texture2D" uid="uid://uf6wmdhob77" path="res://assets-3D/grass/grasses.png" id="1_0y2ih"]
+
+[resource]
+resource_name = "Grass"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+albedo_texture = ExtResource("1_0y2ih")
+roughness = 0.5
+emission_enabled = true
+emission = Color(0.477009, 0.314278, 1.92523e-07, 1)
