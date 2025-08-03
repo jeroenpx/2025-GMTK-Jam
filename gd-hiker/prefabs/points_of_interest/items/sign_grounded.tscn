@@ -1,0 +1,99 @@
+[gd_scene load_steps=19 format=3 uid="uid://cypkriqvjpyts"]
+
+[ext_resource type="Texture2D" uid="uid://cq58311tfmk5m" path="res://assets-2D/UI/sign_plate.png" id="1_usp67"]
+[ext_resource type="Texture2D" uid="uid://baqxsnt5tk2mr" path="res://assets-2D/UI/icon_bench.png" id="2_tv36o"]
+[ext_resource type="Texture2D" uid="uid://c6qw77olkj74e" path="res://assets-2D/UI/icon_house.png" id="3_yxrdi"]
+[ext_resource type="Texture2D" uid="uid://b033iatll5eiy" path="res://assets-2D/UI/icon_trees.png" id="4_77t1y"]
+[ext_resource type="Texture2D" uid="uid://w40f6u8gulbw" path="res://assets-2D/UI/icon_boat.png" id="5_2cyis"]
+[ext_resource type="Texture2D" uid="uid://bdnfd73smuptc" path="res://assets-2D/UI/icon_zipline.png" id="6_nn2n0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jatcm"]
+render_priority = 6
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.94902, 0.658824, 0.584314, 1)
+albedo_texture = ExtResource("1_usp67")
+
+[sub_resource type="QuadMesh" id="QuadMesh_bxn3o"]
+material = SubResource("StandardMaterial3D_jatcm")
+size = Vector2(0.975, 0.625)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpxt3"]
+render_priority = 8
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_tv36o")
+
+[sub_resource type="QuadMesh" id="QuadMesh_uesxv"]
+material = SubResource("StandardMaterial3D_fpxt3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33we2"]
+render_priority = 8
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_yxrdi")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qr8fw"]
+material = SubResource("StandardMaterial3D_33we2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_353ck"]
+render_priority = 8
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("4_77t1y")
+
+[sub_resource type="QuadMesh" id="QuadMesh_n7wdq"]
+material = SubResource("StandardMaterial3D_353ck")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qr8fw"]
+render_priority = 8
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("5_2cyis")
+
+[sub_resource type="QuadMesh" id="QuadMesh_353ck"]
+material = SubResource("StandardMaterial3D_qr8fw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7wdq"]
+render_priority = 8
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("6_nn2n0")
+
+[sub_resource type="QuadMesh" id="QuadMesh_gpjgj"]
+material = SubResource("StandardMaterial3D_n7wdq")
+
+[node name="sign-grounded" type="MeshInstance3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("QuadMesh_bxn3o")
+
+[node name="logo-rest" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.05, 0.024)
+visible = false
+mesh = SubResource("QuadMesh_uesxv")
+skeleton = NodePath("../..")
+
+[node name="logo-house" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.05, 0)
+visible = false
+mesh = SubResource("QuadMesh_qr8fw")
+skeleton = NodePath("../..")
+
+[node name="logo-nature" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.05, 0)
+visible = false
+mesh = SubResource("QuadMesh_n7wdq")
+skeleton = NodePath("../..")
+
+[node name="logo-boat" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.05, 0)
+visible = false
+mesh = SubResource("QuadMesh_353ck")
+skeleton = NodePath("../..")
+
+[node name="logo-zipline" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.05, 0)
+visible = false
+mesh = SubResource("QuadMesh_gpjgj")
+skeleton = NodePath("../..")

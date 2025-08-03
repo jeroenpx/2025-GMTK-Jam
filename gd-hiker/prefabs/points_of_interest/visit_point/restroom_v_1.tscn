@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bs5yntn82cg7r"]
 
 [ext_resource type="PackedScene" uid="uid://blga2ivwagy0g" path="res://prefabs/points_of_interest/items/restroom.tscn" id="1_jh6lq"]
-[ext_resource type="PackedScene" uid="uid://hcbfjruvubej" path="res://prefabs/points_of_interest/items/sign.tscn" id="2_76t0q"]
+[ext_resource type="PackedScene" uid="uid://cypkriqvjpyts" path="res://prefabs/points_of_interest/items/sign_grounded.tscn" id="2_76t0q"]
 
 [node name="RestroomV1" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.2, 0)
@@ -9,13 +9,9 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="restroom" parent="." instance=ExtResource("1_jh6lq")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 1, 0.805389, 1.17336, -0.57057)
 
-[node name="sign" parent="." instance=ExtResource("2_76t0q")]
-transform = Transform3D(-3.44683, -0.520945, 0, -0.607769, 2.95442, 0, 0, 0, 3.5, -1.35158, 1.31039, -1.13173)
+[node name="sign-grounded" parent="." instance=ExtResource("2_76t0q")]
 
-[node name="logo-rest" parent="sign" index="0"]
+[node name="logo-rest" parent="sign-grounded" index="0"]
 visible = true
 
-[node name="logo-zipline" parent="sign" index="4"]
-visible = false
-
-[editable path="sign"]
+[editable path="sign-grounded"]
