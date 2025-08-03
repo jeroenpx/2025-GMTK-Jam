@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8a8idpibikiv"]
+
+[ext_resource type="PackedScene" uid="uid://oxtw37suukxh" path="res://prefabs/points_of_interest/items/shell_mesh.tscn" id="1_hx3t4"]
+[ext_resource type="PackedScene" uid="uid://dxc66iinhvvkq" path="res://prefabs/points_of_interest/items/shell_mesh_2.tscn" id="2_no1a1"]
+[ext_resource type="PackedScene" uid="uid://dwxh5tlaor6rn" path="res://prefabs/points_of_interest/items/shell_mesh_3.tscn" id="3_qgbiu"]
+[ext_resource type="PackedScene" uid="uid://7bseeunr2h1a" path="res://prefabs/points_of_interest/items/shell_mesh_4.tscn" id="4_svtll"]
+[ext_resource type="PackedScene" uid="uid://dowlq5otrlrnh" path="res://prefabs/points_of_interest/items/shell_mesh_5.tscn" id="5_fsqrs"]
+[ext_resource type="PackedScene" uid="uid://8uuvlmihtqdu" path="res://prefabs/points_of_interest/items/shell_mesh_6.tscn" id="6_y6320"]
+[ext_resource type="PackedScene" uid="uid://hcbfjruvubej" path="res://prefabs/points_of_interest/items/sign.tscn" id="7_qgbiu"]
+
+[node name="Shells" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="shell-mesh" parent="." instance=ExtResource("1_hx3t4")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.415, 0, 0)
+
+[node name="shell-mesh2" parent="." instance=ExtResource("2_no1a1")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.09065, -0.574909, 0.574909)
+
+[node name="shell-mesh3" parent="." instance=ExtResource("3_qgbiu")]
+transform = Transform3D(-0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, -1.499, -1.07365, 1.07365)
+
+[node name="shell-mesh4" parent="." instance=ExtResource("4_svtll")]
+transform = Transform3D(-0.8, 0, -1.20797e-07, 0, 0.8, 0, 1.20797e-07, 0, -0.8, -0.459465, -1.36764, 1.36764)
+
+[node name="shell-mesh5" parent="." instance=ExtResource("5_fsqrs")]
+transform = Transform3D(-0.6, 0, -9.05975e-08, 0, 0.6, 0, 9.05975e-08, 0, -0.6, -0.551674, -0.117277, 0.117277)
+
+[node name="shell-mesh6" parent="." instance=ExtResource("6_y6320")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.09016, -1.42508, 1.42508)
+
+[node name="sign" parent="." instance=ExtResource("7_qgbiu")]
+transform = Transform3D(3.48668, -0.261467, 0, 0.305045, 2.98858, 0, 0, 0, 3.5, -1.75994, 0.928762, -0.928762)
+
+[node name="logo-nature" parent="sign" index="2"]
+visible = true
+
+[node name="logo-zipline" parent="sign" index="4"]
+visible = false
+
+[editable path="sign"]

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b3vg64njqiw05" path="res://assets-2D/points_of_interest/beach lounger.png" id="1_o6783"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8bnd"]
+render_priority = 4
 transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("1_o6783")

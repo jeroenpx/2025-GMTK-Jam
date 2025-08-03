@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxc66iinhvvkq"]
+
+[ext_resource type="Texture2D" uid="uid://di3gu3knfiu66" path="res://assets-2D/points_of_interest/shell.png" id="1_3l357"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbb6t"]
+render_priority = 3
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.9837, 0.779635, 0.967539, 1)
+albedo_texture = ExtResource("1_3l357")
+
+[sub_resource type="QuadMesh" id="QuadMesh_jelyp"]
+material = SubResource("StandardMaterial3D_fbb6t")
+size = Vector2(1.608, 1.222)
+
+[node name="shell-mesh2" type="MeshInstance3D"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+mesh = SubResource("QuadMesh_jelyp")

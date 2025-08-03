@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cxq4knk3gw56u" path="res://assets-2D/points_of_interest/bucket.png" id="1_6eptt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jq6d"]
+render_priority = 5
 transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("1_6eptt")

@@ -1,24 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://crxmlfn7m01yi"]
+[gd_scene load_steps=4 format=3 uid="uid://crxmlfn7m01yi"]
 
-[ext_resource type="Texture2D" uid="uid://c55121t56evn1" path="res://assets-2D/points_of_interest/House 1.png" id="1_t7osq"]
+[ext_resource type="PackedScene" uid="uid://b70t0ey2spj71" path="res://prefabs/points_of_interest/items/big_house.tscn" id="1_ewh4e"]
 [ext_resource type="PackedScene" uid="uid://uclhbj7m1nrp" path="res://prefabs/points_of_interest/items/small_house_right.tscn" id="2_ewh4e"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rkj1"]
-transparency = 1
-cull_mode = 1
-shading_mode = 0
-albedo_texture = ExtResource("1_t7osq")
-
-[sub_resource type="QuadMesh" id="QuadMesh_206mr"]
-material = SubResource("StandardMaterial3D_4rkj1")
-size = Vector2(2.296, 2.204)
+[ext_resource type="PackedScene" uid="uid://hcbfjruvubej" path="res://prefabs/points_of_interest/items/sign.tscn" id="3_ewh4e"]
 
 [node name="HousesV2" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.2, 0)
 
-[node name="BigHouseRight" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, -1.39569, 0.123972, 1.96466)
-mesh = SubResource("QuadMesh_206mr")
+[node name="BigHouseRight" parent="." instance=ExtResource("1_ewh4e")]
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, -1.42905, 0.168499, -0.168499)
 
 [node name="SmallHouseRight" parent="." instance=ExtResource("2_ewh4e")]
-transform = Transform3D(-1.2, 0, -1.81195e-07, 0, 1.2, 0, 1.81195e-07, 0, -1.2, -0.510906, 0.814438, -0.104156)
+transform = Transform3D(-1.2, 0, -1.81195e-07, 0, 1.2, 0, 1.81195e-07, 0, -1.2, -0.510906, 0.689605, -0.228989)
+
+[node name="sign" parent="." instance=ExtResource("3_ewh4e")]
+transform = Transform3D(3.48668, -0.261467, 0, 0.305045, 2.98858, 0, 0, 0, 3.5, -2.37485, 1.47413, -1.47413)
+
+[node name="logo-house" parent="sign" index="1"]
+visible = true
+
+[node name="logo-zipline" parent="sign" index="4"]
+visible = false
+
+[editable path="sign"]

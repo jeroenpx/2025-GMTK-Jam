@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://cpt2dsovjc00g" path="res://assets-2D/points_of_interest/restroom.png" id="1_06ssx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teexs"]
+render_priority = 3
 transparency = 1
+cull_mode = 2
 shading_mode = 0
 albedo_texture = ExtResource("1_06ssx")
 
@@ -14,3 +16,4 @@ size = Vector2(1.1, 1.7)
 [node name="restroom" type="MeshInstance3D"]
 transform = Transform3D(3, 0, 0, 0, 2.12132, 0.707107, 0, -2.12132, 0.707107, 0, 0, 0)
 mesh = SubResource("QuadMesh_4rkj1")
+skeleton = NodePath("")
