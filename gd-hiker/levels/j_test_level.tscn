@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://c04genqfmbokc" path="res://prefabs/points_of_interest/visit_point/beach_v_1.tscn" id="18_206mr"]
 [ext_resource type="PackedScene" uid="uid://cuikq65ijlo6" path="res://prefabs/points_of_interest/visit_point/houses_v_3.tscn" id="19_1k4xs"]
 [ext_resource type="PackedScene" uid="uid://c0vaehty6qr2l" path="res://prefabs/points_of_interest/visit_point/zipline_v_1.tscn" id="19_dwryu"]
-[ext_resource type="PackedScene" uid="uid://3v4djyqlx2ai" path="res://prefabs/points_of_interest/visit_point/pier_v_1.tscn" id="19_y8bnd"]
+[ext_resource type="PackedScene" uid="uid://3v4djyqlx2ai" path="res://prefabs/points_of_interest/items/pier_v_1.tscn" id="19_y8bnd"]
 [ext_resource type="PackedScene" uid="uid://c8a8idpibikiv" path="res://prefabs/points_of_interest/visit_point/shells.tscn" id="20_dwryu"]
 [ext_resource type="PackedScene" uid="uid://bs5yntn82cg7r" path="res://prefabs/points_of_interest/visit_point/restroom_v_1.tscn" id="20_pd01j"]
 [ext_resource type="PackedScene" uid="uid://crxmlfn7m01yi" path="res://prefabs/points_of_interest/visit_point/houses_v_2.tscn" id="21_8jq6d"]

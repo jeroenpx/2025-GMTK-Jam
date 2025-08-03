@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://62j5ku3jpl4u"]
+
+[ext_resource type="PackedScene" uid="uid://pkia5bf77rbj" path="res://prefabs/points_of_interest/items/zipline.tscn" id="1_ecmwn"]
+[ext_resource type="PackedScene" uid="uid://cypkriqvjpyts" path="res://prefabs/points_of_interest/items/sign_grounded.tscn" id="2_ptavs"]
+[ext_resource type="PackedScene" uid="uid://hcbfjruvubej" path="res://prefabs/points_of_interest/items/sign.tscn" id="3_cbpib"]
+
+[node name="ZiplineSpot2" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="Zipline" parent="." instance=ExtResource("1_ecmwn")]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1, -0.223114, -0.869289, 0.884171)
+
+[node name="sign-grounded" parent="." instance=ExtResource("2_ptavs")]
+transform = Transform3D(2.89756, 0.244348, -0.723099, -0.315846, 2.55555, -0.0898352, 0.710216, 0.139603, 2.91017, -2.87883, -0.573067, 3.80546)
+skeleton = NodePath("../sign")
+
+[node name="logo-rest" parent="sign-grounded" index="0"]
+skeleton = NodePath("../../sign")
+
+[node name="logo-house" parent="sign-grounded" index="1"]
+skeleton = NodePath("../../sign")
+
+[node name="logo-nature" parent="sign-grounded" index="2"]
+skeleton = NodePath("../../sign")
+
+[node name="logo-boat" parent="sign-grounded" index="3"]
+skeleton = NodePath("../../sign")
+
+[node name="logo-zipline" parent="sign-grounded" index="4"]
+visible = true
+skeleton = NodePath("../../sign")
+
+[node name="sign" parent="." instance=ExtResource("3_cbpib")]
+transform = Transform3D(2.89756, 0.244348, -0.723099, -0.315846, 2.55555, -0.0898352, 0.710216, 0.139603, 2.91017, -3.02529, -2.21269, 1.96065)
+
+[editable path="sign-grounded"]
+[editable path="sign"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://3v4djyqlx2ai"]
+
+[ext_resource type="PackedScene" uid="uid://chs40t0p7efbg" path="res://prefabs/points_of_interest/items/pier_right.tscn" id="1_3egrf"]
+[ext_resource type="PackedScene" uid="uid://cypkriqvjpyts" path="res://prefabs/points_of_interest/items/sign_grounded.tscn" id="4_2mkeh"]
+
+[node name="PierV1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.2, 0)
+
+[node name="pierRight" parent="." instance=ExtResource("1_3egrf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 0.771, 1.88789, -0.919925, 1.70536)
+
+[node name="sign-grounded" parent="." instance=ExtResource("4_2mkeh")]
+
+[node name="logo-boat" parent="sign-grounded" index="3"]
+visible = true
+
+[editable path="sign-grounded"]
