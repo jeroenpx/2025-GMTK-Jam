@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://thqe5rmq3pap"]
+
+[ext_resource type="Script" uid="uid://8hque7ckcbvj" path="res://systems/froggy/froggy_placement.gd" id="1_i3nd5"]
+[ext_resource type="PackedScene" uid="uid://ccumtmh5o0u8l" path="res://assets-3D/frog/frog.glb" id="2_38044"]
+
+[node name="FrogPlacement" type="Node3D"]
+script = ExtResource("1_i3nd5")
+
+[node name="frog" parent="." instance=ExtResource("2_38044")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+metadata/_edit_lock_ = true

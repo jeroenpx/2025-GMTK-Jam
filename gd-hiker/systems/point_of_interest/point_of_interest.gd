@@ -13,6 +13,7 @@ extends Node3D
 # Highlight stuff
 @export_category("Visuals")
 @export var floor_indication: CircleEffect;
+@export var froggy_placement: FroggyPlacement;
 
 # State
 var is_start: bool = false;
