@@ -240,7 +240,7 @@ multimesh = SubResource("MultiMesh_xbp5m")
 multimesh = SubResource("MultiMesh_ud6ch")
 
 [node name="Lakes" type="MeshInstance3D" parent="."]
-transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 39.44, -1.77785, 37.216)
+transform = Transform3D(45, 0, 0, 0, 45, 0, 0, 0, 45, 39.44, -1.77785, 37.216)
 mesh = SubResource("PlaneMesh_m28hf")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("6_8dnx5")
