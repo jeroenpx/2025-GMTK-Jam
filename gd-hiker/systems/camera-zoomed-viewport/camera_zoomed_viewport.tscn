@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://bduww2s6pjqrk"]
+
+[ext_resource type="Script" uid="uid://pephb5g4xxk8" path="res://systems/camera-zoomed-viewport/camera_zoomed_viewport.gd" id="1_oklo4"]
+[ext_resource type="Texture2D" uid="uid://b27p0d74x3uxv" path="res://assets-2D/UI/circle.png" id="2_j00px"]
+[ext_resource type="Shader" uid="uid://3ucfpq256hgv" path="res://systems/camera-zoomed-viewport/camera_circle_shader.gdshader" id="3_mdtku"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ckac"]
+shader = ExtResource("3_mdtku")
+shader_parameter/radius = 0.95
+
+[node name="Camera Zoomed Viewport" type="Control"]
+layout_mode = 3
+anchor_left = 0.087
+anchor_top = 0.154
+anchor_right = 0.087
+anchor_bottom = 0.154
+offset_left = -100.224
+offset_top = -99.792
+offset_right = 99.776
+offset_bottom = 100.208
+pivot_offset = Vector2(100, 100)
+mouse_filter = 2
+script = ExtResource("1_oklo4")
+camera_distance_y = 40.0
+offset_z = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("2_j00px")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="TextureRect"]
+material = SubResource("ShaderMaterial_1ckac")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 100)
+
+[node name="SubViewport" type="SubViewport" parent="TextureRect/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="ZoomedCamera" type="Camera3D" parent="TextureRect/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.999999, 0.00102709, -0.000293368, -0.000519606, 0.707703, 0.70651, 0.000933264, -0.706509, 0.707703, 31.7916, 48.3002, 107.436)
+projection = 1
+fov = 60.9
+size = 6.932
+near = 0.018

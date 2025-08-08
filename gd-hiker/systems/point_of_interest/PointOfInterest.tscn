@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://d1n2asaxrdb7x" path="res://systems/point_of_interest/point_of_interest.gd" id="1_a6jru"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_a6jru"]
-radius = 2.5
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r12gc"]
+height = 1.0
+radius = 3.5
 
 [node name="PointOfInterest" type="Area3D" groups=["point of interest"]]
 script = ExtResource("1_a6jru")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_a6jru")
+shape = SubResource("CylinderShape3D_r12gc")

@@ -1,3 +1,4 @@
+class_name LoopManager
 extends Node3D
 
 signal going_at(current_visit)
@@ -5,6 +6,10 @@ signal going_back(current_visit)
 signal reset(starting_point)
 
 signal reseting_hover_over()
+
+signal start_hovering_over(visit)
+signal stop_hovering_over()
+
 @export var camera: Camera3D 
 @export var ray_distance: float = 1000.0
 @export var current_visit: PointOfInterest = null
@@ -19,8 +24,9 @@ var all_limitations_completed: Array[bool] = []
 var limitations_start_values: Array[int] = []
 var current_path: Array[PointOfInterest] = []
 var is_reseting: bool = false
-
+var is_hovering_over = false
 var available_to_visit: Array[PointOfInterest] = [];
+var duo_visit_types: Array[Limitations.VisitType] = [Limitations.VisitType.ZIPLINE, Limitations.VisitType.PIER] #update this when necessary
 
 func _ready() -> void:
 	reseting_hover_over.connect(_on_reseting_hover_over)
@@ -110,41 +116,55 @@ func is_path_taken() -> bool:
 	print("path not taken")
 	return false
 
-#update the limitation status
+# Update the limitation status
+# Add on is +1 when undo, -1 when choose
 func update_status(visit: PointOfInterest, addOn: int)-> void:
 	var i : int = 0
 	for limitation in limitations:
 		if limitation.visit_type == visit.type_point_of_interest:
-			limitation.value += addOn
+			# Check if the type is type of duo like zipline,pier
+			if duo_visit_types.has(limitation.visit_type):
+				var previous = current_path[0]
+				print("previous " + str(current_path[0]) + "curr " + str(visit))
+				if visit.is_travel_by_vehicle(previous):
+					if !visit.get_is_neighbour_by_vehicle_complete(previous):
+						if addOn<0:  
+							continue #continue to next limitation otherwise limitations is updated
+				else:
+					continue
+				print("not add on")
+			print("change limitaiton")
+			limitation.value += addOn 
 			var value = limitations_start_values[i] - limitation.value 
 			print("Limit " + str(limitation.visit_type) + " " + str(limitation.value))
+			
 			if limitation.numerical_type== Limitations.NumericalType.MIN:
-					if limitation.value <= 0:
-						all_limitations_completed[i] = true
-						LimitationsIndication.set_indicator(limitations[i],i, value, true)
-						print("minimun okay")
-					else:
-						all_limitations_completed[i] = false
-						LimitationsIndication.set_indicator(limitations[i],i,value, false)
-						print("minimun not okay")
+				if limitation.value <= 0:
+					all_limitations_completed[i] = true
+					LimitationsIndication.set_indicator(limitations[i],i, value, true)
+					print("minimun okay")
+				else:
+					all_limitations_completed[i] = false
+					LimitationsIndication.set_indicator(limitations[i],i,value, false)
+					print("minimun not okay")
 			if limitation.numerical_type == Limitations.NumericalType.MAX:
-					if limitation.value >= 0:
-						all_limitations_completed[i] = true
-						LimitationsIndication.set_indicator(limitations[i],i,value, true)
-						print("max okay")
-					else:
-						all_limitations_completed[i] = false
-						LimitationsIndication.set_indicator(limitations[i],i, value, false)
-						print("max not okay")
+				if limitation.value >= 0:
+					all_limitations_completed[i] = true
+					LimitationsIndication.set_indicator(limitations[i],i,value, true)
+					print("max okay")
+				else:
+					all_limitations_completed[i] = false
+					LimitationsIndication.set_indicator(limitations[i],i, value, false)
+					print("max not okay")
 			if limitation.numerical_type ==Limitations.NumericalType.CONSTANT:
-					if limitation.value == 0:
-						all_limitations_completed[i] = true
-						LimitationsIndication.set_indicator(limitations[i],i, value, true)
-						print("const okay")
-					else:
-						all_limitations_completed[i] = false
-						LimitationsIndication.set_indicator(limitations[i],i, value, false)
-						print("const not okay")
+				if limitation.value == 0:
+					all_limitations_completed[i] = true
+					LimitationsIndication.set_indicator(limitations[i],i, value, true)
+					print("const okay")
+				else:
+					all_limitations_completed[i] = false
+					LimitationsIndication.set_indicator(limitations[i],i, value, false)
+					print("const not okay")
 		i+=1
 
 
@@ -174,6 +194,7 @@ func undo_path() -> void:
 		BtnIndicators.show_undo(false)
 		BtnIndicators.show_reset(false)
 		var last_path = visited_paths.pop_back()
+		current_path =  last_path
 		
 		if last_path:
 			last_path[1].undo_point_of_interest(last_path[0])
@@ -227,8 +248,12 @@ func hover_over() -> void:
 	
 	var hit = space_state.intersect_ray(query)
 	if hit and hit.collider is PointOfInterest:
+		is_hovering_over = true
+		
 		var point = hit.collider
+		start_hovering_over.emit(hit.position)
 		if point != last_hover_over:
+			
 			
 			if last_hover_over:
 				last_hover_over.hover_over(false)
@@ -242,7 +267,6 @@ func hover_over() -> void:
 				else:
 					point.hover_over(false)
 		else:
-			
 			if last_hover_over and is_reseting:
 				print("is reseting " + str(is_reseting))
 				
@@ -255,6 +279,8 @@ func hover_over() -> void:
 			is_reseting = false
 				
 	else:
+		stop_hovering_over.emit()
+		is_hovering_over = false
 		if last_hover_over:
 			print("mouse exited " + last_hover_over.name)
 			last_hover_over.hover_over(false)
