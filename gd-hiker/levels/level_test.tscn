@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://dolq01oqaex2n"]
+[gd_scene load_steps=38 format=4 uid="uid://dolq01oqaex2n"]
 
 [ext_resource type="PackedScene" uid="uid://cdqv31d3821e8" path="res://prefabs/basic_level_stuff/map.tscn" id="1_pxlyt"]
 [ext_resource type="Material" uid="uid://d0bxqje3wpwf7" path="res://materials/terrain_beach.tres" id="2_i21ic"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dawr2dgsmwxri" path="res://prefabs/other/placeholder_point_of_interest_graphic.tscn" id="14_y37wk"]
 [ext_resource type="PackedScene" uid="uid://cmnrcxa4f22f6" path="res://prefabs/basic_level_stuff/froggy_and_stuff.tscn" id="15_t6qov"]
 [ext_resource type="PackedScene" uid="uid://bwaqyc7tjry6c" path="res://prefabs/basic_level_stuff/standard_lighting.tscn" id="16_i7cw2"]
+[ext_resource type="PackedScene" uid="uid://bduww2s6pjqrk" path="res://systems/camera-zoomed-viewport/camera_zoomed_viewport.tscn" id="20_o6ev6"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6yg1s"]
 _surfaces = [{
@@ -329,6 +330,7 @@ multimesh = SubResource("MultiMesh_8dbi8")
 metadata/_edit_lock_ = true
 
 [node name="LoopManager" parent="." node_paths=PackedStringArray("camera", "current_visit") instance=ExtResource("12_8dbi8")]
+unique_name_in_owner = true
 camera = NodePath("../StandardLighting/Camera3D")
 current_visit = NodePath("Parked")
 
@@ -374,6 +376,8 @@ metadata/_edit_lock_ = true
 
 [node name="Camera3D" parent="StandardLighting" index="0"]
 transform = Transform3D(0.999999, 0.00102709, -0.000293368, -0.000519606, 0.707703, 0.70651, 0.000933264, -0.706509, 0.707703, 39.7526, 19.1769, 64.87)
+
+[node name="Control" parent="." instance=ExtResource("20_o6ev6")]
 
 [editable path="Map"]
 [editable path="FroggyAndStuff"]

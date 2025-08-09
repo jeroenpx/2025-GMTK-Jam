@@ -20,9 +20,10 @@ var is_start: bool = false;
 var is_visited: bool = false;
 var is_hover: bool = false;
 var is_canvisitnext: bool = false;
-
+var is_neighbour_by_vehicle_complete: Dictionary[PointOfInterest, bool] = {} #Array[bool] = []
 func _ready() -> void:
 	_update_vehicles();
+	_initialize_is_neighbour_by_vehicle_complete()
 
 func add_vehicle(amount: int) -> void:
 	vehicles_available += amount;
@@ -31,6 +32,20 @@ func add_vehicle(amount: int) -> void:
 func _update_vehicles() -> void:
 	for i in range(vehicles.size()):
 		vehicles[i].visible = i < vehicles_available;
+
+func _initialize_is_neighbour_by_vehicle_complete() -> void:
+	for neigh_vehicle in neighbours_by_vehicle:
+		is_neighbour_by_vehicle_complete[neigh_vehicle] = false
+		print("neigh-vehicle" + str(is_neighbour_by_vehicle_complete))
+
+func update_is_neighbour_by_vehicle_complete(neigh_vehicle: PointOfInterest, is_complete: bool) -> void:
+	is_neighbour_by_vehicle_complete[neigh_vehicle] = is_complete
+
+func get_is_neighbour_by_vehicle_complete(neigh_vehicle: PointOfInterest) -> bool:
+	for vehicle_neighbour in neighbours_by_vehicle:
+		if vehicle_neighbour == neigh_vehicle:
+			return is_neighbour_by_vehicle_complete[neigh_vehicle]
+	return false
 
 func is_travel_by_vehicle(towards: PointOfInterest) -> bool:
 	for vehicle_neighbour in neighbours_by_vehicle:
@@ -43,6 +58,8 @@ func on_clicked(current_visit: PointOfInterest) -> PointOfInterest:
 	if current_visit.is_travel_by_vehicle(self):
 		self.add_vehicle(1);
 		current_visit.add_vehicle(-1);
+		update_is_neighbour_by_vehicle_complete(current_visit,  true)
+		current_visit.update_is_neighbour_by_vehicle_complete(self,  true)
 	
 	is_visited = true
 	_update_floor_color();
@@ -52,6 +69,8 @@ func undo_point_of_interest(from: PointOfInterest) -> void:
 	if from.is_travel_by_vehicle(self):
 		self.add_vehicle(-1);
 		from.add_vehicle(1);
+		update_is_neighbour_by_vehicle_complete(from,  false)
+		from.update_is_neighbour_by_vehicle_complete(self,  false)
 	
 	is_visited = false
 	_update_floor_color();
