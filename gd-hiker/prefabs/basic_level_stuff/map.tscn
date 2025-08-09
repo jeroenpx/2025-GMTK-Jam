@@ -1,17 +1,16 @@
-[gd_scene load_steps=38 format=3 uid="uid://cdqv31d3821e8"]
+[gd_scene load_steps=37 format=3 uid="uid://cdqv31d3821e8"]
 
 [ext_resource type="Script" uid="uid://ba2ebcko7uar4" path="res://systems/map/map.gd" id="1_g0w84"]
 [ext_resource type="Script" uid="uid://cnsjf7dn0f155" path="res://systems/map/generation/generate_landscape.gd" id="2_dq20s"]
 [ext_resource type="Texture2D" uid="uid://dhu7xol0cbruk" path="res://systems/map/generation/path_samples/path_sample_straight.png" id="3_go7kh"]
-[ext_resource type="Script" uid="uid://bg0wqssp11cvi" path="res://systems/map/generation/data_grid.gd" id="4_4pfjn"]
+[ext_resource type="Script" uid="uid://bg0wqssp11cvi" path="res://systems/math/data_grid.gd" id="4_4pfjn"]
 [ext_resource type="Material" uid="uid://bma2e53y8w15l" path="res://materials/terrain.tres" id="4_dq20s"]
-[ext_resource type="Script" uid="uid://cswuret7v8eo7" path="res://systems/map/generation/generate_trees.gd" id="5_6wqpt"]
+[ext_resource type="Script" uid="uid://cswuret7v8eo7" path="res://systems/map/generation/populate_asset_layers.gd" id="5_6wqpt"]
 [ext_resource type="Material" uid="uid://cr8yf6r3utjih" path="res://materials/water/water_mat.tres" id="6_8dnx5"]
-[ext_resource type="Script" uid="uid://o4l85kldhm4q" path="res://systems/map/generation/generate_trees_asset_layer.gd" id="7_ebhvr"]
+[ext_resource type="Script" uid="uid://o4l85kldhm4q" path="res://systems/asset_layer/asset_layer.gd" id="7_ebhvr"]
 [ext_resource type="Script" uid="uid://bsii35udp3c74" path="res://systems/map/generation/generate_points_of_interest.gd" id="7_go7kh"]
 [ext_resource type="PackedScene" uid="uid://7rdp17ixhb6o" path="res://systems/point_of_interest/PointOfInterest.tscn" id="8_4pfjn"]
 [ext_resource type="ArrayMesh" uid="uid://plnx5xdqtfb2" path="res://assets-3D/trees/tree_pyramidal1.res" id="8_oaixu"]
-[ext_resource type="PackedScene" uid="uid://dawr2dgsmwxri" path="res://prefabs/other/placeholder_point_of_interest_graphic.tscn" id="9_6wqpt"]
 [ext_resource type="ArrayMesh" uid="uid://tiqtny8uuuff" path="res://assets-3D/trees/tree_pyramidal2.res" id="9_xjr5c"]
 [ext_resource type="Script" uid="uid://bkaqta415ccjt" path="res://systems/map/generation/generate_point_of_interest_floor.gd" id="10_8dnx5"]
 [ext_resource type="ArrayMesh" uid="uid://e2dq6clvkrfb" path="res://assets-3D/trees/tree_pyramidal3.res" id="10_pqdfy"]
@@ -142,7 +141,6 @@ metadata/_custom_type_script = "uid://bg0wqssp11cvi"
 [node name="GeneratePointsOfInterest" type="Node3D" parent="." node_paths=PackedStringArray("input_height_grid")]
 script = ExtResource("7_go7kh")
 prefab_point_of_interest = ExtResource("8_4pfjn")
-prefab_point_of_interest_graphic = ExtResource("9_6wqpt")
 input_height_grid = NodePath("../GenerateLandscape/HeightGrid")
 
 [node name="GeneratePointOfInterestFloor" type="Node3D" parent="." node_paths=PackedStringArray("input_height_grid", "smooth_normals_grid", "point_generator")]

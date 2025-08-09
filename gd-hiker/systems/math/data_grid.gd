@@ -7,14 +7,6 @@ extends Node
 @export var grid_h: int = -1;
 @export var grid: Array;
 
-# initialize the Triangle Grid Structure to fit the size of the Map
-func init_from_map_triangles(map: Map) -> void:
-	init(ceil(map.bounds.size.x / Hexagons.triangle_width), ceil(map.bounds.size.y / Hexagons.triangle_height * 2.0));
-
-# initialize the Hexagon Grid Structure to fit the size of the Map
-func init_from_map_hexagons(map: Map) -> void:
-	init(map.dim.x, map.dim.y);
-
 # initialize a custom grid structure to track stuff
 func init(w: int, h: int) -> void:
 	grid_w = w;

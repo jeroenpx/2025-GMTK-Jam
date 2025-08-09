@@ -119,7 +119,7 @@ func _parse_csv_layer_data(csv_data: String) -> Array:
 # Call the generators to build the level
 func _regenerate_scene() -> void:
 	for child in get_children():
-		if child is MapGen:
+		if child is MapGen or child.has_method("generate"):
 			child.generate(self);
 
 
@@ -128,5 +128,5 @@ func _run_cleanup() -> void:
 	_annotations.clear();
 	
 	for child in get_children():
-		if child is MapGen:
+		if child is MapGen or child.has_method("do_cleanup"):
 			child.do_cleanup(self);

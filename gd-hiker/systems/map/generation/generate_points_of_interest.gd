@@ -4,7 +4,6 @@ class_name PointOfInterestGenerator
 extends MapGen
 
 @export var prefab_point_of_interest: PackedScene;
-@export var prefab_point_of_interest_graphic: PackedScene;
 @export var input_height_grid: DataGrid;
 @export var where_to_create: Node3D;
 
@@ -87,11 +86,6 @@ func generate(map: Map):
 					new_point.name = name_of_point;
 					
 					_generated_points[name_of_point] = new_point;
-					
-					# Also add a placeholder display to the thingy
-					var new_placeholder: Node3D = prefab_point_of_interest_graphic.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE);
-					new_point.add_child(new_placeholder);
-					new_placeholder.owner = get_tree().edited_scene_root;
 				else:
 					# Keep this one
 					remaining.remove_at(remaining.find(name_of_point));
