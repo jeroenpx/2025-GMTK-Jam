@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cdqv31d3821e8"]
+[gd_scene load_steps=39 format=3 uid="uid://cdqv31d3821e8"]
 
 [ext_resource type="Script" uid="uid://ba2ebcko7uar4" path="res://systems/map/map.gd" id="1_g0w84"]
 [ext_resource type="Script" uid="uid://cnsjf7dn0f155" path="res://systems/map/generation/generate_landscape.gd" id="2_dq20s"]
@@ -14,8 +14,10 @@
 [ext_resource type="ArrayMesh" uid="uid://tiqtny8uuuff" path="res://assets-3D/trees/tree_pyramidal2.res" id="9_xjr5c"]
 [ext_resource type="Script" uid="uid://bkaqta415ccjt" path="res://systems/map/generation/generate_point_of_interest_floor.gd" id="10_8dnx5"]
 [ext_resource type="ArrayMesh" uid="uid://e2dq6clvkrfb" path="res://assets-3D/trees/tree_pyramidal3.res" id="10_pqdfy"]
+[ext_resource type="Script" uid="uid://db0kdmuj0ptby" path="res://systems/map/generation/generate_path_displays.gd" id="10_xkhuh"]
 [ext_resource type="PackedScene" uid="uid://c2y40ww76r4au" path="res://prefabs/other/point_of_interest_floor.tscn" id="11_0mk57"]
 [ext_resource type="ArrayMesh" uid="uid://1gkdlnwxf0hq" path="res://assets-3D/trees/tree_round1.res" id="11_4botv"]
+[ext_resource type="PackedScene" uid="uid://crelyl4sjvpda" path="res://prefabs/other/path_display.tscn" id="11_bb54c"]
 [ext_resource type="Script" uid="uid://tfj6bd0g3uxb" path="res://systems/map/generation/generate_point_of_interest_avoidance_zones.gd" id="11_y7fc5"]
 [ext_resource type="Script" uid="uid://c4xfbuj3gykdb" path="res://systems/map/generation/generate_path_avoidance_zone.gd" id="12_7y0c8"]
 [ext_resource type="ArrayMesh" uid="uid://dtuo4e0hur8fw" path="res://assets-3D/trees/tree_round2.res" id="12_y7fc5"]
@@ -152,6 +154,16 @@ input_height_grid = NodePath("../GenerateLandscape/HeightGrid")
 smooth_normals_grid = NodePath("../GenerateLandscape/SmoothNormalsGrid")
 point_generator = NodePath("../GeneratePointsOfInterest")
 prefab_point_of_interest_floor = ExtResource("11_0mk57")
+
+[node name="GeneratePathDisplays" type="Node3D" parent="." node_paths=PackedStringArray("input_height_grid", "smooth_normals_grid", "point_generator")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.042305, 0)
+script = ExtResource("10_xkhuh")
+input_height_grid = NodePath("../GenerateLandscape/HeightGrid")
+smooth_normals_grid = NodePath("../GenerateLandscape/SmoothNormalsGrid")
+point_generator = NodePath("../GeneratePointsOfInterest")
+prefab_path_line = ExtResource("11_bb54c")
+factor_scale = null
+factor_shift = null
 
 [node name="GeneratePointOfInterestAvoidanceZones" type="Node3D" parent="." node_paths=PackedStringArray("point_generator", "input_height_grid", "output_interest_zone")]
 script = ExtResource("11_y7fc5")

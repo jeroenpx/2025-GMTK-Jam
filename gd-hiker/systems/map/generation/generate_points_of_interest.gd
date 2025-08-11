@@ -22,13 +22,15 @@ func _generate():
 func _is_path(type: String) -> bool:
 	return type == "3" or type == "4";
 
-func _follow_paths(map: Map, origin: Vector2i, start_name: String):
+func _follow_paths(map: Map, origin: Vector2i, start_name: String, output_paths: Dictionary[PointOfInterest, Array]):
 	var results: Array[String] = [];
 	
 	# Follow the paths!
 	var visited: Dictionary[Vector2i, bool];
 	var pending: Dictionary[Vector2i, bool];
 	var pending_arr: Array[Vector2i] = [];
+	
+	var from: Dictionary[Vector2i, Vector2i];
 	
 	var added_connections: Dictionary[String, bool];
 	
@@ -50,6 +52,7 @@ func _follow_paths(map: Map, origin: Vector2i, start_name: String):
 				if not pending.has(neighbour) and not visited.has(neighbour) and _is_path(map.get_at(neighbour, "")):
 					pending_arr.push_back(neighbour);
 					pending[neighbour] = true;
+					from[neighbour] = at;
 		else:
 			# Found a connection
 			var connection_id = str(start_name, " -> ", near_point);
@@ -57,6 +60,17 @@ func _follow_paths(map: Map, origin: Vector2i, start_name: String):
 				added_connections[connection_id] = true;
 				print(connection_id);
 				results.push_back(near_point);
+				
+				var path_back: Array = [];
+				var previous = at;
+				while previous != null:
+					path_back.push_front(previous);
+					if from.has(previous):
+						previous = from[previous];
+					else:
+						previous = null;
+				
+				output_paths[_generated_points[near_point]] = path_back;
 	
 	return results;
 
@@ -111,8 +125,11 @@ func generate(map: Map):
 				if not name_of_point:
 					continue;
 				
+				# Collect the paths to neighbours:
+				var paths: Dictionary[PointOfInterest, Array];
+				
 				# Follow the neighbours
-				var neighbour_ids = _follow_paths(map, at, name_of_point);
+				var neighbour_ids = _follow_paths(map, at, name_of_point, paths);
 				
 				# Get the "point of interest"
 				var point = _generated_points[name_of_point] as PointOfInterest;
@@ -120,6 +137,9 @@ func generate(map: Map):
 				for id in neighbour_ids:
 					data.push_back(_generated_points[id]);
 				point.neighbours = data;
+				
+				# Set the paths
+				point.paths = paths;
 	
 	
 	if safe_to_remove:

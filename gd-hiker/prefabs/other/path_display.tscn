@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crelyl4sjvpda"]
+
+[ext_resource type="Material" uid="uid://b0rq8217ak1gb" path="res://materials/path_display.tres" id="1_nc22m"]
+
+[node name="PathDisplay" type="MeshInstance3D"]
+material_override = ExtResource("1_nc22m")

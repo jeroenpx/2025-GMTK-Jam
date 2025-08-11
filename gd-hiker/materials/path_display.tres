@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b0rq8217ak1gb"]
+
+[ext_resource type="Texture2D" uid="uid://bl7y4afix76tw" path="res://assets-2D/footstep.png" id="1_0wxbu"]
+
+[resource]
+transparency = 1
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("1_0wxbu")

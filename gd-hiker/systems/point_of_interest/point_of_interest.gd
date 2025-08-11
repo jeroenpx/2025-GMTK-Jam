@@ -15,6 +15,11 @@ extends Node3D
 @export var floor_indication: CircleEffect;
 @export var froggy_placement: FroggyPlacement;
 
+# Paths - type: [PointOfInterest, Array[Vector2i]]
+@export var paths: Dictionary[PointOfInterest, Array];
+
+@export var path_indications: Dictionary[PointOfInterest, MeshInstance3D];
+
 # State
 var is_start: bool = false;
 var is_visited: bool = false;
