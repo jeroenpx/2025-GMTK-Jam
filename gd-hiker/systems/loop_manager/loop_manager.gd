@@ -1,7 +1,7 @@
 class_name LoopManager
 extends Node3D
 
-signal going_at(current_visit)
+signal on_going_at(current_visit)
 signal going_back(current_visit)
 signal reset(starting_point)
 
@@ -183,7 +183,7 @@ func level_complete() -> void:
 func visit_point() -> void:
 	update_status(current_visit,-1) #update limitation status
 	visited_paths.append(current_path)
-	going_at.emit(current_visit) #probably you need the current_visit as an input?
+	on_going_at.emit(current_visit) #probably you need the current_visit as an input?
 
 #undo path
 func undo_path() -> void:
@@ -202,7 +202,7 @@ func undo_path() -> void:
 			current_visit = last_path[0]
 			print("current visit = " + str(current_visit))
 			reseting_hover_over.emit()
-			going_back.emit()
+			on_going_at.emit(current_visit)
 			
 			_update_available_to_visit();
 		
