@@ -18,11 +18,11 @@ void vertex() {
 void fragment() {
 	// Convert to polar coords
 	vec2 polar = vec2(length(UV), atan(UV.y, UV.x));
-	
+
 	vec4 sample = texture(edge, vec2(polar.x, 0)) * color;
-	
+
 	float noise_sample = texture(noise, polar * polar_uv_scale + vec2(TIME * time_speed, 0)).r;
-	
+
 	// Called for every pixel the material is visible on.
 	ALBEDO = sample.rgb * circle_color_global.rgb;
 	ALPHA = sample.a * noise_sample;

@@ -1,10 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bal7j4fvqejnd"]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://y50yt0ob2v7u"]
 
-[ext_resource type="Shader" uid="uid://v53rl4himaxy" path="res://materials/point_circle/floor_circle_shader.gdshader" id="1_vbpgt"]
+[ext_resource type="Shader" uid="uid://v53rl4himaxy" path="res://materials/point_circle/floor_circle_shader.gdshader" id="1_t34vx"]
 
 [sub_resource type="Gradient" id="Gradient_vbpgt"]
-offsets = PackedFloat32Array(0.372881, 0.631356, 0.665254)
-colors = PackedColorArray(1, 1, 1, 0.156863, 1, 1, 1, 0.717647, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.257951, 0.431095, 0.678445)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_0oeq4"]
 gradient = SubResource("Gradient_vbpgt")
@@ -18,8 +18,8 @@ gradient = SubResource("Gradient_nhgv0")
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_vbpgt")
-shader_parameter/color = Color(0.458824, 0.152941, 0, 1)
+shader = ExtResource("1_t34vx")
+shader_parameter/color = Color(0.984314, 1, 1, 1)
 shader_parameter/edge = SubResource("GradientTexture1D_0oeq4")
 shader_parameter/noise = SubResource("GradientTexture1D_iqu3f")
 shader_parameter/polar_uv_scale = Vector2(1, 0)
