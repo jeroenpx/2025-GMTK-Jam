@@ -7,7 +7,7 @@ signal reset(starting_point)
 
 signal reseting_hover_over()
 
-signal start_hovering_over(visit)
+signal start_hovering_over(visit_pos, visit_spot)
 signal stop_hovering_over()
 
 @export var camera: Camera3D 
@@ -251,7 +251,7 @@ func hover_over() -> void:
 		is_hovering_over = true
 		
 		var point = hit.collider
-		start_hovering_over.emit(hit.position)
+		start_hovering_over.emit(hit.position, point)
 		if point != last_hover_over:
 			
 			
