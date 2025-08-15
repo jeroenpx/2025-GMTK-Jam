@@ -25,8 +25,10 @@ var limitations_start_values: Array[int] = []
 var current_path: Array[PointOfInterest] = []
 var is_reseting: bool = false
 var is_hovering_over = false
+var available_to_visit_from: PointOfInterest;
 var available_to_visit: Array[PointOfInterest] = [];
 var duo_visit_types: Array[Limitations.VisitType] = [Limitations.VisitType.ZIPLINE, Limitations.VisitType.PIER] #update this when necessary
+var last_path_effect_taken: PathEffect;
 
 func _ready() -> void:
 	reseting_hover_over.connect(_on_reseting_hover_over)
@@ -44,10 +46,16 @@ func _ready() -> void:
 	start_point.set_is_start(true);
 	_update_available_to_visit();
 
-func _update_available_to_visit() -> void:
+func _update_available_to_visit(from_undo: bool = false) -> void:
 	for point in available_to_visit:
 		point.set_can_next_visit(false);
+		if available_to_visit_from.path_indications.has(point):
+			var path_effect = available_to_visit_from.path_indications[point];
+			if path_effect.target_state != PathEffect.State.TAKEN:
+				path_effect.animate_to_state(PathEffect.State.HIDDEN);
+				path_effect.skip_animation();
 	
+	available_to_visit_from = current_visit;
 	available_to_visit = current_visit.get_all_can_visit();
 	
 	print("Av:", available_to_visit.size());
@@ -57,6 +65,9 @@ func _update_available_to_visit() -> void:
 				continue;
 			
 			point.set_can_next_visit(true);
+			if available_to_visit_from.path_indications.has(point):
+				var path_effect = available_to_visit_from.path_indications[point];
+				path_effect.animate_to_state(PathEffect.State.READY);
 
 func _process(delta: float) -> void:
 	if GameState.isGameplayRunning():
@@ -83,6 +94,17 @@ func _unhandled_input(event: InputEvent) -> void:
 				if previous_visit.can_visit_towards(point):
 					current_path = [previous_visit, point]
 					if !is_path_taken():
+						# Footsteps
+						if last_path_effect_taken != null:
+							last_path_effect_taken.skip_animation();
+						if previous_visit.path_indications.has(point):
+							var path_effect = previous_visit.path_indications[point];
+							path_effect.animate_to_state(PathEffect.State.TAKEN);
+							path_effect.skip_animation();
+							last_path_effect_taken = path_effect;
+						else:
+							last_path_effect_taken = null;
+						
 						current_visit = point.on_clicked(previous_visit)
 						visit_point()
 						print("Start" + str(start_point) +" From " + str(previous_visit) + " to " + str(current_visit))
@@ -204,7 +226,7 @@ func undo_path() -> void:
 			reseting_hover_over.emit()
 			on_going_at.emit(current_visit)
 			
-			_update_available_to_visit();
+			_update_available_to_visit(true);
 		
 	
 #reset path

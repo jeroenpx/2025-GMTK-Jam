@@ -19,7 +19,7 @@ extends MapGen
 var _do_generate = _generate;
 
 @export_group("Generated Data")
-@export var _generated_paths: Dictionary[String, MeshInstance3D];
+@export var _generated_paths: Dictionary[String, PathEffect];
 
 func _generate():
 	generate(self.get_parent() as Map)
@@ -57,6 +57,9 @@ func generate(map: Map):
 				var meshInst = _generated_paths[name_of_path];
 				
 				meshInst.mesh = generate_mesh_for(map, point.paths[to_point]);
+				meshInst.path_length = point.paths[to_point].size()
+				meshInst.path_from = point;
+				meshInst.path_to = to_point;
 				
 				path_meshes[to_point] = meshInst;
 			

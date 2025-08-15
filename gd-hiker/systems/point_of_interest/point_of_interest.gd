@@ -18,7 +18,7 @@ extends Node3D
 # Paths - type: [PointOfInterest, Array[Vector2i]]
 @export var paths: Dictionary[PointOfInterest, Array];
 
-@export var path_indications: Dictionary[PointOfInterest, MeshInstance3D];
+@export var path_indications: Dictionary[PointOfInterest, PathEffect];
 
 # State
 var is_start: bool = false;
