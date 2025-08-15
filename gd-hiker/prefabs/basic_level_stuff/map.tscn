@@ -162,8 +162,10 @@ input_height_grid = NodePath("../GenerateLandscape/HeightGrid")
 smooth_normals_grid = NodePath("../GenerateLandscape/SmoothNormalsGrid")
 point_generator = NodePath("../GeneratePointsOfInterest")
 prefab_path_line = ExtResource("11_bb54c")
-factor_scale = null
-factor_shift = null
+sample_distance = 0.69
+factor_scale = 0.63
+factor_shift = 0.65
+up_shift = 0.2
 
 [node name="GeneratePointOfInterestAvoidanceZones" type="Node3D" parent="." node_paths=PackedStringArray("point_generator", "input_height_grid", "output_interest_zone")]
 script = ExtResource("11_y7fc5")

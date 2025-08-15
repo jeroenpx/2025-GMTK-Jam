@@ -1,8 +1,22 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b0rq8217ak1gb"]
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://b0rq8217ak1gb"]
 
-[ext_resource type="Texture2D" uid="uid://bl7y4afix76tw" path="res://assets-2D/footstep.png" id="1_0wxbu"]
+[ext_resource type="Texture2D" uid="uid://c5033fpt8nq8l" path="res://assets-2D/footstepBoot.png" id="1_0wxbu"]
+[ext_resource type="Shader" uid="uid://ctgs3ofbu0rp0" path="res://materials/pathshader/path_shader.gdshader" id="1_sidpw"]
+
+[sub_resource type="Gradient" id="Gradient_pp64i"]
+offsets = PackedFloat32Array(0, 0.0677966, 0.627119, 0.682203, 0.783898)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.109804, 1, 1, 1, 0, 0.329412, 0.329412, 0.329412, 0.521569, 0.933962, 0.933962, 0.933962, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_um0ae"]
+gradient = SubResource("Gradient_pp64i")
 
 [resource]
-transparency = 1
-albedo_color = Color(0.339244, 0.0259935, 0.334, 1)
-albedo_texture = ExtResource("1_0wxbu")
+render_priority = 0
+shader = ExtResource("1_sidpw")
+shader_parameter/color = Color(0.364706, 0.160784, 0, 1)
+shader_parameter/color2 = Color(1, 0.623529, 0.556863, 1)
+shader_parameter/text = ExtResource("1_0wxbu")
+shader_parameter/time_curve = SubResource("GradientTexture1D_um0ae")
+shader_parameter/time_speed = -2.0
+shader_parameter/time_distance = 6.0
+shader_parameter/time_hard_step = 0.4

@@ -12,6 +12,8 @@ extends MapGen
 @export var factor_scale: float = 1.2;
 @export var factor_shift: float = .8;
 
+@export var up_shift: float = 0.1;
+
 
 @export_tool_button("Generate")
 var _do_generate = _generate;
@@ -84,7 +86,7 @@ func print_quad(st: SurfaceTool, i: int, quad_position: Vector3, normal: Vector3
 		];
 	
 	for v in vertices:
-		var pos = quad_position + (v.x * forward + (v.y + side_extra * factor_shift) * side) * factor_scale / 2.0 * Hexagons.SHORT_SIDE_DIAGONAL;
+		var pos = quad_position + (v.x * forward + (v.y + side_extra * factor_shift) * side) * factor_scale / 2.0 * Hexagons.SHORT_SIDE_DIAGONAL + Vector3(0, up_shift, 0);
 		var uv = Vector2(0.5, 0.5) + v*0.5 + Vector2(i * 1.0, 0);
 		# Push vertex
 		st.set_uv(uv);
