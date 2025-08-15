@@ -14,13 +14,16 @@ func _ready() -> void:
 
 
 
-func trigger_viewport(visit_point:Vector3):
+func trigger_viewport(visit_point:Vector3, visit_spot: PointOfInterest):
 	
-	var visit_pos= visit_point#.position #= loop_manager.current_visit.position
+	#var visit_pos= visit_point # a. uncomment this if want the view to move
+	var visit_pos= visit_spot.position # a. comment this if want the view to move
 	var dist_z = visit_pos.z - offset_z + camera_distance_y #tan45 = 1
 	zoomed_cam.position = Vector3(visit_pos.x, camera_distance_y, dist_z)
-	self.position = get_viewport().get_mouse_position()+ Vector2(-subviewport.size.x*0.5, -subviewport.size.y*0.5)
-	#self.position = main_cam.unproject_position(visit_pos)+ Vector2(-subviewport.size.x*0.5, -subviewport.size.y*0.5)
+	# b. uncomment the next line if want the view to move
+	#self.position = get_viewport().get_mouse_position()+ Vector2(-subviewport.size.x*0.5, -subviewport.size.y*0.5) # b. uncomment this if want the view to move
+	# b. comment the next line if want the view to move
+	self.position = get_viewport().get_camera_3d().unproject_position(visit_pos)+ Vector2(-subviewport.size.x*0.5, -subviewport.size.y*0.5)
 	self.visible = true
 
 
