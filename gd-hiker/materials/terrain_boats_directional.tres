@@ -1,0 +1,61 @@
+[gd_resource type="ShaderMaterial" load_steps=13 format=3 uid="uid://dhuvbe0gg5i6s"]
+
+[ext_resource type="Shader" uid="uid://dhq5wn4242k0c" path="res://materials/_shaders/terrain_shader.gdshader" id="1_0lyl7"]
+[ext_resource type="Texture2D" uid="uid://cj2guey3v321o" path="res://materials/_noise/rock_grudge_albedo.png" id="2_iiutp"]
+
+[sub_resource type="Gradient" id="Gradient_0lyl7"]
+offsets = PackedFloat32Array(0.422969, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iiutp"]
+noise_type = 0
+frequency = 0.0065
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_strk4"]
+seamless = true
+color_ramp = SubResource("Gradient_0lyl7")
+noise = SubResource("FastNoiseLite_iiutp")
+
+[sub_resource type="Gradient" id="Gradient_uupk1"]
+offsets = PackedFloat32Array(0, 0.521008)
+colors = PackedColorArray(0, 0, 0, 1, 0.577008, 0.577008, 0.577008, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m0shn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o5vb0"]
+color_ramp = SubResource("Gradient_uupk1")
+noise = SubResource("FastNoiseLite_m0shn")
+
+[sub_resource type="Gradient" id="Gradient_o5vb0"]
+offsets = PackedFloat32Array(0.285714, 0.294118, 0.397759, 0.484594, 0.57423)
+colors = PackedColorArray(0, 0, 0, 1, 0.474453, 0.474453, 0.474453, 1, 1, 1, 1, 1, 0.65834, 0.65834, 0.65834, 1, 0.908789, 0.908789, 0.908789, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bwtgk"]
+gradient = SubResource("Gradient_o5vb0")
+
+[sub_resource type="Gradient" id="Gradient_bwtgk"]
+offsets = PackedFloat32Array(0.15544, 0.559586)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aap3m"]
+gradient = SubResource("Gradient_bwtgk")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_0lyl7")
+shader_parameter/terrain_color = Color(0.286231, 0.216703, 7.21961e-08, 1)
+shader_parameter/terrain_colorB = Color(0.249617, 0.406888, 0.272835, 1)
+shader_parameter/terrain_colorC = Color(0.910161, 0.595943, 0.355691, 1)
+shader_parameter/terrain_color_sides = Color(0.635983, 0.537582, 0.377482, 1)
+shader_parameter/path_color = Color(0.795823, 0.662666, 0.496815, 1)
+shader_parameter/path_colorB = Color(0.856673, 0.659731, 0.549373, 1)
+shader_parameter/emit_color = Color(0, 0, 0, 1)
+shader_parameter/path_noise = SubResource("NoiseTexture2D_o5vb0")
+shader_parameter/path_noise_scale = 0.1
+shader_parameter/path_step = 0.6
+shader_parameter/path_step_grad = SubResource("GradientTexture1D_bwtgk")
+shader_parameter/color_noise = ExtResource("2_iiutp")
+shader_parameter/color_noise_scale = -0.005
+shader_parameter/color_noise_scale_path = 0.13
+shader_parameter/color_noise2 = SubResource("NoiseTexture2D_strk4")
+shader_parameter/color_noise2_scale = 0.005
+shader_parameter/sides_gradient = SubResource("GradientTexture1D_aap3m")
