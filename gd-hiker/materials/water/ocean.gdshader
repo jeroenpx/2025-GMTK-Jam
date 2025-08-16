@@ -1,15 +1,11 @@
 shader_type spatial;
 render_mode shadows_disabled;
 
-vec3 fma_(vec3 a, vec3 b, vec3 c) {
-	return a * b + c;
-}
-vec2 fma_(vec2 a, vec2 b, vec2 c) {
-	return a * b + c;
-}
-float fma_(float a, float b, float c) {
-	return a * b + c;
-}
+// Adds .9 alpha
+//#define USE_ALPHA
+
+// Make the player position and wind direction global
+//#define USE_GLOBAL_WIND_AND_PLAYER
 
 //#define CAUSTICS
 #define FRESNEL
@@ -79,15 +75,45 @@ uniform vec2 normal_map_scale = vec2(0.1);
 uniform sampler2D normal_map : hint_normal, filter_linear_mipmap;
 
 // Hidden Uniforms
-uniform float wind_intensity; // Global shader parameter between 0.0 and 1.0
+#ifdef USE_GLOBAL_WIND_AND_PLAYER
+global uniform float wind_intensity; // Global shader parameter between 0.0 and 1.0
+global uniform vec3 wind_direction;
+#ifdef PLAYER_WAVES
+global uniform vec3 player_position;
+#endif
+#else
+uniform float wind_intensity; // between 0.0 and 1.0
 uniform vec3 wind_direction;
 #ifdef PLAYER_WAVES
-uniform vec3 player_position;// TODO: make global?
+uniform vec3 player_position;
+#endif
 #endif
 uniform sampler2D screen_texture: hint_screen_texture, filter_linear_mipmap, repeat_disable;
 uniform sampler2D depth_texture: hint_depth_texture, filter_linear_mipmap, repeat_disable;
 
 varying vec3 global_position;
+
+// Switches to use _fma polyfill, no LOD on screentexture, ...
+#if CURRENT_RENDERER == RENDERER_COMPATIBILITY
+#define WEB_SUPPORT
+#endif
+#ifdef WEB_SUPPORT
+#define FMA fma_
+
+vec3 fma_(vec3 a, vec3 b, vec3 c) {
+	return a * b + c;
+}
+vec2 fma_(vec2 a, vec2 b, vec2 c) {
+	return a * b + c;
+}
+float fma_(float a, float b, float c) {
+	return a * b + c;
+}
+
+#else
+#define FMA fma
+#define SCREENTEXTURE_HAS_LOD
+#endif
 
 #ifdef CAUSTICS
 // Permutation polynomial hash credit Stefan Gustavson
@@ -113,12 +139,12 @@ vec3 grad(float hash) {
 
     // Expand it so that the new edges are the same length
     // as the existing ones
-    vec3 grad = fma_(cuboct, vec3(1.22474487139), rhomb);
+    vec3 grad = FMA(cuboct, vec3(1.22474487139), rhomb);
 
     // To make all gradients the same length, we only need to shorten the
     // second type of vector. We also put in the whole noise scale constant.
     // The compiler should reduce it into the existing floats. I think.
-    grad *= fma_(-0.042942436724648037, type, 1.0) * 3.5946317686139184;
+    grad *= FMA(-0.042942436724648037, type, 1.0) * 3.5946317686139184;
 
     return grad;
 }
@@ -175,7 +201,7 @@ float fresnel(vec3 normal, vec3 view) {
 
 vec2 refract_uv(inout vec2 uv, vec3 normal, float depth){
 	float strength1 = refraction_strength * depth;
-	uv += fma_(strength1, length(normal), strength1 * -1.2);
+	uv += FMA(strength1, length(normal), strength1 * -1.2);
 	return uv;
 }
 
@@ -189,7 +215,11 @@ vec2 get_uv_from_view_position(vec3 position_view_space, mat4 proj_m)
 
 vec3 get_view_position_from_uv(vec2 uv, float depth, mat4 inv_proj_m)
 {
+#if CURRENT_RENDERER == RENDERER_COMPATIBILITY
+	vec4 position_ndc = (vec4(uv, depth, 1.0) * 2.0) - 1.0;
+#else
 	vec4 position_ndc = vec4((uv * 2.0) - 1.0, depth, 1.0);
+#endif
 	vec4 view_position = inv_proj_m * position_ndc;
 	return view_position.xyz /= view_position.w;
 }
@@ -219,20 +249,24 @@ void vertex() {
 void fragment() {
 	vec3 opposing_color = vec3(1.0) - absorption_color.rgb;
 	vec3 normalized_wind_direction = normalize(wind_direction);
-	float wind_intens_factor = fma_(wind_intensity, 0.7, 0.3);
+	float wind_intens_factor = FMA(wind_intensity, 0.7, 0.3);
 	#ifdef FRESNEL
 	float fresnel_value = fresnel(NORMAL, VIEW);
 	#endif
 
 	float time_factor = TIME * scroll_speed * wind_intens_factor;
-	vec3 n1 = texture(normal_map, fma_(global_position.xz, normal_map_scale, time_factor * -normalized_wind_direction.xz)/*, 2.0*/).xyz;
-	vec3 n2 = texture(normal_map, fma_(global_position.xz, normal_map_scale * scale_offset, time_factor * 0.8 * (-normalized_wind_direction.xz + scroll_offset))/*, 2.0*/).xyz;
+	vec3 n1 = textureLod(normal_map, FMA(global_position.xz, normal_map_scale, time_factor * -normalized_wind_direction.xz), 2.0).xyz;
+	vec3 n2 = textureLod(normal_map, FMA(global_position.xz, normal_map_scale * scale_offset, time_factor * 0.8 * (-normalized_wind_direction.xz + scroll_offset)), 2.0).xyz;
 	NORMAL_MAP = mix(n1, n2, 0.5);
 	NORMAL_MAP_DEPTH = normal_map_strength;
 
 	float depth_tex = texture(depth_texture, SCREEN_UV).r;
 
-	vec3 ndc = fma_(vec3(SCREEN_UV, depth_tex), vec3(2.0), vec3(-1.0));
+#if CURRENT_RENDERER == RENDERER_COMPATIBILITY
+	vec3 ndc = FMA(vec3(SCREEN_UV, depth_tex), vec3(2.0), vec3(-1.0));
+#else
+	vec3 ndc = vec3(FMA(SCREEN_UV, vec2(2.0), vec2(-1.0)), depth_tex);
+#endif
 	vec4 world = INV_VIEW_MATRIX * INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 	world.y /= world.w;
 	float vertey_y = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).y;
@@ -241,10 +275,10 @@ void fragment() {
 
 	// Create Edge caused by other Objects
 	float edge_blend = clamp(relative_depth / -edge_thickness + 1.0, 0.0, 1.0);
-	vec2 edge_noise_uv = global_position.xz * edge_noise_scale * fma_(normalized_wind_direction.xz, vec2(0.5), vec2(0.5));
-	edge_noise_uv = fma_(-normalized_wind_direction.xz * TIME * edge_speed, vec2(wind_intens_factor), edge_noise_uv);
+	vec2 edge_noise_uv = global_position.xz * edge_noise_scale * FMA(normalized_wind_direction.xz, vec2(0.5), vec2(0.5));
+	edge_noise_uv = FMA(-normalized_wind_direction.xz * TIME * edge_speed, vec2(wind_intens_factor), edge_noise_uv);
 	float edge_noise_sample = texture(edge_noise, edge_noise_uv).r;
-	float edge_mask = normalize( texture(edge_ramp, vec2(edge_noise_sample * fma_(edge_blend, -1., 1.))).r);
+	float edge_mask = normalize( texture(edge_ramp, vec2(edge_noise_sample * FMA(edge_blend, -1., 1.))).r);
 
 	// Create Ripples caused by player
 	float player_effect_mask = 0.0;
@@ -258,20 +292,30 @@ void fragment() {
 	#endif
 
 	// combine Edge Mask with Player Ripples
-	float ripple_mask = clamp( fma_( edge_mask, edge_blend, player_effect_mask), 0.0, 1.0);
+	float ripple_mask = clamp( FMA( edge_mask, edge_blend, player_effect_mask), 0.0, 1.0);
 
 	// Calculate Fragment Depth
 	vec4 clip_pos = PROJECTION_MATRIX * vec4(VERTEX, 1.0);
 	clip_pos.xyz /= clip_pos.w;
-	//DEPTH = clip_pos.z;
+	float depth = clip_pos.z;
+#if CURRENT_RENDERER == RENDERER_COMPATIBILITY
+	DEPTH = depth * 0.5 + 0.5;
+#else
+	DEPTH = depth;
+#endif
+
 	// Refract UV
-	vec2 refracted_uv = vec2(0,0);// SCREEN_UV;
-	//refract_uv(refracted_uv, NORMAL_MAP, sqrt(DEPTH) * relative_depth);
+	vec2 refracted_uv = SCREEN_UV;
+	refract_uv(refracted_uv, NORMAL_MAP, sqrt(DEPTH) * relative_depth);
 
 	vec3 screen;
 	float depth_blend;
 	float refracted_depth_tex = texture(depth_texture, refracted_uv).x;
-	ndc = fma_(vec3(refracted_uv, refracted_depth_tex), vec3(2.0), vec3(-1.0));
+#if CURRENT_RENDERER == RENDERER_COMPATIBILITY
+	ndc = FMA(vec3(refracted_uv, refracted_depth_tex), vec3(2.0), vec3(-1.0));
+#else
+	ndc = vec3(FMA(refracted_uv, vec2(2.0), vec2(-1.0)), refracted_depth_tex);
+#endif
 	world = INV_VIEW_MATRIX * INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 	world.xyz /= world.w;
 	float depth_test = vertey_y - world.y;
@@ -282,10 +326,11 @@ void fragment() {
 	float caustic_value = 0.0;
 	// Protect yourself from calculating Noise at runtime with this handy if statement!
 	if (range_mod > 0.0) {
+		
 		vec3 X = vec3(world.xz * caustic_size, mod(TIME, 578.0) * 0.8660254037844386);
 		vec4 noiseResult = os2NoiseWithDerivatives_Fallback(X);
 		noiseResult = os2NoiseWithDerivatives_Fallback(X - noiseResult.xyz / 16.0);
-		caustic_value = fma_(noiseResult.w, 0.5, 0.5) * range_mod * range_mod;
+		caustic_value = FMA(noiseResult.w, 0.5, 0.5) * range_mod * range_mod;
 	}
 	#endif
 
@@ -298,11 +343,11 @@ void fragment() {
 	if (depth_test > -0.0001 && in_bounds(refracted_uv)) {
 		screen = texture(screen_texture, refracted_uv).rgb * 0.9;
 		depth_blend = clamp(depth_test / depth_distance, 0.0, 1.0);
-		depth_blend = fma_(exp(-depth_blend * beers_law), -1.0, 1.0);
+		depth_blend = FMA(exp(-depth_blend * beers_law), -1.0, 1.0);
 	} else {
 		screen = texture(screen_texture, SCREEN_UV).rgb * 0.9;
 		depth_blend = clamp(relative_depth / depth_distance, 0.0, 1.0);
-		depth_blend = fma_(exp(-depth_blend * beers_law), -1.0, 1.0);
+		depth_blend = FMA(exp(-depth_blend * beers_law), -1.0, 1.0);
 	}
 
 	#ifdef SSR
@@ -324,7 +369,11 @@ void fragment() {
 		current_depth = get_view_position_from_uv(current_screen_pos, texture(depth_texture, current_screen_pos).x, INV_PROJECTION_MATRIX).z - current_view_pos.z;
 
 		if (current_depth > -0.0001 && current_depth <= ssr_tolerance * current_stepD) {
-			sampled_color = texture(screen_texture, current_screen_pos/*, 0.5*/).rgb;
+#ifdef SCREENTEXTURE_HAS_LOD
+			sampled_color = textureLod(screen_texture, current_screen_pos, 0.5).rgb;
+#else
+			sampled_color = texture(screen_texture, current_screen_pos).rgb;
+#endif
 			vec2 ruv = 1.0 - abs(current_screen_pos * 2.0 - 1.0);
 			ruv = pow(ruv, vec2(0.5));
 			alpha_hit = clamp(min(ruv.x, ruv.y), 0.0, 1.0);
@@ -340,7 +389,7 @@ void fragment() {
 	color = mix(color, fresnel_color, fresnel_value); // Apply fresnel color
 	#endif
 	#ifdef CAUSTICS
-	color = clamp( color + caustic_value * caustic_strength, vec3(0.0), vec3(1.0));
+	color = clamp(color + caustic_value * caustic_strength * (1.0 - depth_blend), vec3(0.0), vec3(1.0));
 	#endif
 	#ifdef SSR
 	color = mix(color, sampled_color, alpha_hit * (1.0 - roughness) * ssr_mix_strength);
@@ -349,5 +398,8 @@ void fragment() {
 	ALBEDO = color;
 	ROUGHNESS = roughness;
 	SPECULAR = specular;
+
+	#ifdef USE_ALPHA
 	ALPHA = 0.9;
+	#endif
 }
