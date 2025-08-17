@@ -48,6 +48,10 @@ func find_point_name(near_at: Vector2i, range: float = 1):
 			return ann;
 	return "";
 
+func get_named_point_in_map_space(point_name: String) -> Vector2:
+	var v = _annotations[point_name];
+	return Vector2(v.x, v.z);
+
 func _update_map() -> void:
 	_update_map_only();
 	_regenerate_scene();

@@ -56,6 +56,7 @@ func _follow_paths(map: Map, origin: Vector2i, start_name: String, output_paths:
 		else:
 			# Found a connection
 			var connection_id = str(start_name, " -> ", near_point);
+			
 			if not added_connections.has(connection_id):
 				added_connections[connection_id] = true;
 				print(connection_id);
@@ -69,6 +70,33 @@ func _follow_paths(map: Map, origin: Vector2i, start_name: String, output_paths:
 						previous = from[previous];
 					else:
 						previous = null;
+				
+				# Try to follow the path 2 hexagons closer to the point still?
+				var near_point_location = map.get_named_point_in_map_space(near_point);
+				var closest_dist_sq: float = INF;
+				var closest_coord: Vector2i;
+				for a in range(3):
+					for dir in range(6):
+						var neighbour = Hexagons.hex_neighbour(at, dir);
+						if _is_path(map.get_at(neighbour, "")):
+							# Ok, this is an option... Is it closer to the target?
+							var my_location_in_map_space = Hexagons.hex_to_map_space(neighbour);
+							var my_dist_sq = near_point_location.distance_squared_to(my_location_in_map_space);
+							if my_dist_sq < closest_dist_sq:
+								closest_coord = neighbour;
+								closest_dist_sq = my_dist_sq;
+					if !is_inf(closest_dist_sq):
+						at = closest_coord;
+						path_back.push_back(closest_coord);
+						if closest_dist_sq < 0.7:
+							# We can't get closer
+							break;
+					else:
+						# Path ended??
+						break;
+					
+				# Do not include the start point of the path?
+				path_back.remove_at(0);
 				
 				output_paths[_generated_points[near_point]] = path_back;
 	
