@@ -4,6 +4,7 @@ uniform vec4 color: source_color = vec4(1, 1, 1, 0);
 uniform vec4 color2: source_color = vec4(1, 1, 1, 0);
 uniform vec4 color_disabled: source_color = vec4(1, 1, 1, 0);
 uniform vec4 color_taken: source_color = vec4(1, 1, 1, 0);
+uniform vec4 color_taken2: source_color = vec4(1, 1, 1, 0);
 uniform sampler2D text;
 
 // AVAIALABLE PATH STATE
@@ -49,13 +50,20 @@ void fragment() {
 		time_sample = vec4(0, 0, 0, 0);
 	}
 	
+	// HACK: take out the activation and walking phase
+	//activation_sample = vec4(0, 0, 0, 0);
+	//time_sample = vec4(0, 0, 0, 0);
+	// HACK, use the activation colors for the step
+	//time_sample.r = taken_sample.r;
+	//taken_sample.r = 0.0;
+	
 	// FOOTSTEP COLOR
 	// 1. active walking & activation
 	vec4 step_color = mix(color, color2, 1.0 - max(time_sample.r, activation_sample.r));
 	// 2. disable
 	step_color = mix(step_color, color_disabled, disable_amount);
 	// 3. taken
-	step_color = mix(step_color, color_taken, taken_sample.r);
+	step_color = mix(step_color, mix(color_taken, color_taken2, 1.0 - time_sample.r), taken_sample.r);
 	
 	// FOOTSTEP SHAPE
 	vec4 sample = texture(text, UV) * step_color;

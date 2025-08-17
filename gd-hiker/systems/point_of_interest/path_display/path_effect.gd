@@ -80,10 +80,10 @@ func skip_animation():
 		_ready_distance_covered = 0;
 		_taken_distance_covered = 0;
 	elif target_state == State.READY:
-		_ready_distance_covered = _anim_path_length();
+		_ready_distance_covered = _anim_path_length()+_activation_delay_path_length();
 		_taken_distance_covered = 0;
 	elif target_state == State.TAKEN:
-		_ready_distance_covered = _anim_path_length();
+		_ready_distance_covered = _anim_path_length()+_activation_delay_path_length();
 		_taken_distance_covered = _anim_path_length();
 	animating = false;
 	completed_state = target_state;
@@ -101,6 +101,9 @@ func skip_animation():
 			_path_effect_wants_to_teleport_player_to(path_from);
 
 func _anim_path_length() -> float:
+	return path_length + path_animation_trail_overflow_length;
+
+func _activation_delay_path_length() -> float:
 	return path_length + path_animation_trail_overflow_length;
 
 func _ready() -> void:
@@ -121,6 +124,9 @@ func _process(delta: float) -> void:
 	elif target_state == State.TAKEN:
 		ready_direction = 1.0 * move_speed_forwards * rescale_speed;
 		taken_direction = 1.0 * move_speed_forwards * rescale_speed;
+	if taken_direction > 0.0 and _taken_distance_covered >= _ready_distance_covered - _activation_delay_path_length():
+		# Don't take yet if not ready that far yet
+		taken_direction = 0.0;
 	
 	var trigger = false;
 	_ready_distance_covered += ready_direction * delta;
@@ -134,7 +140,7 @@ func _process(delta: float) -> void:
 		trigger = true;
 		completed_state = State.HIDDEN;
 		on_animated_to_state.emit(State.HIDDEN);
-	if ready_direction > 0 and _ready_distance_covered > _anim_path_length() and completed_state == State.HIDDEN:
+	if ready_direction > 0 and _ready_distance_covered > _anim_path_length() + _activation_delay_path_length() and completed_state == State.HIDDEN:
 		trigger = true;
 		completed_state = State.READY;
 		on_animated_to_state.emit(State.READY);
@@ -153,7 +159,7 @@ func _process(delta: float) -> void:
 		animating = true;
 		visible = true;
 	
-	_ready_distance_covered = clampf(_ready_distance_covered, 0.0, _anim_path_length());
+	_ready_distance_covered = clampf(_ready_distance_covered, 0.0, _anim_path_length() + _activation_delay_path_length());
 	_taken_distance_covered = clampf(_taken_distance_covered, 0.0, _anim_path_length());
 	
 	if ready_but_no_hover:
@@ -165,7 +171,7 @@ func _process(delta: float) -> void:
 	_update_material();
 
 func _update_material() -> void:
-	set_instance_shader_parameter("activation_distance", _ready_distance_covered);
+	set_instance_shader_parameter("activation_distance", clamp(_ready_distance_covered - _activation_delay_path_length(), 0.0, INF));
 	set_instance_shader_parameter("taken_distance", _taken_distance_covered);
 	set_instance_shader_parameter("time_flip", -1.0 if target_state == State.HIDDEN else 1.0);
 	set_instance_shader_parameter("disable_amount", _disable_amount);

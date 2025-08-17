@@ -27,10 +27,11 @@ gradient = SubResource("Gradient_pp64i")
 [resource]
 render_priority = 0
 shader = ExtResource("1_sidpw")
-shader_parameter/color = Color(0.437759, 0.226518, 0.20645, 1)
+shader_parameter/color = Color(0.44, 0.226233, 0.2068, 0.501961)
 shader_parameter/color2 = Color(1, 0.623529, 0.556863, 1)
 shader_parameter/color_disabled = Color(0.462801, 0.37073, 0.327408, 1)
-shader_parameter/color_taken = Color(0.198114, 0.0266588, 0, 1)
+shader_parameter/color_taken = Color(0.0635307, 0.0169312, 0.0142193, 1)
+shader_parameter/color_taken2 = Color(0.36, 0.12, 0, 0.85098)
 shader_parameter/text = ExtResource("1_0wxbu")
 shader_parameter/time_curve = SubResource("GradientTexture1D_um0ae")
 shader_parameter/time_speed = 0.0

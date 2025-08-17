@@ -100,7 +100,7 @@ func _unhandled_input(event: InputEvent) -> void:
 						if previous_visit.path_indications.has(point):
 							var path_effect = previous_visit.path_indications[point];
 							path_effect.animate_to_state(PathEffect.State.TAKEN);
-							path_effect.skip_animation();
+							#path_effect.skip_animation();
 							last_path_effect_taken = path_effect;
 						else:
 							last_path_effect_taken = null;
