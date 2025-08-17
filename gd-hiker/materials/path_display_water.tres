@@ -1,0 +1,43 @@
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://btc6n1d4wjmd0"]
+
+[ext_resource type="Shader" uid="uid://ctgs3ofbu0rp0" path="res://materials/pathshader/path_shader.gdshader" id="1_i8npb"]
+[ext_resource type="Texture2D" uid="uid://c5033fpt8nq8l" path="res://assets-2D/footstepBoot.png" id="2_bpoe4"]
+
+[sub_resource type="Gradient" id="Gradient_sidpw"]
+offsets = PackedFloat32Array(0, 0.0423729, 0.168142)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pp64i"]
+gradient = SubResource("Gradient_sidpw")
+
+[sub_resource type="Gradient" id="Gradient_um0ae"]
+offsets = PackedFloat32Array(0, 0.0254237)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gr286"]
+gradient = SubResource("Gradient_um0ae")
+
+[sub_resource type="Gradient" id="Gradient_pp64i"]
+offsets = PackedFloat32Array(0.682203, 0.783898)
+colors = PackedColorArray(0, 0, 0, 0.490196, 0.93, 0.93, 0.93, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_um0ae"]
+gradient = SubResource("Gradient_pp64i")
+
+[resource]
+render_priority = 1
+shader = ExtResource("1_i8npb")
+shader_parameter/color = Color(0.598, 0.69, 0.5175, 1)
+shader_parameter/color2 = Color(1, 1, 1, 0)
+shader_parameter/color_disabled = Color(0.462801, 0.37073, 0.327408, 1)
+shader_parameter/color_taken = Color(0.862363, 0.750353, 0.277582, 1)
+shader_parameter/color_taken2 = Color(0.857089, 0.864207, 0.0832135, 0.85098)
+shader_parameter/text = ExtResource("2_bpoe4")
+shader_parameter/time_curve = SubResource("GradientTexture1D_um0ae")
+shader_parameter/time_speed = 0.0
+shader_parameter/time_distance = 6.0
+shader_parameter/time_hard_step = 0.4
+shader_parameter/activation_curve = SubResource("GradientTexture1D_pp64i")
+shader_parameter/activation_length = 12.0
+shader_parameter/taken_curve = SubResource("GradientTexture1D_gr286")
+shader_parameter/taken_length = 12.0

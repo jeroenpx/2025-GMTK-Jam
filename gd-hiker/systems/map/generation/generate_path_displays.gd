@@ -2,6 +2,12 @@
 @icon("res://systems/map/icons/trowel-bricks-solid-full.svg")
 extends MapGen
 
+# In which property of PointOfInterest do we find the paths?
+@export var paths_to_generate = "paths";
+@export var clear_first: bool = true;
+
+@export var water_level: float = 0.0;
+
 @export var input_height_grid: DataGrid;
 @export var smooth_normals_grid: DataGrid;
 @export var point_generator: PointOfInterestGenerator;
@@ -42,13 +48,18 @@ func _make_mesh(name_of_path: String):
 func generate(map: Map):
 	var points = point_generator._generated_points;
 	
+	var used_paths: Dictionary[String, bool];
+		
 	for from_point in points.keys():
 		var point = points[from_point];
 		
 		if point:
 			var path_meshes: Dictionary[PointOfInterest, MeshInstance3D];
+			if not clear_first:
+				for key in point.path_indications.keys():
+					path_meshes[key] = point.path_indications[key];
 			
-			var paths = point.paths;
+			var paths: Dictionary[PointOfInterest, Array] = point.get(paths_to_generate);
 			for to_point in paths.keys():
 				var name_of_path = _make_name(from_point, to_point.name);
 				if not _generated_paths.has(name_of_path):
@@ -56,15 +67,21 @@ func generate(map: Map):
 				
 				var meshInst = _generated_paths[name_of_path];
 				
-				meshInst.mesh = generate_mesh_for(map, point.paths[to_point]);
-				meshInst.path_length = point.paths[to_point].size()
+				meshInst.mesh = generate_mesh_for(map, paths[to_point]);
+				meshInst.path_length = paths[to_point].size()
 				meshInst.path_from = point;
 				meshInst.path_to = to_point;
+				meshInst.visible = true;
 				
 				path_meshes[to_point] = meshInst;
+				used_paths[name_of_path] = true;
 			
 			# Add the path indications to the point
 			point.path_indications = path_meshes;
+	
+	for path_name in _generated_paths.keys():
+		if not used_paths.has(path_name):
+			_generated_paths[path_name].visible = false;
 
 func print_quad(st: SurfaceTool, i: int, quad_position: Vector3, normal: Vector3, forward: Vector3):
 	# Make forward perpendicular
@@ -130,6 +147,10 @@ func generate_mesh_for(map: Map, path_points: Array) -> ArrayMesh:
 		var vertex_at = HexagonTriangleVertexSpace.triangle_to_idx(triangle_at);
 		var point_at = input_height_grid.get_thing(vertex_at);
 		var normal_at = smooth_normals_grid.get_thing(vertex_at);
+		
+		if point_at.y < water_level:
+			point_at.y = water_level;
+			normal_at = Vector3(0, 1, 0);
 		
 		path_points_real.push_back(point_at);
 		path_normals_real.push_back(normal_at);

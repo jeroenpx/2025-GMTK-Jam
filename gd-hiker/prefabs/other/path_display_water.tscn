@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0tunuxkatc3p"]
+
+[ext_resource type="Material" uid="uid://btc6n1d4wjmd0" path="res://materials/path_display_water.tres" id="1_t0lnx"]
+[ext_resource type="Script" uid="uid://cpjt3fffv1kk" path="res://systems/point_of_interest/path_display/path_effect.gd" id="2_adloh"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_cjr3f"]
+
+[node name="PathDisplay" type="MeshInstance3D"]
+material_override = ExtResource("1_t0lnx")
+instance_shader_parameters/activation_distance = 80.0
+mesh = SubResource("QuadMesh_cjr3f")
+script = ExtResource("2_adloh")
+move_speed_forwards = 40.0
+move_speed_backwards = 80.0
+path_animation_trail_overflow_length = 24.0

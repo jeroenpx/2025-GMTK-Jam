@@ -4,6 +4,7 @@ extends Node3D
 @export_category("Config")
 @export var neighbours: Array[PointOfInterest]; #possible neighbours
 @export var type_point_of_interest: Limitations.VisitType;
+@export var connects_land_to_water: bool;
 
 @export_category("Config - travel by vehicle")
 @export var neighbours_by_vehicle: Array[PointOfInterest];
@@ -17,6 +18,7 @@ extends Node3D
 
 # Paths - type: [PointOfInterest, Array[Vector2i]]
 @export var paths: Dictionary[PointOfInterest, Array];
+@export var paths_on_water: Dictionary[PointOfInterest, Array];
 
 @export var path_indications: Dictionary[PointOfInterest, PathEffect];
 
