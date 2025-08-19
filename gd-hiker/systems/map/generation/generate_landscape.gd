@@ -56,6 +56,9 @@ func do_cleanup(map: Map):
 	output_collider.shape = null;
 	output.mesh = null;
 
+func do_display(map: Map):
+	build(map);
+
 func cleanup_all():
 	displacement_grid.init(1,1);
 	amount_path_grid.init(1,1);

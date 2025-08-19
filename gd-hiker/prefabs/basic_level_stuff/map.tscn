@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cdqv31d3821e8"]
+[gd_scene load_steps=40 format=3 uid="uid://cdqv31d3821e8"]
 
 [ext_resource type="Script" uid="uid://ba2ebcko7uar4" path="res://systems/map/map.gd" id="1_g0w84"]
 [ext_resource type="Script" uid="uid://cnsjf7dn0f155" path="res://systems/map/generation/generate_landscape.gd" id="2_dq20s"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://crelyl4sjvpda" path="res://prefabs/other/path_display.tscn" id="11_bb54c"]
 [ext_resource type="Script" uid="uid://tfj6bd0g3uxb" path="res://systems/map/generation/generate_point_of_interest_avoidance_zones.gd" id="11_y7fc5"]
 [ext_resource type="Script" uid="uid://c4xfbuj3gykdb" path="res://systems/map/generation/generate_path_avoidance_zone.gd" id="12_7y0c8"]
+[ext_resource type="PackedScene" uid="uid://c0tunuxkatc3p" path="res://prefabs/other/path_display_water.tscn" id="12_bb54c"]
 [ext_resource type="ArrayMesh" uid="uid://dtuo4e0hur8fw" path="res://assets-3D/trees/tree_round2.res" id="12_y7fc5"]
 [ext_resource type="ArrayMesh" uid="uid://cfyfcwh1eqn47" path="res://assets-3D/trees/tree_round3.res" id="13_7y0c8"]
 [ext_resource type="ArrayMesh" uid="uid://lgkwlxx2418x" path="res://assets-3D/trees/tree_palm1.res" id="21_jihwy"]
@@ -144,7 +145,7 @@ metadata/_custom_type_script = "uid://bg0wqssp11cvi"
 script = ExtResource("7_go7kh")
 prefab_point_of_interest = ExtResource("8_4pfjn")
 input_height_grid = NodePath("../GenerateLandscape/HeightGrid")
-paths_arrived_at_pier_radius = 4
+paths_arrived_at_pier_radius = 2.5
 path_generation_choice = 2
 
 [node name="GeneratePointOfInterestFloor" type="Node3D" parent="." node_paths=PackedStringArray("input_height_grid", "smooth_normals_grid", "point_generator")]
@@ -179,7 +180,7 @@ water_level = -1.778
 input_height_grid = NodePath("../GenerateLandscape/HeightGrid")
 smooth_normals_grid = NodePath("../GenerateLandscape/SmoothNormalsGrid")
 point_generator = NodePath("../GeneratePointsOfInterest")
-prefab_path_line = ExtResource("11_bb54c")
+prefab_path_line = ExtResource("12_bb54c")
 sample_distance = 0.69
 factor_scale = 0.63
 factor_shift = 0.65
