@@ -51,7 +51,7 @@ var _disable_amount: float = 0;
 # Interact with external stuff
 func _path_effect_wants_to_teleport_player_to(point: PointOfInterest) -> void:
 	# TODO: teleport the player only when the animation finishes!!!
-	#%LoopManager.on_going_at.emit(point);
+	%LoopManager.on_going_at.emit(point);
 	pass
 
 # Animate to a certain state

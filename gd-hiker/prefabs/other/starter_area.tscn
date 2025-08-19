@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://bx3htd1i8ptwh"]
 
 [ext_resource type="Script" uid="uid://8ugpps12qt26" path="res://systems/cinematics/cinematic.gd" id="1_1d7jr"]
-[ext_resource type="Script" path="res://systems/froggy/starter_area.gd" id="1_mty2f"]
+[ext_resource type="Script" uid="uid://iee6dakip3i0" path="res://systems/froggy/starter_area.gd" id="1_mty2f"]
 [ext_resource type="Script" uid="uid://bb2ka0cke0q3q" path="res://systems/cinematics/cine_onload_trigger.gd" id="2_6mlh5"]
-[ext_resource type="Script" path="res://systems/cinematics/cine_action_emit.gd" id="3_v3edf"]
-[ext_resource type="Script" path="res://systems/cinematics/cine_action_play_simple_animation.gd" id="4_cbdoa"]
+[ext_resource type="Script" uid="uid://vj0ynr1jo73m" path="res://systems/cinematics/cine_action_emit.gd" id="3_v3edf"]
+[ext_resource type="Script" uid="uid://2d654tb8yudh" path="res://systems/cinematics/cine_action_play_simple_animation.gd" id="4_cbdoa"]
 [ext_resource type="Script" uid="uid://blqs5r2t5er3v" path="res://systems/cinematics/cine_action_delay.gd" id="5_14iw2"]
 [ext_resource type="Script" uid="uid://bmyeq3omypld3" path="res://systems/cinematics/cine_action_swap_cinematic.gd" id="6_lbihu"]
 [ext_resource type="PackedScene" uid="uid://0ewbqid8v08w" path="res://assets-3D/car/car.glb" id="7_ov66j"]
