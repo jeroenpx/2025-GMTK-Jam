@@ -17,6 +17,9 @@ var _do_update_map_only = _update_map_only;
 @export_tool_button("Cleanup")
 var _do_cleanup = _run_cleanup;
 
+@export_tool_button("Display Only")
+var _do_display = _display_level;
+
 @export_group("Parsed Data")
 @export var _grid_data: Array;
 @export var _annotations: Dictionary[String, Vector3];
@@ -105,7 +108,10 @@ func _calculate_bounds() -> void:
 
 func _parse_csv_layer_data(csv_data: String) -> Array:
 	var grid: Array = [];
-	var rows = csv_data.split("\r\n");
+	var line_sep = "\n";
+	if csv_data.contains("\r\n"):
+		line_sep = "\r\n";
+	var rows = csv_data.split(line_sep);
 	for row in rows:
 		# Trim and such
 		row = row.strip_edges();
@@ -134,3 +140,8 @@ func _run_cleanup() -> void:
 	for child in get_children():
 		if child is MapGen or child.has_method("do_cleanup"):
 			child.do_cleanup(self);
+
+func _display_level() -> void:
+	for child in get_children():
+		if child.has_method("do_display"):
+			child.do_display(self);

@@ -20,7 +20,11 @@ extends Node3D
 @export var paths: Dictionary[PointOfInterest, Array];
 @export var paths_on_water: Dictionary[PointOfInterest, Array];
 
+# Path Effects
 @export var path_indications: Dictionary[PointOfInterest, PathEffect];
+
+# Paths in actual 3D coordinates of each hex tiles
+@export var paths_3D: Dictionary[PointOfInterest, Array];
 
 # State
 var is_start: bool = false;

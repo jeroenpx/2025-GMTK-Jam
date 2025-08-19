@@ -55,9 +55,12 @@ func generate(map: Map):
 		
 		if point:
 			var path_meshes: Dictionary[PointOfInterest, MeshInstance3D];
+			var path_points: Dictionary[PointOfInterest, Variant];
 			if not clear_first:
 				for key in point.path_indications.keys():
 					path_meshes[key] = point.path_indications[key];
+				for key in point.paths_3D.keys():
+					path_points[key] = point.paths_3D[key];
 			
 			var paths: Dictionary[PointOfInterest, Array] = point.get(paths_to_generate);
 			for to_point in paths.keys():
@@ -67,51 +70,29 @@ func generate(map: Map):
 				
 				var meshInst = _generated_paths[name_of_path];
 				
-				meshInst.mesh = generate_mesh_for(map, paths[to_point]);
+				# 1. Convert path to 3D coordinates
+				var path_points_real: Array[Vector3] = [];
+				var path_normals_real: Array[Vector3] = [];
+				convert_paths_to_3d(map, paths[to_point], path_points_real, path_normals_real);
+				
+				# 2. Convert those coordinates to a mesh
+				meshInst.mesh = generate_mesh_for(map, path_points_real, path_normals_real);
 				meshInst.path_length = paths[to_point].size()
 				meshInst.path_from = point;
 				meshInst.path_to = to_point;
 				meshInst.visible = true;
 				
 				path_meshes[to_point] = meshInst;
+				path_points[to_point] = path_points_real;
 				used_paths[name_of_path] = true;
 			
 			# Add the path indications to the point
 			point.path_indications = path_meshes;
+			point.paths_3D = path_points;
 	
 	for path_name in _generated_paths.keys():
 		if not used_paths.has(path_name):
 			_generated_paths[path_name].visible = false;
-
-func print_quad(st: SurfaceTool, i: int, quad_position: Vector3, normal: Vector3, forward: Vector3):
-	# Make forward perpendicular
-	forward = forward - normal.dot(forward) * normal;
-	forward.normalized();
-	
-	# Calculate side
-	var side = forward.cross(normal);
-	
-	var side_extra = 1.0 if i%2 == 0 else -1.0;
-	
-	# Add all the vertices
-	var vertices = [
-		# First triangle
-		Vector2(-1, -1), 
-		Vector2(1, -1), 
-		Vector2(1, 1), 
-		# Second triangle
-		Vector2(-1, -1),
-		Vector2(1, 1),  
-		Vector2(-1, 1), 
-		];
-	
-	for v in vertices:
-		var pos = quad_position + (v.x * forward + (v.y + side_extra * factor_shift) * side) * factor_scale / 2.0 * Hexagons.SHORT_SIDE_DIAGONAL + Vector3(0, up_shift, 0);
-		var uv = Vector2(0.5, 0.5) + v*0.5 + Vector2(i * 1.0, 0);
-		# Push vertex
-		st.set_uv(uv);
-		st.set_normal(normal);
-		st.add_vertex(pos);
 
 # Do a cubic curve interpolation sample at float position i
 func sample_cubic_interpolated(path_points_real: Array[Vector3], i: float) -> Vector3:
@@ -136,11 +117,7 @@ func sample_cubic_interpolated(path_points_real: Array[Vector3], i: float) -> Ve
 	
 	return path_points_real[b].cubic_interpolate(path_points_real[c], path_points_real[a], path_points_real[d], amount);
 
-# path_points = Array[Vector2i]
-func generate_mesh_for(map: Map, path_points: Array) -> ArrayMesh:
-	var path_points_real: Array[Vector3] = [];
-	var path_normals_real: Array[Vector3] = [];
-	
+func convert_paths_to_3d(map: Map, path_points: Array, path_points_real: Array[Vector3], path_normals_real: Array[Vector3]) -> void:
 	# Convert to 3D coordinates
 	for p in path_points:
 		var triangle_at = Hexagons.hex_to_center_triangle(p);
@@ -155,7 +132,9 @@ func generate_mesh_for(map: Map, path_points: Array) -> ArrayMesh:
 		path_points_real.push_back(point_at);
 		path_normals_real.push_back(normal_at);
 	
-	
+
+# path_points = Array[Vector2i]
+func generate_mesh_for(map: Map, path_points_real: Array[Vector3], path_normals_real: Array[Vector3]) -> ArrayMesh:
 	# Run through the curve and sample cubic interpolated
 	var i_fl = 0;
 	var path_points_sampled: Array[Vector3] = [];
@@ -176,15 +155,19 @@ func generate_mesh_for(map: Map, path_points: Array) -> ArrayMesh:
 		path_forward_sampled.push_back((next-prev).normalized());
 	
 	# Build the mesh
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES);
+	var path_printer: Path3DPrinter = Path3DPrinter.new();
+	path_printer.begin();
 	for i in range(path_points_sampled.size()):
 		var pos = path_points_sampled[i];
 		var norm = path_normals_sampled[i];
 		var forw = path_forward_sampled[i];
 		
-		print_quad(st, i, pos, norm, forw);
+		var quad_shift_side = factor_shift * (1.0 if i%2 == 0 else -1.0);
+		var quad_shift_up = Vector3(0, up_shift, 0)
+		var quad_scale = factor_scale * Hexagons.SHORT_SIDE_DIAGONAL;
+		var quad_index = Vector2i(i, 0);
+		path_printer.print_quad(pos + quad_shift_up, norm, forw, quad_scale, quad_index, quad_shift_side);
 	
 	# Make the mesh
-	return st.commit();
+	return path_printer.commit();
 	
