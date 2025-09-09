@@ -13,7 +13,7 @@ config_version=5
 config/name="gd-hiker"
 run/main_scene="uid://bqpb1fry6ek2v"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://bwl4wme4ts1mq"
 
 [audio]
 
