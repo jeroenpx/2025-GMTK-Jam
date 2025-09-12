@@ -1,19 +1,27 @@
 class_name FroggyPlacement
 extends Node3D
 @onready var animator:AnimationPlayer = $frog/AnimationPlayer
+@onready var froggy: Node3D = $frog
 @onready var loop_manager : LoopManager = %LoopManager
 var is_disappearing = false
 var direction =  Vector3.ZERO
+var default_rotation : Vector3
+var default_rotation_froggy : Vector3
+
+
 func _ready() -> void:
 	visible = false;
 	if get_parent() is PointOfInterest:
 		(get_parent() as PointOfInterest).froggy_placement = self
 	animator.play("Idle")
+	default_rotation_froggy = froggy.rotation
+	default_rotation = rotation
 	loop_manager.on_going_at.connect(froggy_appears)
 	loop_manager.on_leaving_from.connect(froggy_disappears)
 
 
 func froggy_appears(currentPoint: PointOfInterest) -> void:
+	reset_transform()
 	if currentPoint.froggy_placement == self:
 		visible = true
 		animator.play("ArriveJump")
@@ -24,16 +32,31 @@ func froggy_appears(currentPoint: PointOfInterest) -> void:
 func froggy_disappears(previousPoint: PointOfInterest, currentPoint: PointOfInterest) -> void:
 	if previousPoint.froggy_placement == self:
 		is_disappearing = true
-		direction = (currentPoint.position - previousPoint.position).normalized() #transform.basis.z
-		animator.play("WalkABitLoop")
+		var currentPosition = currentPoint.position
+		var pathCoords: Array[Vector3]
+		if previousPoint.paths_3D.has(currentPoint):
+			pathCoords = previousPoint.paths_3D[currentPoint]
+			direction = (pathCoords[4] - froggy.global_position).normalized()
+			print("go to coordinates " + str(pathCoords[4]))
+			froggy.look_at(froggy.global_position + direction, Vector3.UP)
+			froggy.rotate_y(deg_to_rad(180))
+			animator.play("WalkABitLoop")
+		else:
+			is_disappearing = false
+			visible = false
+	
+		
 		return
+	
 	visible = false
 
 func _process(delta: float) -> void:
 	if is_disappearing:
-		position += direction * 2.0 * delta
+		froggy.global_position += direction * 2.0 * delta
 
 
-func move() -> void:
-	
+func reset_transform() -> void:
+	rotation = default_rotation
+	froggy.position = Vector3.ZERO
+	froggy.rotation = default_rotation_froggy
 	pass
