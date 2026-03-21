@@ -989,6 +989,7 @@ transform = Transform3D(2.96641, 0.3588, 0.158537, -0.419035, 2.54579, -0.004194
 skeleton = NodePath("../sign")
 
 [node name="logo-rest" parent="LoopManager/Required2/HousesV1/sign-grounded" index="0"]
+visible = false
 skeleton = NodePath("../../sign")
 
 [node name="logo-house" parent="LoopManager/Required2/HousesV1/sign-grounded" index="1"]
@@ -1054,6 +1055,7 @@ transform = Transform3D(2.65609, 1.19143, -0.111472, -1.39188, 2.27746, -0.02200
 skeleton = NodePath("../sign")
 
 [node name="logo-rest" parent="LoopManager/PierB/PierV1/sign-grounded" index="0"]
+visible = false
 skeleton = NodePath("../../sign")
 
 [node name="logo-house" parent="LoopManager/PierB/PierV1/sign-grounded" index="1"]
@@ -1067,7 +1069,6 @@ visible = true
 skeleton = NodePath("../../sign")
 
 [node name="logo-zipline" parent="LoopManager/PierB/PierV1/sign-grounded" index="4"]
-visible = true
 skeleton = NodePath("../../sign")
 
 [node name="sign" parent="LoopManager/PierB/PierV1" instance=ExtResource("20_sn8cg")]
@@ -1108,6 +1109,7 @@ transform = Transform3D(2.9926, -0.0505147, 0.202103, 0.0595383, 2.57049, -0.006
 skeleton = NodePath("../sign")
 
 [node name="logo-rest" parent="LoopManager/Required1/HousesV2/sign-grounded" index="0"]
+visible = false
 skeleton = NodePath("../../sign")
 
 [node name="logo-house" parent="LoopManager/Required1/HousesV2/sign-grounded" index="1"]
@@ -1172,6 +1174,7 @@ transform = Transform3D(2.95311, 0.338402, -0.351064, -0.431057, 2.53092, -0.304
 skeleton = NodePath("../sign")
 
 [node name="logo-rest" parent="LoopManager/PierC/PierV1/sign-grounded" index="0"]
+visible = false
 skeleton = NodePath("../../sign")
 
 [node name="logo-house" parent="LoopManager/PierC/PierV1/sign-grounded" index="1"]
@@ -1185,7 +1188,6 @@ visible = true
 skeleton = NodePath("../../sign")
 
 [node name="logo-zipline" parent="LoopManager/PierC/PierV1/sign-grounded" index="4"]
-visible = true
 skeleton = NodePath("../../sign")
 
 [node name="sign" parent="LoopManager/PierC/PierV1" instance=ExtResource("20_sn8cg")]
@@ -1248,6 +1250,7 @@ transform = Transform3D(2.89756, 0.244348, -0.723099, -0.315846, 2.55555, -0.089
 skeleton = NodePath("../sign")
 
 [node name="logo-rest" parent="LoopManager/ZiplineEndA/ZiplineSpot/sign-grounded" index="0"]
+visible = false
 skeleton = NodePath("../../sign")
 
 [node name="logo-house" parent="LoopManager/ZiplineEndA/ZiplineSpot/sign-grounded" index="1"]
@@ -1301,6 +1304,7 @@ transform = Transform3D(2.88585, 0.667606, -0.254996, -0.782724, 2.48193, -0.010
 skeleton = NodePath("../sign")
 
 [node name="logo-rest" parent="LoopManager/ZiplineStartB/ZiplineSpot/sign-grounded" index="0"]
+visible = false
 skeleton = NodePath("../../sign")
 
 [node name="logo-house" parent="LoopManager/ZiplineStartB/ZiplineSpot/sign-grounded" index="1"]
@@ -1353,6 +1357,7 @@ transform = Transform3D(2.94909, -0.322447, 0.401632, 0.388509, 2.54871, -0.0666
 skeleton = NodePath("../sign")
 
 [node name="logo-rest" parent="LoopManager/ZiplineStartA/ZiplineSpot/sign-grounded" index="0"]
+visible = false
 skeleton = NodePath("../../sign")
 
 [node name="logo-house" parent="LoopManager/ZiplineStartA/ZiplineSpot/sign-grounded" index="1"]
@@ -1425,6 +1430,9 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 0.771, 1.88789, -0.919925, 0.325
 [node name="sign-grounded" parent="LoopManager/PierA/Mirrored/PierV2" index="1"]
 transform = Transform3D(2.88367, 0.585, 0.585, -0.585, 2.94183, -0.058165, -0.585, -0.058165, 2.94183, 1.0554, -2.32919, 1.87402)
 
+[node name="logo-rest" parent="LoopManager/PierA/Mirrored/PierV2/sign-grounded" index="0"]
+visible = false
+
 [node name="FrogPlacement" parent="LoopManager/PierA" instance=ExtResource("23_6al36")]
 transform = Transform3D(0.997562, 0, -0.0697913, 0, 1, 0, 0.0697913, 0, 0.997562, -1.38749, 0.223536, -0.191441)
 
@@ -1456,6 +1464,7 @@ transform = Transform3D(2.31437, 1.31733, -1.13177, -1.65212, 2.14593, 0.0224429
 skeleton = NodePath("../sign")
 
 [node name="logo-rest" parent="LoopManager/ZinlineEndB/ZiplineSpot/sign-grounded" index="0"]
+visible = false
 skeleton = NodePath("../../sign")
 
 [node name="logo-house" parent="LoopManager/ZinlineEndB/ZiplineSpot/sign-grounded" index="1"]

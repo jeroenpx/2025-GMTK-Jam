@@ -1,21 +1,20 @@
 class_name VisitIndicator
-extends HBoxContainer
+extends Container
 @export var type: Limitations.VisitType
-@onready var visit_logo: TextureRect = $TextureLogo
-@onready var check_mark: Node = $TextureLogo2
-@onready var label_const: Label = $Label
-@onready var label: Label = $Label2
+@export var check_mark: Node;
+@export var label_const: Label;
+@export var label: Label;
 
-func show_indicator(limitation: Limitations, img:Texture2D)-> void:
+func show_indicator(limitation: Limitations)-> void:
 	#if type == limitation.visit_type:
 	var txt: String = "0"
 	type = limitation.visit_type
-	visit_logo.texture = img
 	match limitation.numerical_type:
 		Limitations.NumericalType.MIN:
 			txt = "/ min " + str(limitation.value)
 		Limitations.NumericalType.MAX:
 			txt = "/ max " +  str(limitation.value)
+			check_mark.visible = true;
 		Limitations.NumericalType.CONSTANT:
 			txt = "/ " +str(limitation.value)
 	label_const.text = txt

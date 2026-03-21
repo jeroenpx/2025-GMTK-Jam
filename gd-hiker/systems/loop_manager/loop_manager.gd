@@ -37,10 +37,11 @@ func _ready() -> void:
 	for point in temp:
 		if point is PointOfInterest:
 			points_of_interest.append(point)
+	LimitationsIndication.hide_indicators();
 	for i in range(0, limitations.size()):
 		all_limitations_completed.append(false)
 		limitations_start_values.append(limitations[i].value)
-		LimitationsIndication.show_indicator(limitations[i],i)
+		LimitationsIndication.show_indicator(limitations[i])
 		#LimitationsIndication.set_indicator(limitations[i],i, false)
 	
 	start_point.set_is_start(true);

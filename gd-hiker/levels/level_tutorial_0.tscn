@@ -592,12 +592,6 @@ transform = Transform3D(-3, 0, 0, 0, 3, 0, 0, 0, 3, 1.71509, -2.00258, 3.21896)
 transform = Transform3D(2.61364, 1.47271, 0, -1.47271, 2.61364, 0, 0, 0, 3, 1.83135, -1.7751, 1.01702)
 visible = false
 
-[node name="logo-rest2" parent="LoopManager/Beach/BeachV1/signTall" index="0"]
-visible = true
-
-[node name="logo-nature2" parent="LoopManager/Beach/BeachV1/signTall" index="2"]
-visible = false
-
 [node name="FrogPlacement" parent="LoopManager/Beach" instance=ExtResource("18_n0sds")]
 transform = Transform3D(0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, 1.37, 0, 0.281)
 

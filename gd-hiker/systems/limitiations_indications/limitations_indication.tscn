@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dr7iyddfemech"]
+[gd_scene load_steps=11 format=3 uid="uid://dr7iyddfemech"]
 
 [ext_resource type="Script" uid="uid://cglhrp75w7c52" path="res://systems/limitiations_indications/limitations_indication.gd" id="1_ssxor"]
 [ext_resource type="Texture2D" uid="uid://b033iatll5eiy" path="res://assets-2D/UI/icon_trees.png" id="2_aptbf"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bdnfd73smuptc" path="res://assets-2D/UI/icon_zipline.png" id="5_ss6vr"]
 [ext_resource type="Texture2D" uid="uid://baqxsnt5tk2mr" path="res://assets-2D/UI/icon_bench.png" id="6_6v8m7"]
 [ext_resource type="PackedScene" uid="uid://dr3ujwwhwlt1v" path="res://systems/button_skip_back/button_skip_back.tscn" id="10_06vyi"]
-[ext_resource type="Texture2D" uid="uid://dxplqt76pux1q" path="res://assets-2D/UI/icon_bench-ui.png" id="10_aptbf"]
 
 [node name="LimitationsIndication" type="Control" node_paths=PackedStringArray("array_indicators")]
 z_index = -1
@@ -23,7 +22,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ssxor")
 array_indicators = [NodePath("TextureRect/VBoxContainer/NatureIndicator"), NodePath("TextureRect/VBoxContainer/CivilIndi"), NodePath("TextureRect/VBoxContainer/BoatIndi"), NodePath("TextureRect/VBoxContainer/ZiplineIndi"), NodePath("TextureRect/VBoxContainer/RestIndi")]
-array_logo = Array[Texture2D]([ExtResource("2_aptbf"), ExtResource("3_tr4s6"), ExtResource("4_htaca"), ExtResource("5_ss6vr"), ExtResource("6_6v8m7")])
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -40,41 +38,53 @@ texture = ExtResource("2_vqbcy")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
+[node name="VBoxContainer" type="HFlowContainer" parent="TextureRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.056
 anchor_top = 0.193
 anchor_right = 0.17
 anchor_bottom = 0.273
-offset_right = 152.52
-offset_bottom = 28.96
+offset_left = -0.320001
+offset_top = 7.68
+offset_right = 183.6
+offset_bottom = 203.48
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(80, 20)
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = -2
 
-[node name="NatureIndicator" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-visible = false
+[node name="NatureIndicator" type="MarginContainer" parent="TextureRect/VBoxContainer" node_paths=PackedStringArray("check_mark", "label_const", "label")]
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
-theme_override_constants/separation = 11
 script = ExtResource("2_avwou")
 type = 1
+check_mark = NodePath("TextureLogo2")
+label_const = NodePath("VBoxContainer/HBoxContainer/Label")
+label = NodePath("VBoxContainer/HBoxContainer/Label2")
 
-[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/NatureIndicator"]
-custom_minimum_size = Vector2(40, 40)
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/VBoxContainer/NatureIndicator"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/NatureIndicator/VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("2_aptbf")
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 
-[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/NatureIndicator"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/VBoxContainer/NatureIndicator/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/NatureIndicator/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0461385, 0.456653, 0.819464, 1)
 theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
 theme_override_constants/outline_size = 1
 text = "0"
 
-[node name="Label" type="Label" parent="TextureRect/VBoxContainer/NatureIndicator"]
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/NatureIndicator/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.139194, 0.188424, 0.244464, 1)
 theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
@@ -89,29 +99,37 @@ texture = ExtResource("5_7r3ua")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="CivilIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-visible = false
+[node name="CivilIndi" type="MarginContainer" parent="TextureRect/VBoxContainer" node_paths=PackedStringArray("check_mark", "label_const", "label")]
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
-theme_override_constants/separation = 11
 script = ExtResource("2_avwou")
-type = 1
+type = 4
+check_mark = NodePath("TextureLogo2")
+label_const = NodePath("VBoxContainer/HBoxContainer/Label")
+label = NodePath("VBoxContainer/HBoxContainer/Label2")
 
-[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/CivilIndi"]
-custom_minimum_size = Vector2(40, 40)
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/VBoxContainer/CivilIndi"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/CivilIndi/VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("3_tr4s6")
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 
-[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/CivilIndi"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/VBoxContainer/CivilIndi/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/CivilIndi/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0461385, 0.456653, 0.819464, 1)
 theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
 theme_override_constants/outline_size = 1
 text = "0"
 
-[node name="Label" type="Label" parent="TextureRect/VBoxContainer/CivilIndi"]
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/CivilIndi/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.139194, 0.188424, 0.244464, 1)
 theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
@@ -126,29 +144,37 @@ texture = ExtResource("5_7r3ua")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="BoatIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-visible = false
+[node name="BoatIndi" type="MarginContainer" parent="TextureRect/VBoxContainer" node_paths=PackedStringArray("check_mark", "label_const", "label")]
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
-theme_override_constants/separation = 11
 script = ExtResource("2_avwou")
-type = 1
+type = 3
+check_mark = NodePath("TextureLogo2")
+label_const = NodePath("VBoxContainer/HBoxContainer/Label")
+label = NodePath("VBoxContainer/HBoxContainer/Label2")
 
-[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/BoatIndi"]
-custom_minimum_size = Vector2(40, 40)
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/VBoxContainer/BoatIndi"]
+layout_mode = 2
+theme_override_constants/separation = -30
+
+[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/BoatIndi/VBoxContainer"]
+custom_minimum_size = Vector2(80, 100)
 layout_mode = 2
 texture = ExtResource("4_htaca")
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 
-[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/BoatIndi"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/VBoxContainer/BoatIndi/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/BoatIndi/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0461385, 0.456653, 0.819464, 1)
 theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
 theme_override_constants/outline_size = 1
 text = "0"
 
-[node name="Label" type="Label" parent="TextureRect/VBoxContainer/BoatIndi"]
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/BoatIndi/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.139194, 0.188424, 0.244464, 1)
 theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
@@ -163,29 +189,37 @@ texture = ExtResource("5_7r3ua")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="ZiplineIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-visible = false
+[node name="ZiplineIndi" type="MarginContainer" parent="TextureRect/VBoxContainer" node_paths=PackedStringArray("check_mark", "label_const", "label")]
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
-theme_override_constants/separation = 11
 script = ExtResource("2_avwou")
-type = 1
+type = 2
+check_mark = NodePath("TextureLogo2")
+label_const = NodePath("VBoxContainer/HBoxContainer/Label")
+label = NodePath("VBoxContainer/HBoxContainer/Label2")
 
-[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/ZiplineIndi"]
-custom_minimum_size = Vector2(40, 40)
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/VBoxContainer/ZiplineIndi"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/ZiplineIndi/VBoxContainer"]
+custom_minimum_size = Vector2(80, 70)
 layout_mode = 2
 texture = ExtResource("5_ss6vr")
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 
-[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/ZiplineIndi"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/VBoxContainer/ZiplineIndi/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/ZiplineIndi/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0461385, 0.456653, 0.819464, 1)
 theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
 theme_override_constants/outline_size = 1
 text = "0"
 
-[node name="Label" type="Label" parent="TextureRect/VBoxContainer/ZiplineIndi"]
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/ZiplineIndi/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.139194, 0.188424, 0.244464, 1)
 theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
@@ -200,28 +234,37 @@ texture = ExtResource("5_7r3ua")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="RestIndi" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-visible = false
+[node name="RestIndi" type="MarginContainer" parent="TextureRect/VBoxContainer" node_paths=PackedStringArray("check_mark", "label_const", "label")]
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
-theme_override_constants/separation = 11
 script = ExtResource("2_avwou")
-type = 1
+type = 5
+check_mark = NodePath("TextureLogo2")
+label_const = NodePath("VBoxContainer/HBoxContainer/Label")
+label = NodePath("VBoxContainer/HBoxContainer/Label2")
 
-[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/RestIndi"]
-custom_minimum_size = Vector2(40, 40)
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/VBoxContainer/RestIndi"]
 layout_mode = 2
-texture = ExtResource("10_aptbf")
-expand_mode = 2
+theme_override_constants/separation = -10
 
-[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/RestIndi"]
+[node name="TextureLogo" type="TextureRect" parent="TextureRect/VBoxContainer/RestIndi/VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("6_6v8m7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/VBoxContainer/RestIndi/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/RestIndi/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0461385, 0.456653, 0.819464, 1)
 theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)
 theme_override_constants/outline_size = 1
 text = "0"
 
-[node name="Label" type="Label" parent="TextureRect/VBoxContainer/RestIndi"]
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/RestIndi/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.139194, 0.188424, 0.244464, 1)
 theme_override_colors/font_outline_color = Color(0.137255, 0.188235, 0.243137, 1)

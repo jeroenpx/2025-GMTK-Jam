@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dr3ujwwhwlt1v"]
 
 [ext_resource type="Theme" uid="uid://46nkkxfbs5a7" path="res://assets-2D/UI/button_theme.tres" id="1_55pmt"]
-[ext_resource type="Script" uid="uid://bw42estgjts86" path="res://systems/button_skip_back/btn_skip.gd" id="1_a11ty"]
-[ext_resource type="Script" uid="uid://pljyy37gsg4p" path="res://systems/button_skip_back/btn_previous.gd" id="2_vgvuo"]
+[ext_resource type="Script" path="res://systems/button_skip_back/btn_skip.gd" id="1_a11ty"]
+[ext_resource type="Script" path="res://systems/button_skip_back/btn_previous.gd" id="2_vgvuo"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
