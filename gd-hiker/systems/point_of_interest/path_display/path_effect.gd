@@ -64,6 +64,8 @@ func animate_to_state(state: State) -> bool:
 	else:
 		# Start processing the animation
 		print("Animating Path: ", name, " from ", completed_state, " to ", target_state);
+		if animating and target_state == State.READY:
+			_path_effect_wants_to_teleport_player_to(path_from);
 		set_process(true);
 		return true;
 
@@ -96,9 +98,11 @@ func skip_animation():
 	
 	if is_skipping_player_move:
 		if completed_state == State.TAKEN:
+			print("TAKEN SKIP => goto to: ", path_to.name);
 			_path_effect_wants_to_teleport_player_to(path_to);
 		else:
-			_path_effect_wants_to_teleport_player_to(path_from);
+			print("OTHER SKIP => goto from: ", path_from.name, " (to: ",path_to.name, ")");
+			#_path_effect_wants_to_teleport_player_to(path_from);
 
 func _anim_path_length() -> float:
 	return path_length + path_animation_trail_overflow_length;
@@ -135,6 +139,7 @@ func _process(delta: float) -> void:
 		trigger = true;
 		completed_state = State.READY;
 		on_animated_to_state.emit(State.READY);
+		print("READY, READY => goto from: ", path_from.name);
 		_path_effect_wants_to_teleport_player_to(path_from);
 	if ready_direction < 0 and _ready_distance_covered < 0 and completed_state == State.READY:
 		trigger = true;
@@ -148,6 +153,7 @@ func _process(delta: float) -> void:
 		trigger = true;
 		completed_state = State.TAKEN;
 		on_animated_to_state.emit(State.TAKEN);
+		print("TAKEN, TAKEN => goto to: ", path_from.name);
 		_path_effect_wants_to_teleport_player_to(path_to);
 	
 	if trigger and target_state == completed_state:

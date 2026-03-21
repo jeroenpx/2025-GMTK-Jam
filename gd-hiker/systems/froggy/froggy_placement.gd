@@ -24,8 +24,14 @@ func froggy_appears(currentPoint: PointOfInterest) -> void:
 	reset_transform()
 	if currentPoint.froggy_placement == self:
 		visible = true
+		animator.stop();
 		animator.play("ArriveJump")
+		is_disappearing = false;
 		return
+	else:
+		if visible and not is_disappearing:
+			visible = false
+	
 	is_disappearing = false
 	visible = false
 
@@ -40,6 +46,7 @@ func froggy_disappears(previousPoint: PointOfInterest, currentPoint: PointOfInte
 			print("go to coordinates " + str(pathCoords[4]))
 			froggy.look_at(froggy.global_position + direction, Vector3.UP)
 			froggy.rotate_y(deg_to_rad(180))
+			animator.stop();
 			animator.play("WalkABitLoop")
 		else:
 			is_disappearing = false
@@ -51,7 +58,7 @@ func froggy_disappears(previousPoint: PointOfInterest, currentPoint: PointOfInte
 	visible = false
 
 func _process(delta: float) -> void:
-	if is_disappearing:
+	if is_disappearing and not GameState.isGamePaused():
 		froggy.global_position += direction * 2.0 * delta
 
 

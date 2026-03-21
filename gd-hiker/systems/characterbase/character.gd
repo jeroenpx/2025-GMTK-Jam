@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 # The model, useful to check the orientation of the 3D model
 @export var model: CharacterPivot;
+@export var animator: AnimationPlayer;
 
 # Signals
 signal on_moved;

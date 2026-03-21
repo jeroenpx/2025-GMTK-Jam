@@ -1505,6 +1505,9 @@ transform = Transform3D(0.956966, 0, -0.290201, 0, 1, 0, 0.290201, 0, 0.956966, 
 
 [node name="FroggyAndStuff" parent="." instance=ExtResource("15_sn8cg")]
 
+[node name="FroggyController" parent="FroggyAndStuff" index="0" node_paths=PackedStringArray("loop_manager")]
+loop_manager = NodePath("../../LoopManager")
+
 [node name="StarterArea" parent="FroggyAndStuff" index="1"]
 transform = Transform3D(0.921036, 1.80039e-08, 0.389478, -1.80933e-08, 1, -3.43856e-09, -0.389478, -3.87991e-09, 0.921036, 53.7999, -0.045521, 61.9364)
 

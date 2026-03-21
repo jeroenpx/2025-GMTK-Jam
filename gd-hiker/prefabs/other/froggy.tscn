@@ -12,9 +12,10 @@
 radius = 1.5
 height = 5.0
 
-[node name="Froggy" type="CharacterBody3D" node_paths=PackedStringArray("model")]
+[node name="Froggy" type="CharacterBody3D" node_paths=PackedStringArray("model", "animator")]
 script = ExtResource("1_cfa78")
 model = NodePath("Pivot")
+animator = NodePath("Pivot/frog/AnimationPlayer")
 
 [node name="InputProvider" type="Node" parent="."]
 script = ExtResource("2_h50sq")

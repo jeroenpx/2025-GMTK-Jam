@@ -8,8 +8,8 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	loop_manager.start_hovering_over.connect(trigger_viewport)
-	loop_manager.stop_hovering_over.connect(untrigger_viewport)
+	#loop_manager.start_hovering_over.connect(trigger_viewport)
+	#loop_manager.stop_hovering_over.connect(untrigger_viewport)
 	self.visible = false
 
 

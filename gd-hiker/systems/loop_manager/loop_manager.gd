@@ -68,6 +68,8 @@ func _update_available_to_visit(from_undo: bool = false) -> void:
 			if available_to_visit_from.path_indications.has(point):
 				var path_effect = available_to_visit_from.path_indications[point];
 				path_effect.animate_to_state(PathEffect.State.READY);
+			else:
+				on_going_at.emit(available_to_visit_from);
 
 func _process(delta: float) -> void:
 	if GameState.isGameplayRunning():
@@ -109,6 +111,9 @@ func _unhandled_input(event: InputEvent) -> void:
 						visit_point()
 						on_leaving_from.emit(previous_visit, current_visit)
 						print("Start" + str(start_point) +" From " + str(previous_visit) + " to " + str(current_visit))
+						if not previous_visit.path_indications.has(point):
+							on_going_at.emit(current_visit);
+						
 						if current_visit == start_point:
 							if are_all_limitations_completed():
 								level_complete()
