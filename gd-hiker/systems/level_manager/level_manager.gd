@@ -1,7 +1,7 @@
 extends Node
 signal on_end_game()
 @export var all_levels: Array [String]
-var loading_screen = load("res://systems/loading_screen/loading_screen.tscn")
+#var loading_screen = load("res://systems/loading_screen/loading_screen.tscn")
 var scene_path : String
 var current_scene_id : int = 0
 func _ready() -> void:

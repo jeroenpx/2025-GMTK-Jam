@@ -17,7 +17,7 @@ func _ready() -> void:
 	
 	# Move the froggy out of the start location (easier to remap locations
 	froggy_display.model.rotation.y = froggy_display.global_rotation.y;
-	root.add_child(froggy_display);
+	#root.add_child(froggy_display);
 	froggy_display.global_rotation = Vector3(0,0,0);
 	
 	# Animation stuff
@@ -55,7 +55,7 @@ func froggy_disappears(previousPoint: PointOfInterest, currentPoint: PointOfInte
 	if previousPoint.name == "Parked":
 		is_disappearing = true
 		var currentPosition = currentPoint.position
-		var pathCoords: Array[Vector3]
+		var pathCoords: Array
 		if previousPoint.paths_3D.has(currentPoint):
 			pathCoords = previousPoint.paths_3D[currentPoint]
 			direction = (pathCoords[4] - froggy_display.global_position).normalized()

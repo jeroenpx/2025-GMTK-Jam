@@ -15,4 +15,4 @@ size = Vector2(2.137, 2.063)
 [node name="lounger" type="MeshInstance3D"]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("QuadMesh_pd01j")
-skeleton = NodePath("../../MeshInstance3D")
+skeleton = NodePath("")

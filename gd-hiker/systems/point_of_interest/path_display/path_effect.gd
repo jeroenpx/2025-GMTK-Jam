@@ -114,6 +114,9 @@ func _ready() -> void:
 	if target_state == State.HIDDEN:
 		self.visible = false;
 		set_process(false);
+	
+	# Copy the shader material
+	self.material_override = self.material_override.duplicate();
 
 func _process(delta: float) -> void:
 	if not GameState.isGameplayRunning():
@@ -177,7 +180,8 @@ func _process(delta: float) -> void:
 	_update_material();
 
 func _update_material() -> void:
-	set_instance_shader_parameter("activation_distance", clamp(_ready_distance_covered - _activation_delay_path_length(), 0.0, INF));
-	set_instance_shader_parameter("taken_distance", _taken_distance_covered);
-	set_instance_shader_parameter("time_flip", -1.0 if target_state == State.HIDDEN else 1.0);
-	set_instance_shader_parameter("disable_amount", _disable_amount);
+	var mat = self.material_override as ShaderMaterial;
+	mat.set_shader_parameter("activation_distance", clamp(_ready_distance_covered - _activation_delay_path_length(), 0.0, INF));
+	mat.set_shader_parameter("taken_distance", _taken_distance_covered);
+	mat.set_shader_parameter("time_flip", -1.0 if target_state == State.HIDDEN else 1.0);
+	mat.set_shader_parameter("disable_amount", _disable_amount);

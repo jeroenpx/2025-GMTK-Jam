@@ -39,7 +39,7 @@ func froggy_disappears(previousPoint: PointOfInterest, currentPoint: PointOfInte
 	if previousPoint.froggy_placement == self:
 		is_disappearing = true
 		var currentPosition = currentPoint.position
-		var pathCoords: Array[Vector3]
+		var pathCoords: Array
 		if previousPoint.paths_3D.has(currentPoint):
 			pathCoords = previousPoint.paths_3D[currentPoint]
 			direction = (pathCoords[4] - froggy.global_position).normalized()

@@ -12,19 +12,19 @@ uniform sampler2D time_curve: repeat_enable;
 uniform float time_speed = 1.0;
 uniform float time_distance = 6.0;
 uniform float time_hard_step = 1.0;
-instance uniform float time_flip = 1.0;
+/*instance*/ uniform float time_flip = 1.0;
 
 // BECOME AVAILABLE PATH STATE
 uniform sampler2D activation_curve: repeat_disable;
-instance uniform float activation_distance = 10.0;
+/*instance*/ uniform float activation_distance = 10.0;
 uniform float activation_length = 12.0;
 
 // DISABLE
-instance uniform float disable_amount: hint_range(0.0, 1.0, 0.01) = 0.0;
+/*instance*/ uniform float disable_amount: hint_range(0.0, 1.0, 0.01) = 0.0;
 
 // TAKE THE PATH STATE
 uniform sampler2D taken_curve: repeat_disable;
-instance uniform float taken_distance = 0.0;
+/*instance*/ uniform float taken_distance = 0.0;
 uniform float taken_length = 12.0;
 
 void vertex() {

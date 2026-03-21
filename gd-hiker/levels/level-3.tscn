@@ -547,7 +547,7 @@ metadata/_custom_type_script = "uid://bf681mrn6bhw5"
 
 [sub_resource type="Resource" id="Resource_7xp8t"]
 script = ExtResource("15_8apud")
-visit_type = 3
+visit_type = 2
 numerical_type = 0
 value = 1
 metadata/_custom_type_script = "uid://bf681mrn6bhw5"

@@ -50,8 +50,9 @@ func _ready() -> void:
 func _update_available_to_visit(from_undo: bool = false) -> void:
 	for point in available_to_visit:
 		point.set_can_next_visit(false);
-		if available_to_visit_from.path_indications.has(point):
-			var path_effect = available_to_visit_from.path_indications[point];
+		var effect = _find_point_path_effect(available_to_visit_from, point);
+		if effect != null:
+			var path_effect = effect;
 			if path_effect.target_state != PathEffect.State.TAKEN:
 				path_effect.animate_to_state(PathEffect.State.HIDDEN);
 				path_effect.skip_animation();
@@ -66,8 +67,9 @@ func _update_available_to_visit(from_undo: bool = false) -> void:
 				continue;
 			
 			point.set_can_next_visit(true);
-			if available_to_visit_from.path_indications.has(point):
-				var path_effect = available_to_visit_from.path_indications[point];
+			var effect = _find_point_path_effect(available_to_visit_from, point);
+			if effect != null:
+				var path_effect = effect;
 				path_effect.animate_to_state(PathEffect.State.READY);
 			else:
 				on_going_at.emit(available_to_visit_from);
@@ -76,6 +78,16 @@ func _process(delta: float) -> void:
 	if GameState.isGameplayRunning():
 		if !is_level_finished:
 			hover_over()
+
+func _find_point_path_effect(from_point: PointOfInterest, to_point: PointOfInterest) -> Variant:
+	if not from_point.path_indications.has(to_point):
+		# Do another check by looping over it
+		for key in from_point.path_indications:
+			if key.name == to_point.name:
+				return from_point.path_indications[key];
+	else:
+		return from_point.path_indications[to_point];
+	return null;
 
 #handle the input
 func _unhandled_input(event: InputEvent) -> void:
@@ -100,8 +112,9 @@ func _unhandled_input(event: InputEvent) -> void:
 						# Footsteps
 						if last_path_effect_taken != null:
 							last_path_effect_taken.skip_animation();
-						if previous_visit.path_indications.has(point):
-							var path_effect = previous_visit.path_indications[point];
+						var effect = _find_point_path_effect(previous_visit, point);
+						if effect != null:
+							var path_effect = effect;
 							path_effect.animate_to_state(PathEffect.State.TAKEN);
 							#path_effect.skip_animation();
 							last_path_effect_taken = path_effect;
@@ -112,7 +125,8 @@ func _unhandled_input(event: InputEvent) -> void:
 						visit_point()
 						on_leaving_from.emit(previous_visit, current_visit)
 						print("Start" + str(start_point) +" From " + str(previous_visit) + " to " + str(current_visit))
-						if not previous_visit.path_indications.has(point):
+						var effect2 = _find_point_path_effect(previous_visit, point);
+						if effect2 == null:
 							on_going_at.emit(current_visit);
 						
 						if current_visit == start_point:

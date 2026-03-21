@@ -7,7 +7,6 @@
 
 [node name="PathDisplay" type="MeshInstance3D"]
 material_override = ExtResource("1_nc22m")
-instance_shader_parameters/activation_distance = 6.0
 mesh = SubResource("QuadMesh_cjr3f")
 script = ExtResource("2_cjr3f")
 move_speed_forwards = 40.0

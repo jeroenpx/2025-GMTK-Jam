@@ -833,7 +833,6 @@ _generated_paths = {
 }
 
 [node name="PierA_to_PierC" parent="Map/GeneratePathDisplaysOnWater" index="0" node_paths=PackedStringArray("path_from", "path_to") instance=ExtResource("8_68q3m")]
-instance_shader_parameters/activation_distance = 51.595
 mesh = SubResource("ArrayMesh_jt82m")
 path_length = 43
 path_from = NodePath("../../../LoopManager/PierA")
